@@ -18,9 +18,9 @@ import estate_icon from "./estate.png";
 import office_icon from "./office_icon.png";
 import realestate_icon from "./real-estate_icon.png";
 
-import topnews1 from "./topnews1.png";
-import topnews2 from "./topnews2.png";
-import topnews3 from "./topnews3.png";
+import topnews1 from "./topnews1.jpg";
+import topnews2 from "./topnews2.jpg";
+import topnews3 from "./topnews3.jpg";
 
 export {
   aboutus,

@@ -3,6 +3,7 @@ import AboutUs from "./components/AboutUs/AboutUs";
 import AreaEstate from "./components/AreaEstate/AreaEstate";
 import Banner from "./components/Banner/Banner";
 import Customer from "./components/Customer/Customer";
+import Evaluation from "./components/Evaluation/Evaluation";
 import NewsBulletin from "./components/NewsBulletin/NewsBulletin";
 import PostNews from "./components/PostNews/PostNews";
 import Searching from "./components/Searching/Searching";
@@ -19,6 +20,7 @@ const Home = () => {
       <Customer />
       <Searching />
       <TopNews />
+      <Evaluation />
     </div>
   );
 };

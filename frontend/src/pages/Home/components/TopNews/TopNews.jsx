@@ -24,14 +24,16 @@ const TopNews = () => {
                 <div className="tn__img">
                   <img src={topnews2} alt="topnews2" />
                   <h4>
-                    10 Năm Thăng Trầm Của Thị Trường Bất Động Sản Quận Thủ Đức
+                    (Cập Nhật] Lãi Suất Vay Mua Nhà Tháng 12/2022 Tăng Cao, Vay
+                    Vốn Khó Khăn
                   </h4>
                 </div>
 
                 <div className="tn__img">
                   <img src={topnews3} alt="topnews3" />
                   <h4>
-                    10 Năm Thăng Trầm Của Thị Trường Bất Động Sản Quận Thủ Đức
+                    Bộ Xây dựng thanh tra hoạt động kinh doanh bất động sản tại
+                    10 tỉnh, thành
                   </h4>
                 </div>
               </div>
@@ -58,7 +60,38 @@ const TopNews = () => {
                     Vốn Khó Khăn
                   </Link>
                 </li>
+                <li>
+                  <Link to="#">
+                    [Cập Nhật] Lãi Suất Vay Mua Nhà Tháng 12/2022 Tăng Cao, Vay
+                    Vốn Khó Khăn
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#">
+                    [Cập Nhật] Lãi Suất Vay Mua Nhà Tháng 12/2022 Tăng Cao, Vay
+                    Vốn Khó Khăn
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#">
+                    [Cập Nhật] Lãi Suất Vay Mua Nhà Tháng 12/2022 Tăng Cao, Vay
+                    Vốn Khó Khăn
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#">
+                    [Cập Nhật] Lãi Suất Vay Mua Nhà Tháng 12/2022 Tăng Cao, Vay
+                    Vốn Khó Khăn
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#">
+                    [Cập Nhật] Lãi Suất Vay Mua Nhà Tháng 12/2022 Tăng Cao, Vay
+                    Vốn Khó Khăn
+                  </Link>
+                </li>
               </ul>
+              <Link to="#">Xem thêm</Link>
             </div>
           </div>
         </div>

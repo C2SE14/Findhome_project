@@ -40,9 +40,9 @@ function SamplePrevArrow(props) {
   );
 }
 
-const Carousel = ({ items }) => {
+const Carousel = ({ items, reviews }) => {
   const settings = {
-    // dots: true,
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 3,
@@ -51,31 +51,52 @@ const Carousel = ({ items }) => {
     prevArrow: <SamplePrevArrow />,
     // autoplay: true,
     autoplaySpeed: 5000,
-    cssEase: "linear",
+    // cssEase: "linear",
     // centerMode: true,
   };
 
   return (
     <Slider {...settings}>
-      {items.map((item) => (
-        <div key={item.id} className="carou">
-          <div className="carou__container">
-            <img src={item.imageUrl} alt={item.title} className="carou__img" />
-            <div className="carou__content">
-              <h3 className="carou__title">{item.title}</h3>
-              <div className="cus__grid">
-                <div className="carou__address">Địa điểm: {item.address}</div>
-                <div className="carou__bedroom">
-                  Phòng ngủ: {item.bedroom} PN
+      {items
+        ? items.map((item) => (
+            <div key={item.id} className="carou">
+              <div className="carou__container">
+                <img
+                  src={item.imageUrl}
+                  alt={item.title}
+                  className="carou__img"
+                />
+                <div className="carou__content">
+                  <h3 className="carou__title">{item.title}</h3>
+                  <div className="cus__grid">
+                    <div className="carou__address">
+                      Địa điểm: {item.address}
+                    </div>
+                    <div className="carou__bedroom">
+                      Phòng ngủ: {item.bedroom} PN
+                    </div>
+                    <div className="carou__area">Diện tích: {item.area} m²</div>
+                    <div className="carou__price">Mức giá: {item.price}</div>
+                  </div>
+                  <Link to="#">Xem chi tiết</Link>
                 </div>
-                <div className="carou__area">Diện tích: {item.area} m²</div>
-                <div className="carou__price">Mức giá: {item.price}</div>
               </div>
-              <Link to="#">Xem chi tiết</Link>
             </div>
-          </div>
-        </div>
-      ))}
+          ))
+        : reviews.map((review) => (
+            <div key={review.id} className="review">
+              <div className="review__container">
+                <p>{review.comment}</p>
+                <div className="group">
+                  <img src={review.imageUrl} alt="" />
+                  <div>
+                    <h4>{review.name}</h4>
+                    <span>{review.position}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
     </Slider>
   );
 };
