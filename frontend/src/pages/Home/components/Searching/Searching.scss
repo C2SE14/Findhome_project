@@ -1,0 +1,43 @@
+.sea {
+  background-color: var(--primary-color);
+  &__container {
+    padding: 80px 0;
+  }
+  &__content {
+    margin-top: 60px;
+    ul {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 0;
+      margin: 0;
+      li {
+        background-color: #fff;
+        list-style: none;
+        border-radius: 8px;
+        text-align: center;
+        padding: 30px 60px;
+        img {
+          width: 100px;
+          height: 100px;
+          object-fit: cover;
+          margin: 0 auto;
+        }
+        h2 {
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 20.8px;
+          margin-top: 20px;
+        }
+        p {
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 18.2px;
+          letter-spacing: 0.15px;
+          padding: 0;
+          margin: 0;
+        }
+      }
+    }
+  }
+}

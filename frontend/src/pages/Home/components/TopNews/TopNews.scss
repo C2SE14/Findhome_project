@@ -1,0 +1,140 @@
+.tn {
+  &__container {
+    padding: 100px 0;
+  }
+  &__main {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  &__content {
+    flex: 0.6;
+
+    display: flex;
+    gap: 20px;
+  }
+  &__left {
+    flex: 0.55;
+    position: relative;
+    // overflow: hidden;
+    cursor: pointer;
+    overflow: hidden;
+    &:hover img {
+      transform: scale(1.1);
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba($color: #000000, $alpha: 0.3);
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1);
+      transition: transform 0.3s linear;
+    }
+    h4 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 31.2px;
+      letter-spacing: 0.15px;
+      color: #fff;
+      z-index: 1;
+    }
+  }
+  &__right {
+    flex: 0.45;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  &__img {
+    flex: 0.5;
+    position: relative;
+    overflow: hidden;
+    &:hover img {
+      transform: scale(1.1);
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba($color: #000000, $alpha: 0.3);
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1);
+      transition: transform 0.3s linear;
+    }
+    h4 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      padding: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 20.8px;
+      color: #fff;
+      z-index: 1;
+    }
+  }
+
+  &__update {
+    flex: 0.4;
+    ul {
+      max-height: 405px;
+      overflow-y: scroll;
+
+      padding: 0;
+      margin: 0;
+      &::-webkit-scrollbar {
+        width: 0;
+      }
+      li {
+        margin: 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #bababa;
+        list-style: none;
+        &:last-child {
+          border: none;
+        }
+        a {
+          display: block;
+          text-decoration: none;
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 20.8px;
+          letter-spacing: 0.15px;
+          color: #000;
+          &:hover {
+            color: var(--primary-color);
+          }
+        }
+      }
+    }
+    a {
+      display: block;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 23.4px;
+      margin-top: 5px;
+      color: #000;
+    }
+  }
+}

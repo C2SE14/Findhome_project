@@ -1,0 +1,130 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: all 0.3s linear;
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s linear;
+  }
+  &__top {
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px auto;
+    }
+    &-left {
+      ul {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 35px;
+        margin: 0;
+        padding: 0;
+        li {
+          list-style: none;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          span {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 18px;
+            letter-spacing: 0.0125em;
+            color: #ffffff;
+          }
+          i {
+            color: var(--primary-color);
+            font-size: 17px;
+          }
+        }
+      }
+    }
+    &-right {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      i {
+        font-size: 17px;
+        color: #ffffff;
+      }
+      a {
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: 0.0125em;
+        color: #fff;
+        &:hover {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+  &__bot {
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px auto;
+    }
+  }
+  &__nav {
+    ul {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0;
+      padding: 0;
+      gap: 28px;
+      li {
+        list-style: none;
+        a {
+          text-decoration: none;
+          color: #fff;
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 21px;
+          letter-spacing: 0.0125em;
+          transition: all 0.2s linear;
+          &:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+
+  .cus__li {
+    max-width: 180px;
+    width: 100%;
+  }
+}
+
+.header.sticky {
+  background: #333;
+  .header__top {
+    background: #333;
+  }
+  .header__bot {
+    padding: 10px 0;
+  }
+  img {
+    width: 150px;
+    height: 60px;
+  }
+}
