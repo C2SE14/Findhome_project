@@ -17,10 +17,27 @@
   &__left {
     flex: 0.55;
     position: relative;
+    // overflow: hidden;
+    cursor: pointer;
+    overflow: hidden;
+    &:hover img {
+      transform: scale(1.1);
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba($color: #000000, $alpha: 0.3);
+    }
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transform: scale(1);
+      transition: transform 0.3s linear;
     }
     h4 {
       position: absolute;
@@ -32,6 +49,7 @@
       line-height: 31.2px;
       letter-spacing: 0.15px;
       color: #fff;
+      z-index: 1;
     }
   }
   &__right {
@@ -44,10 +62,25 @@
   &__img {
     flex: 0.5;
     position: relative;
+    overflow: hidden;
+    &:hover img {
+      transform: scale(1.1);
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba($color: #000000, $alpha: 0.3);
+    }
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transform: scale(1);
+      transition: transform 0.3s linear;
     }
     h4 {
       position: absolute;
@@ -58,6 +91,7 @@
       font-weight: 600;
       line-height: 20.8px;
       color: #fff;
+      z-index: 1;
     }
   }
 
@@ -69,6 +103,9 @@
 
       padding: 0;
       margin: 0;
+      &::-webkit-scrollbar {
+        width: 0;
+      }
       li {
         margin: 0;
         padding-bottom: 10px;
@@ -85,6 +122,9 @@
           line-height: 20.8px;
           letter-spacing: 0.15px;
           color: #000;
+          &:hover {
+            color: var(--primary-color);
+          }
         }
       }
     }

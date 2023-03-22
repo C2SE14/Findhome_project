@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 //
-import logo from "../../../assets/images/logo.png";
+import { logo } from "../../../assets/images";
 import "./Header.scss";
 
 const Header = () => {
+  const [sticky, setSticky] = useState(false);
+
+  const changeBackground = () => {
+    if (window.scrollY >= 80) {
+      setSticky(true);
+    } else {
+      setSticky(false);
+    }
+  };
+  window.addEventListener("scroll", changeBackground);
   return (
-    <div className="header">
+    <div className={sticky ? "header sticky" : "header"}>
       <div className="header__container">
         <div className="header__top">
           <Container>
-            <div className="header__top-right">
+            <div className="header__top-left">
               <ul>
                 <li>
                   <i className="bi bi-telephone"></i>
@@ -29,7 +39,7 @@ const Header = () => {
                 </li>
               </ul>
             </div>
-            <div className="header__top-left">
+            <div className="header__top-right">
               <i className="bi bi-person-circle"></i>
               <Link to="/#">ĐĂNG NHẬP/ĐĂNG KÍ </Link>
             </div>

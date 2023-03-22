@@ -52,9 +52,11 @@
     }
   }
   &__group {
+    display: block;
     position: relative;
     bottom: 0;
     left: 0;
+    color: #fff;
     overflow: hidden;
     &:hover .are__img {
       transform: scale(1.1);
