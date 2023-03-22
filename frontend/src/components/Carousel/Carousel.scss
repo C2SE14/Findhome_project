@@ -1,8 +1,10 @@
 .carou {
+  display: block;
   &__container {
     position: relative;
     margin: 10px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    overflow: hidden;
   }
   &__img {
     max-width: 310px;
@@ -11,6 +13,11 @@
     height: 100%;
     object-fit: cover;
     position: relative;
+    transform: scale(1);
+    transition: transform 0.2s linear;
+    &:hover {
+      transform: scale(1.1);
+    }
   }
   &__content {
     position: absolute;
@@ -20,6 +27,7 @@
     background-color: #f8f8f8;
     margin: 10px;
     padding: 10px;
+    color: #000;
     a {
       display: block;
       color: #000;

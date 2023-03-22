@@ -11,6 +11,7 @@ import {
   area_haiphong,
   area_vungtau,
 } from "../../../../assets/images";
+import { Link } from "react-router-dom";
 
 const AreaEstate = () => {
   return (
@@ -21,7 +22,7 @@ const AreaEstate = () => {
           <div className="are__main">
             <ul>
               <li>
-                <div className="are__group">
+                <Link to="#" className="are__group">
                   <img
                     src={area_hochiminh}
                     alt="area_hochiminh"
@@ -31,48 +32,48 @@ const AreaEstate = () => {
                     <h2>TP. Hồ Chí Minh</h2>
                     <p>4000 tin đăng</p>
                   </div>
-                </div>
+                </Link>
               </li>
               <li>
-                <div className="are__group">
+                <Link to="#" className="are__group">
                   <img src={area_danang} alt="" className="are__img" />
                   <div className="are__content">
                     <h2>Đà Nẵng</h2>
                     <p>3000 tin đăng</p>
                   </div>
-                </div>
-                <div className="are__group">
+                </Link>
+                <Link to="#" className="are__group">
                   <img src={area_haiphong} alt="" className="are__img" />
                   <div className="are__content">
                     <h2>Hải phòng</h2>
                     <p>2000 tin đăng</p>
                   </div>
-                </div>
+                </Link>
               </li>
               <li>
-                <div className="are__group">
+                <Link to="#" className="are__group">
                   <img src={area_hanoi} alt="are_hanoi" className="are__img" />
                   <div className="are__content">
                     <h2>Hà Nội</h2>
                     <p>3000 tin đăng</p>
                   </div>
-                </div>
+                </Link>
               </li>
               <li>
-                <div className="are__group">
+                <Link to="#" className="are__group">
                   <img src={area_dongnai} alt="" className="are__img" />
                   <div className="are__content">
                     <h2>Đồng Nai</h2>
                     <p>3000 tin đăng</p>
                   </div>
-                </div>
-                <div className="are__group">
+                </Link>
+                <Link to="#" className="are__group">
                   <img src={area_vungtau} alt="" className="are__img" />
                   <div className="are__content">
                     <h2>Vũng Tàu</h2>
                     <p>2000 tin đăng</p>
                   </div>
-                </div>
+                </Link>
               </li>
             </ul>
           </div>

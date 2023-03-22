@@ -1,3 +1,5 @@
+import logo from "./logo.png";
+
 import aboutus from "./aboutus.png";
 import banner from "./Banner.png";
 import customer_icon from "./customer_icon.png";
@@ -22,6 +24,13 @@ import topnews1 from "./topnews1.jpg";
 import topnews2 from "./topnews2.jpg";
 import topnews3 from "./topnews3.jpg";
 
+import bussiness1 from "./bussiness1.png";
+import bussiness2 from "./bussiness2.png";
+import bussiness3 from "./bussiness3.png";
+import bussiness4 from "./bussiness4.png";
+import bussiness5 from "./bussiness5.png";
+import bussiness6 from "./bussiness6.png";
+
 export {
   aboutus,
   banner,
@@ -44,4 +53,11 @@ export {
   topnews1,
   topnews2,
   topnews3,
+  bussiness1,
+  bussiness2,
+  bussiness3,
+  bussiness4,
+  bussiness5,
+  bussiness6,
+  logo,
 };
