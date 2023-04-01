@@ -1,4 +1,5 @@
 import logo from "./logo.png";
+import logoblack from "./logoblack.png";
 
 import aboutus from "./aboutus.png";
 import banner from "./Banner.png";
@@ -60,4 +61,5 @@ export {
   bussiness5,
   bussiness6,
   logo,
+  logoblack,
 };
