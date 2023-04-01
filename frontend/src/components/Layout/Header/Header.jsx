@@ -43,7 +43,7 @@ const Header = (props) => {
             </div>
             <div className="header__top-right">
               <i className="bi bi-person-circle"></i>
-              <Link to="/#">ĐĂNG NHẬP/ĐĂNG KÍ </Link>
+              <Link to="/login">ĐĂNG NHẬP/ĐĂNG KÍ </Link>
             </div>
           </Container>
         </div>

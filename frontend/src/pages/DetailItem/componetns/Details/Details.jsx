@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Dropdown from "react-dropdown";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Details.scss";
 
 const options = [
@@ -23,7 +23,7 @@ const datas = [
     description:
       "+ Khu nhà phố thương mại Lavela Garden khơi nguồn cuộc sống xanh.Tọa lạc ngay trên đường bình Chuẩn 69, TP Thuận An, Bình Dương. LAVELA Garden tạo ấn tượng mạnh đến với quý khách hàng với quý mô thiết kế hiện đại mang tiêu chuẩn chuẩn sống xanh giữa lòng TP Thuận An.",
     createdAt: "2022-12-29T03:26:26.730+00:00",
-    view: 1500,
+    reviews: 1500,
   },
 ];
 
@@ -75,16 +75,30 @@ const Details = () => {
                 />
               </div>
             </div>
-            <ul className="details__list">
-              <li className="details__item">
-                {datas.map((data) => (
-                  <Link to="#" className="item">
-                    <img src={data.imageUrl} alt="" className="item-img" />
-                    <div className="item-content"></div>
-                  </Link>
-                ))}
-              </li>
-            </ul>
+            <div className="details__list">
+              {datas.map((data) => (
+                <div className="item" key={data.id}>
+                  <img src={data.imageUrl} alt="" className="item__img" />
+                  <div className="item__content">
+                    <h3>{data.name}</h3>
+                    <ul>
+                      <li>
+                        <p>{data.price}</p> <p>tỷ</p>{" "}
+                      </li>
+                      <li>
+                        <p>{data.areas}</p> <p>m²</p>
+                      </li>
+                      <li>{data.description}</li>
+                    </ul>
+                    <p>{data.description}</p>
+                    <div className="item__reviews">
+                      <p>{data.createdAt}</p>
+                      <p>{data.reviews} lượt xem</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="details__content-right"></div>
         </div>
