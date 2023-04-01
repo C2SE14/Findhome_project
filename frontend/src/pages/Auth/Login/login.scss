@@ -1,0 +1,185 @@
+.login {
+     position: relative;
+     width: 100%;
+     height: auto;
+     padding: 10px;
+     background-color: #f8f8f8;
+
+     .container {
+          display: flex;
+          margin: 50px auto;
+          width: 852px;
+
+          .left {
+               position: relative;
+               width: 388px;
+               height: 100%;
+               padding: 19px 24px 100px 21px;
+               background: rgba(227, 125, 91, 0.3);
+
+               .logo {
+                    width: 160px;
+                    height: 66px;
+               }
+               .logologin {
+                    position: absolute;
+                    left: 0;
+               }
+               .context {
+                    position: absolute;
+                    font-size: 20px;
+                    line-height: 26px;
+                    padding: 10px;
+                    color: #222222;
+                    font-weight: 600;
+                    bottom: 100px;
+               }
+          }
+          .right {
+               width: 464px;
+               background: #ffffff;
+               padding: 55px 47px 55px 17px;
+               height: 100%;
+               .login-header {
+                    width: 100%;
+                    display: flex;
+
+                    .btn-header-login {
+                         width: 200px;
+                         padding: 5px;
+                         cursor: pointer;
+                         border: 3px;
+                         background-color: #ffffff;
+                         color: #222222;
+                         font-size: 20px;
+                         line-height: 26px;
+                         font-family: "Raleway";
+                         font-style: normal;
+                         font-weight: 600;
+                    }
+                    .isActive {
+                         border-bottom: 3px solid var(--primary-color);
+                    }
+               }
+               .context-1 {
+                    width: 100px;
+                    height: 20px;
+                    font-weight: 600;
+                    font-size: 16px;
+                    line-height: 130%;
+                    /* or 21px */
+
+                    letter-spacing: 0.0125em;
+                    margin-top: 26px;
+                    color: #000000;
+               }
+               .context-2 {
+                    width: 258px;
+                    height: 31px;
+                    font-weight: 600;
+                    font-size: 24px;
+                    line-height: 130%;
+                    /* or 31px */
+
+                    letter-spacing: 0.0125em;
+                    color: #000000;
+               }
+
+               .action-login {
+                    display: flex;
+                    width: 100%;
+                    margin-top: 16px;
+                    justify-content: space-between;
+                    .button-login-gg {
+                         position: relative;
+                         padding: 14px 47px 15px 79px;
+                         border: 1px solid #ababab;
+                         border-radius: 8px;
+                         text-decoration: none;
+                         font-weight: 600;
+                         font-size: 18px;
+                         line-height: 130%;
+                         color: #000000;
+
+                         /* or 23px */
+
+                         letter-spacing: 0.0125em;
+                         i {
+                              position: absolute;
+                              left: 36px;
+                              top: 14px;
+                              font-size: 24px;
+                              color: red;
+                         }
+                         &:hover {
+                              background-color: #e6e6e6;
+                         }
+                    }
+                    .button-login-fb {
+                         position: relative;
+                         padding: 14px 35px 15px 68px;
+                         border: 1px solid #ababab;
+                         border-radius: 8px;
+                         text-decoration: none;
+                         font-weight: 600;
+                         font-size: 18px;
+                         line-height: 130%;
+                         color: #000000;
+                         /* or 23px */
+
+                         letter-spacing: 0.0125em;
+                         i {
+                              position: absolute;
+                              left: 36px;
+                              top: 14px;
+                              font-size: 24px;
+                              color: #0a58ca;
+                         }
+                         &:hover {
+                              background-color: #e6e6e6;
+                         }
+                    }
+                    .line {
+                         margin-top: 10px;
+                         width: 152px;
+                         height: 0px;
+                         border: 1px solid #ababab;
+                    }
+                    p {
+                         font-weight: 500;
+                         font-size: 16px;
+                         line-height: 130%;
+                         /* identical to box height, or 21px */
+
+                         letter-spacing: 0.0015em;
+
+                         /* GREY/ABABAB */
+
+                         color: #ababab;
+                    }
+               }
+               .context-3 {
+                    width: 100%;
+                    margin-top: 24px;
+                    font-weight: 600;
+                    font-size: 16px;
+                    line-height: 130%;
+                    text-align: center;
+                    .change-register {
+                         text-decoration: none;
+                         color: var(--primary-color);
+                    }
+               }
+               .context-4 {
+                    font-weight: 500;
+                    font-size: 12px;
+                    line-height: 130%;
+                    margin-top: 37px;
+                    .rules {
+                         text-decoration: none;
+                         color: var(--primary-color);
+                    }
+               }
+          }
+     }
+}
