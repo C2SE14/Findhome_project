@@ -55,7 +55,7 @@ const Footer = () => {
                     }}
                   ></i>
                   <i
-                    class="bi bi-twitter"
+                    className="bi bi-twitter"
                     style={{
                       color: "blue",
                       fontSize: "20px",
