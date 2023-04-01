@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 //
-import { logo } from "../../../assets/images";
+import { logo, logoblack } from "../../../assets/images";
+
 import "./Header.scss";
 
-const Header = () => {
+const Header = (props) => {
+  const { setColor } = props;
   const [sticky, setSticky] = useState(false);
 
   const changeBackground = () => {
@@ -19,7 +21,7 @@ const Header = () => {
   return (
     <div className={sticky ? "header sticky" : "header"}>
       <div className="header__container">
-        <div className="header__top">
+        <div className={!setColor ? "header__top" : "header__top setColor"}>
           <Container>
             <div className="header__top-left">
               <ul>
@@ -45,11 +47,15 @@ const Header = () => {
             </div>
           </Container>
         </div>
-        <div className="header__bot">
+        <div className={!setColor ? "header__bot" : "header__bot setColor"}>
           <Container>
             <div className="header__logo">
               <Link to="/">
-                <img src={logo} alt="Logo" />
+                {setColor ? (
+                  <img src={logoblack} alt="LogoBlack" />
+                ) : (
+                  <img src={logo} alt="Logo" />
+                )}
               </Link>
             </div>
             <div className="header__nav">
@@ -58,7 +64,7 @@ const Header = () => {
                   <NavLink to="/">Trang chủ</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/">Dự án</NavLink>
+                  <NavLink to="/chi-tiet">Dự án</NavLink>
                 </li>
                 <li>
                   <NavLink to="/">Mua nhà</NavLink>

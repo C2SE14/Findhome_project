@@ -3,11 +3,15 @@ import { Outlet } from "react-router-dom";
 import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 
-const Layout = () => {
+const LayoutDefault = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
   return (
     <div className="layout">
-      <Header />
-      <div className="layout__content">
+      <Header setColor />
+      <div className="layout__content" style={{ marginTop: "178.8px" }}>
         <Outlet />
       </div>
       <Footer />
@@ -15,4 +19,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default LayoutDefault;
