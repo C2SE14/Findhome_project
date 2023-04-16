@@ -5,17 +5,17 @@
 .table-bordered{
     font-size: 12px;
 }
-.gia{
+.title{
     font-weight: lighter;
 
 }
+.amount{
+    font-weight: bold;
+}
 .font{
     width: 356px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 25px;
-    -webkit-line-clamp: 2;
-    // height: 75px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }

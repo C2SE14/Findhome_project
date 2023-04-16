@@ -15,8 +15,8 @@ const Aution = () => {
           <tr>
             <th className="col-1" scope="col">STT</th>
             <th className="col-5" scope="col">Tiêu đề tin</th>
-            <th className="col-2" scope="col">Loại tin</th>
-            <th className="col-2" scope="col">Thời hạn tin</th>
+            <th className="col-1.5" scope="col">Loại tin</th>
+            <th className="col-2.5" scope="col">Thời hạn tin</th>
             <th className="col-2" scope="col">Trạng thái</th>
           </tr>
         </thead>
