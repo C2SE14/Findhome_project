@@ -33,6 +33,8 @@ import bussiness5 from "./bussiness5.png";
 import bussiness6 from "./bussiness6.png";
 
 import logologin from "./logologin.png";
+
+import hinhbds1 from "./nhanquan4.jpg"
 export {
      aboutus,
      banner,
@@ -64,4 +66,5 @@ export {
      logo,
      logoblack,
      logologin,
+     hinhbds1,
 };

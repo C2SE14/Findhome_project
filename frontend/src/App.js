@@ -8,6 +8,7 @@ import Login from "./pages/Auth/Login/Login";
 import Details from "./pages/DetailItem/componetns/Details/Details";
 import DetailItem from "./pages/DetailItem/DetailItem";
 import Home from "./pages/Home/Home";
+import AuctionRoom from "./pages/Auction/AuctionRoom/AuctionRoom";
 
 function App() {
      return (
@@ -16,6 +17,7 @@ function App() {
                     <Routes>
                          <Route element={<LayoutHome />}>
                               <Route path="/" element={<Home />} />
+                              <Route path="/auction-room" element={<AuctionRoom />} />
                          </Route>
                          <Route element={<LayoutDefault />}>
                               <Route path="/chi-tiet" element={<DetailItem />}>
