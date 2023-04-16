@@ -13,7 +13,7 @@ const Banner = () => {
         <div className="banner__content">
           <h3>CÙNG TÌM KIẾM</h3>
           <h2>NGÔI NHÀ TUYỆT NHẤT CHO BẠN</h2>
-          <Link to="#" className="button button__secondary">
+          <Link to="/nha-dat-ban" className="button button__secondary">
             Khám phá
           </Link>
         </div>

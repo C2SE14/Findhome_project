@@ -34,6 +34,7 @@ import bussiness6 from "./bussiness6.png";
 
 import logologin from "./logologin.png";
 
+<<<<<<< HEAD
 import hinhbds1 from "./nhanquan4.jpg"
 export {
      aboutus,
@@ -67,4 +68,42 @@ export {
      logoblack,
      logologin,
      hinhbds1,
+=======
+import matbang from "./matbang.jpg";
+
+import map from "./map.png";
+export {
+  aboutus,
+  banner,
+  customer_icon,
+  medal_icon,
+  branch_icon,
+  area_hochiminh,
+  area_danang,
+  area_hanoi,
+  area_dongnai,
+  area_haiphong,
+  area_vungtau,
+  customer,
+  postnews,
+  building_icon,
+  house_icon,
+  estate_icon,
+  office_icon,
+  realestate_icon,
+  topnews1,
+  topnews2,
+  topnews3,
+  bussiness1,
+  bussiness2,
+  bussiness3,
+  bussiness4,
+  bussiness5,
+  bussiness6,
+  logo,
+  logoblack,
+  logologin,
+  matbang,
+  map,
+>>>>>>> dfdfc60489ce212c7d22367da749696e0ca2fbe5
 };

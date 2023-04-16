@@ -40,19 +40,25 @@ function SamplePrevArrow(props) {
   );
 }
 
-const Carousel = ({ items, reviews }) => {
+const Carousel = ({
+  items,
+  reviews,
+  data_area,
+  data_news_viewed,
+  data__newEstate,
+}) => {
+  const slidesToShow = data_news_viewed ? 4 : data__newEstate ? 1 : 3;
+  const autoPlay = data_news_viewed ? true : false;
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: slidesToShow,
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
-    // autoplay: true,
+    autoplay: autoPlay,
     autoplaySpeed: 5000,
-    // cssEase: "linear",
-    // centerMode: true,
   };
 
   return (
@@ -83,7 +89,8 @@ const Carousel = ({ items, reviews }) => {
               </div>
             </div>
           ))
-        : reviews.map((review) => (
+        : reviews
+        ? reviews.map((review) => (
             <div key={review.id} className="review">
               <div className="review__container">
                 <p>{review.comment}</p>
@@ -92,6 +99,74 @@ const Carousel = ({ items, reviews }) => {
                   <div>
                     <h4>{review.name}</h4>
                     <span>{review.position}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        : data_area
+        ? data_area.map((area) => (
+            <div key={area.id} className="na">
+              <div className="na__container">
+                <img src={area.imageUrl} alt="" />
+                <div className="na__content">
+                  <h4>{area.name}</h4>
+                  <p>{area.address}</p>
+                  <div className="na__info">
+                    <div>
+                      <i className="bi bi-cash"></i>
+                      <span>{area.price}</span>
+                    </div>
+
+                    <div>
+                      <i className="bi bi-textarea"></i>
+                      <span>{area.area}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        : data_news_viewed
+        ? data_news_viewed.map((area) => (
+            <div key={area.id} className="na">
+              <div className="na__container">
+                <img src={area.imageUrl} alt="" />
+                <div className="na__content">
+                  <h4>{area.name}</h4>
+                  <p>{area.address}</p>
+                  <div className="na__info">
+                    <div>
+                      <i className="bi bi-cash"></i>
+                      <span>{area.price}</span>
+                    </div>
+
+                    <div>
+                      <i className="bi bi-textarea"></i>
+                      <span>{area.area}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))
+        : data__newEstate.map((area) => (
+            <div key={area.id} className="na">
+              <div className="na__container">
+                <img src={area.imageUrl} alt="" />
+                <div className="na__content">
+                  <h4>{area.name}</h4>
+                  <p>{area.address}</p>
+                  <div className="na__info">
+                    <div>
+                      <i className="bi bi-cash"></i>
+                      <span>{area.price}</span>
+                    </div>
+
+                    <div>
+                      <i className="bi bi-textarea"></i>
+                      <span>{area.area}</span>
+                    </div>
                   </div>
                 </div>
               </div>

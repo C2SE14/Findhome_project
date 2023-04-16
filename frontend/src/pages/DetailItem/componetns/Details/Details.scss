@@ -40,11 +40,47 @@
   &__content {
     display: flex;
     gap: 20px;
+    margin-bottom: 70px;
     &-left {
       flex: 0.7;
     }
     &-right {
       flex: 0.3;
+
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .filter__price,
+      .filter__area,
+      .filter__hot,
+      .filter__utility {
+        border: 1px solid #ccc;
+        padding: 25px 30px;
+        border-radius: 8px;
+        h3 {
+          font-family: var(--secondary-font);
+          font-size: 24px;
+          font-weight: 400;
+          line-height: 31.99px;
+          margin-bottom: 18px;
+        }
+        ul {
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          li {
+            list-style: none;
+            font-size: 14px;
+            font-weight: 500;
+            &:hover {
+              color: var(--primary-color);
+              cursor: pointer;
+            }
+          }
+        }
+      }
     }
   }
   &__head {
@@ -86,38 +122,6 @@
       }
       .Dropdown-option {
         font-size: 14px;
-      }
-    }
-  }
-}
-
-// Item
-
-.item {
-  display: flex;
-  gap: 5px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  &__img {
-    width: 270px;
-    height: 215px;
-    object-fit: cover;
-  }
-  &__content {
-    padding: 20px;
-    h3 {
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 21.33px;
-      font-family: var(--secondary-font);
-    }
-    ul {
-      display: flex;
-      align-items: center;
-      padding: 0;
-      margin: 0;
-      li {
-        display: flex;
-        align-items: center;
       }
     }
   }

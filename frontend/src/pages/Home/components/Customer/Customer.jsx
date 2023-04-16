@@ -27,10 +27,7 @@ const Customer = () => {
                 </li>
                 <li>
                   <i className="bi bi-megaphone"></i>
-                  <p>
-                    Nhận thông báo ngay tức thì về Findhome App khi có khách
-                    hàng mới quan tâm
-                  </p>
+                  <p>Nhận thông báo khi sử dụng dịch vụ của chúng tôi</p>
                 </li>
 
                 <li>
