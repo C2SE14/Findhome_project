@@ -11,6 +11,10 @@ import Searching from "./components/Searching/Searching";
 import TopNews from "./components/TopNews/TopNews";
 
 const Home = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
   return (
     <div className="home">
       <Banner />

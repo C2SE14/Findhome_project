@@ -24,10 +24,10 @@ const ActionsHeader = () => {
       <Container>
         <div className="ah__container">
           <div className="ah__buttons">
-            <Link to="#" className="ah__buttons-btn active">
+            <Link to="/nha-dat-ban" className="ah__buttons-btn active">
               BÁN
             </Link>
-            <Link to="#" className="ah__buttons-btn">
+            <Link to="/nha-dat-cho-thue" className="ah__buttons-btn">
               CHO THUÊ
             </Link>
           </div>

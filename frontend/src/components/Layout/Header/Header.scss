@@ -183,6 +183,14 @@
   background: #333;
   .header__top {
     background: #333;
+    &-right {
+      i {
+        color: #777;
+      }
+      a {
+        color: #777;
+      }
+    }
   }
   .header__bot {
     padding: 10px 0;

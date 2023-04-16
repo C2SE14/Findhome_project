@@ -4,6 +4,10 @@ import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 
 const LayoutHome = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
   return (
     <div className="layout">
       <Header />

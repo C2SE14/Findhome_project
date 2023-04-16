@@ -32,7 +32,7 @@ const Header = (props) => {
                 <li>
                   <i className="bi bi-geo-alt"></i>
                   <span className="cus__li">
-                    Số 02 Quang Trung, Thạch Thang, Hải Châu ,Đà Nẵng
+                    254 Nguyễn Văn Linh,Thanh Khê,Đà Nẵng
                   </span>
                 </li>
                 <li>
@@ -64,16 +64,16 @@ const Header = (props) => {
                   <NavLink to="/">Trang chủ</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/chi-tiet">Dự án</NavLink>
+                  <NavLink to="/nha-dat-ban">Nhà đất bán</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/">Mua nhà</NavLink>
+                  <NavLink to="/nha-dat-cho-thue">Nhà đất cho thuê</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/">Cho thuê</NavLink>
+                  <NavLink to="">Dự án</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/">Bản giá dịch vụ</NavLink>
+                  <NavLink to="/">Đấu giá</NavLink>
                 </li>
                 <li>
                   <NavLink to="/">Liên hệ</NavLink>
