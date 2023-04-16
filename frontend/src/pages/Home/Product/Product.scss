@@ -1,0 +1,21 @@
+.imageChange {
+    max-width: 50px;
+    height: auto;
+}
+.table-bordered{
+    font-size: 12px;
+}
+.gia{
+    font-weight: lighter;
+
+}
+.font{
+    width: 356px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 25px;
+    -webkit-line-clamp: 2;
+    // height: 75px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
