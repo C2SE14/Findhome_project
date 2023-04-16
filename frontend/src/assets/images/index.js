@@ -1,4 +1,5 @@
 import logo from "./logo.png";
+import logoblack from "./logoblack.png";
 
 import aboutus from "./aboutus.png";
 import banner from "./Banner.png";
@@ -31,6 +32,11 @@ import bussiness4 from "./bussiness4.png";
 import bussiness5 from "./bussiness5.png";
 import bussiness6 from "./bussiness6.png";
 
+import logologin from "./logologin.png";
+
+import matbang from "./matbang.jpg";
+
+import map from "./map.png";
 export {
   aboutus,
   banner,
@@ -60,4 +66,8 @@ export {
   bussiness5,
   bussiness6,
   logo,
+  logoblack,
+  logologin,
+  matbang,
+  map,
 };

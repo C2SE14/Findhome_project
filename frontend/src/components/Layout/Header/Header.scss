@@ -11,8 +11,8 @@
     flex-direction: column;
   }
   img {
-    width: 100%;
-    height: 100%;
+    width: 200px;
+    height: 82px;
     object-fit: cover;
     transition: all 0.3s linear;
   }
@@ -23,7 +23,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px auto;
+      padding: 10px 0;
     }
     &-left {
       ul {
@@ -74,12 +74,76 @@
       }
     }
   }
+  &__top.setColor {
+    background: #fff;
+    border-bottom: 1px solid rgba(119, 119, 119, 0.5);
+    .header__top-left {
+      ul {
+        li {
+          span {
+            color: #777;
+          }
+          i {
+            color: var(--primary-color);
+            font-size: 17px;
+          }
+        }
+      }
+    }
+    .header__top-right {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      i {
+        font-size: 17px;
+        color: #000;
+      }
+      a {
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: 0.0125em;
+        color: #000;
+        &:hover {
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
   &__bot {
+    background-color: transparent;
+    padding: 20px 0;
     .container {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 20px auto;
+    }
+  }
+  &__bot.setColor {
+    background-color: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    .header__nav {
+      ul {
+        li {
+          a {
+            color: #000;
+            &:hover {
+              color: var(--primary-color);
+            }
+          }
+        }
+      }
+    }
+    .header__btn {
+      a {
+        color: #000;
+        border-color: #000;
+        &:hover {
+          color: #fff;
+          background-color: #000;
+        }
+      }
     }
   }
   &__nav {
@@ -119,6 +183,14 @@
   background: #333;
   .header__top {
     background: #333;
+    &-right {
+      i {
+        color: #777;
+      }
+      a {
+        color: #777;
+      }
+    }
   }
   .header__bot {
     padding: 10px 0;
