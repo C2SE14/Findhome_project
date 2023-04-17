@@ -8,12 +8,11 @@ import Login from "./pages/Auth/Login/Login";
 import Details from "./pages/DetailItem/componetns/Details/Details";
 import DetailItem from "./pages/DetailItem/DetailItem";
 import Home from "./pages/Home/Home";
+import Detail from "./pages/DetailItem/componetns/Detail/Detail";
 import LayoutSystem from "./components/Layout/LayoutSystem";
 import PostNew from "./pages/PostNew/PostNew";
 import ListNew from "./pages/ListNew/ListNew";
-import AuctionRoom from "./pages/AuctionRoom/AuctionRoom";
 import RegisterParticipate from "./pages/RegisterParticipate/RegisterParticipate";
-
 function App() {
      return (
           <BrowserRouter>
@@ -23,11 +22,11 @@ function App() {
                               <Route path="/" element={<Home />} />
                          </Route>
                          <Route element={<LayoutDefault />}>
-                              <Route path="/chi-tiet" element={<DetailItem />}>
+                              <Route path="/nha-dat-ban" element={<DetailItem />}>
                                    <Route index element={<Details />} />
+                                   <Route path="/nha-dat-ban/:slug" element={<Detail />} />
                               </Route>
                               <Route path="/login" element={<Login />} />
-                              <Route path="/auctionroom" element={<AuctionRoom />} />
                               <Route
                                    path="/register-participate"
                                    element={<RegisterParticipate />}

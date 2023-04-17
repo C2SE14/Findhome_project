@@ -34,8 +34,9 @@ import bussiness6 from "./bussiness6.png";
 
 import avatar_nav from "./avatar-nav.png";
 import logologin from "./logologin.png";
-import map from "./map.png";
+import matbang from "./matbang.jpg";
 
+import map from "./map.png";
 export {
      aboutus,
      banner,
@@ -67,6 +68,7 @@ export {
      logo,
      logoblack,
      logologin,
-     avatar_nav,
+     matbang,
      map,
+     avatar_nav,
 };
