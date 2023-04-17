@@ -68,7 +68,7 @@ const Header = (props) => {
               </ul>
             </nav>
             <div className="header__btn">
-              <NavLink to="#" className="button button__primary">
+              <NavLink to="/dang-tin" className="button button__primary">
                 Đăng tin
               </NavLink>
             </div>
