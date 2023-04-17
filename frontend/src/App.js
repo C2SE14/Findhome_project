@@ -23,6 +23,16 @@ function App() {
               <Route index element={<Details />} />
               <Route path="/nha-dat-ban/:slug" element={<Detail />} />
             </Route>
+
+            <Route path="/nha-dat-cho-thue" element={<DetailItem />}>
+              <Route index element={<Details />} />
+              <Route path="/nha-dat-cho-thue/:slug" element={<Detail />} />
+            </Route>
+
+            <Route path="/du-an" element={<DetailItem />}>
+              <Route index element={<Details />} />
+              <Route path="/du-an/:slug" element={<Detail />} />
+            </Route>
             <Route path="/login" element={<Login />} />
           </Route>
         </Routes>

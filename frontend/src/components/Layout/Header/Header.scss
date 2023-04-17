@@ -147,28 +147,95 @@
     }
   }
   &__nav {
-    ul {
+    .menu {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin: 0;
       padding: 0;
       gap: 28px;
-      li {
+
+      &-item {
         list-style: none;
-        a {
-          text-decoration: none;
-          color: #fff;
-          font-size: 16px;
-          font-weight: 500;
-          line-height: 21px;
-          letter-spacing: 0.0125em;
-          transition: all 0.2s linear;
-          &:hover {
-            color: var(--primary-color);
-            text-decoration: underline;
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          height: 10px;
+          width: 100%;
+          bottom: -5px;
+          cursor: pointer;
+        }
+        &::after {
+          content: "";
+          height: 3px;
+          width: 0;
+          background-color: var(--primary-color);
+          position: absolute;
+          bottom: 0;
+          right: 0%;
+          transition: width 0.3s linear;
+        }
+        &:hover::after {
+          width: 100%;
+          left: 0%;
+        }
+        &:hover .submenus {
+          visibility: visible;
+        }
+
+        .submenus {
+          position: absolute;
+          left: 0;
+          top: calc(100% + 5px);
+          width: 100%;
+          width: 200px;
+          visibility: hidden;
+          display: flex;
+          flex-direction: column;
+          padding: 0;
+          background-color: #fff;
+          z-index: 999;
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+          border-radius: 8px;
+
+          li {
+            list-style: none;
+            display: inline-block;
+            padding: 5px 10px;
+            a {
+              display: inline-block;
+              text-decoration: none;
+              color: #333;
+              font-size: 14px;
+              font-weight: 600;
+              position: relative;
+              &::after {
+                content: "";
+                height: 2px;
+                width: 0;
+                background-color: var(--primary-color);
+                position: absolute;
+                bottom: 0;
+                right: 0%;
+                transition: width 0.3s linear;
+              }
+              &:hover::after {
+                width: 100%;
+                left: 0%;
+              }
+            }
           }
         }
+      }
+      &-link {
+        text-decoration: none;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 21px;
+        letter-spacing: 0.0125em;
+        transition: all 0.2s linear;
       }
     }
   }

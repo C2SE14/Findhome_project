@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import Dropdown from "react-dropdown";
 import { Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
-
+import { Link, useLocation } from "react-router-dom";
 //
 import "./ActionsHeader.scss";
 
@@ -19,17 +18,30 @@ const ActionsHeader = () => {
   const handleSelect = (option) => {
     setSelectedOption(option);
   };
+  const location = useLocation();
   return (
     <div className="ah">
       <Container>
         <div className="ah__container">
           <div className="ah__buttons">
-            <Link to="/nha-dat-ban" className="ah__buttons-btn active">
-              BÁN
-            </Link>
-            <Link to="/nha-dat-cho-thue" className="ah__buttons-btn">
-              CHO THUÊ
-            </Link>
+            <div>
+              <Link
+                to="/nha-dat-ban"
+                className={`ah__buttons-btn ${
+                  location.pathname === "/nha-dat-ban" ? "active" : ""
+                }`}
+              >
+                BÁN
+              </Link>
+              <Link
+                to="/nha-dat-cho-thue"
+                className={`ah__buttons-btn ${
+                  location.pathname === "/nha-dat-cho-thue" ? "active" : ""
+                }`}
+              >
+                CHO THUÊ
+              </Link>
+            </div>
           </div>
           <div className="ah__search">
             <Dropdown

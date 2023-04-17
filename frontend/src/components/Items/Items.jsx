@@ -1,7 +1,7 @@
 import React from "react";
 import "./Items.scss";
 import { Link } from "react-router-dom";
-import { convertToSlug } from "../ConvertToSlug";
+import { convertToSlug } from "../Common/convertToSlug";
 
 const Items = (props) => {
   const { data } = props;

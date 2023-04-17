@@ -2,7 +2,7 @@ import logo from "./logo.png";
 import logoblack from "./logoblack.png";
 
 import aboutus from "./aboutus.png";
-import banner from "./Banner.png";
+import banner from "./banner.jpeg";
 import customer_icon from "./customer_icon.png";
 import medal_icon from "./medal_icon.png";
 import branch_icon from "./branch_icon.png";

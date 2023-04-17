@@ -2,13 +2,25 @@
   overflow: hidden;
   &__container {
     position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba($color: #000000, $alpha: 0.5);
+      z-index: 1;
+    }
   }
   &__img {
     width: 100%;
-    height: 100vh;
-    height: 100%;
+    height: 100vh !important;
     object-fit: cover;
-    background-size: cover;
+    background-size: contain;
+    position: relative;
   }
   &__content {
     position: absolute;
@@ -16,6 +28,7 @@
     width: 100%;
     text-align: center;
     color: #fff;
+    z-index: 2;
     h3 {
       font-size: 24px;
       font-weight: 700;

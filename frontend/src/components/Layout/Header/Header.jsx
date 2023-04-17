@@ -5,6 +5,8 @@ import { Link, NavLink } from "react-router-dom";
 import { logo, logoblack } from "../../../assets/images";
 
 import "./Header.scss";
+import { menuItems } from "../../Common/menuItems";
+import MenuItems from "../../MenuItems/MenuItems";
 
 const Header = (props) => {
   const { setColor } = props;
@@ -58,28 +60,13 @@ const Header = (props) => {
                 )}
               </Link>
             </div>
-            <div className="header__nav">
-              <ul>
-                <li>
-                  <NavLink to="/">Trang chủ</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/nha-dat-ban">Nhà đất bán</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/nha-dat-cho-thue">Nhà đất cho thuê</NavLink>
-                </li>
-                <li>
-                  <NavLink to="">Dự án</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/">Đấu giá</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/">Liên hệ</NavLink>
-                </li>
+            <nav className="header__nav">
+              <ul className="menu">
+                {menuItems.map((menu, index) => {
+                  return <MenuItems menu={menu} key={index} />;
+                })}
               </ul>
-            </div>
+            </nav>
             <div className="header__btn">
               <NavLink to="#" className="button button__primary">
                 Đăng tin
