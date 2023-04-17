@@ -1,0 +1,48 @@
+.listnew {
+     width: calc(100% - 259px);
+     background-color: #f8f8f8;
+     .list-container {
+          width: 1142px;
+          margin: 34px 20px 60px 22px;
+          .navigation {
+               font-weight: 500;
+               font-size: 16px;
+               line-height: 130%;
+               color: #1479ff;
+               span {
+                    font-weight: 500;
+                    font-size: 16px;
+                    line-height: 130%;
+                    color: #89939e;
+               }
+          }
+          .heading-title {
+               font-weight: 600;
+               font-size: 24px;
+               line-height: 130%;
+               text-transform: uppercase;
+          }
+          .content {
+               .table {
+                    thead {
+                         tr {
+                              background-color: var(--primary-color);
+                              color: #f3f4f8;
+                              th {
+                                   font-weight: 600;
+                                   font-size: 16px;
+                                   line-height: 22px;
+                              }
+                         }
+                    }
+                    tbody {
+                         tr {
+                              font-weight: 500;
+                              font-size: 16px;
+                              line-height: 130%;
+                         }
+                    }
+               }
+          }
+     }
+}

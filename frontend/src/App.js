@@ -9,7 +9,10 @@ import Details from "./pages/DetailItem/componetns/Details/Details";
 import DetailItem from "./pages/DetailItem/DetailItem";
 import Home from "./pages/Home/Home";
 import Detail from "./pages/DetailItem/componetns/Detail/Detail";
-
+import LayoutSystem from "./components/Layout/LayoutSystem";
+import PostNew from "./pages/PostNew/PostNew";
+import ListNew from "./pages/ListNew/ListNew";
+import RegisterParticipate from "./pages/RegisterParticipate/RegisterParticipate";
 function App() {
   return (
     <BrowserRouter>
@@ -23,17 +26,15 @@ function App() {
               <Route index element={<Details />} />
               <Route path="/nha-dat-ban/:slug" element={<Detail />} />
             </Route>
-
-            <Route path="/nha-dat-cho-thue" element={<DetailItem />}>
-              <Route index element={<Details />} />
-              <Route path="/nha-dat-cho-thue/:slug" element={<Detail />} />
-            </Route>
-
-            <Route path="/du-an" element={<DetailItem />}>
-              <Route index element={<Details />} />
-              <Route path="/du-an/:slug" element={<Detail />} />
-            </Route>
             <Route path="/login" element={<Login />} />
+            <Route
+              path="/register-participate"
+              element={<RegisterParticipate />}
+            />
+          </Route>
+          <Route element={<LayoutSystem />}>
+            <Route path="/postnew" element={<PostNew />} />
+            <Route path="/listnew" element={<ListNew />} />
           </Route>
         </Routes>
       </div>
