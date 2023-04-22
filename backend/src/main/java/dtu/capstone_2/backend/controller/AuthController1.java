@@ -3,11 +3,11 @@ package dtu.capstone_2.backend.controller;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
-
 
 import dtu.capstone_2.backend.entity.ERole;
 import dtu.capstone_2.backend.entity.Role;
@@ -16,6 +16,7 @@ import dtu.capstone_2.backend.payload.request.LoginRequest;
 import dtu.capstone_2.backend.payload.request.SignupRequest;
 import dtu.capstone_2.backend.payload.response.JwtResponse;
 import dtu.capstone_2.backend.payload.response.MessageResponse;
+import dtu.capstone_2.backend.payload.response.RegisterResponse;
 import dtu.capstone_2.backend.repository.RoleRepository;
 import dtu.capstone_2.backend.repository.UserRepository;
 import dtu.capstone_2.backend.security.jwt.JwtUtils;
@@ -61,9 +62,14 @@ public class AuthController1 {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+        // xún db query username by email
+
+            String getUserName = String.valueOf(userRepository.findByEmail(loginRequest.getEmail()));
+
+            User userGet = userRepository.findByEmail(loginRequest.getEmail());
 
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+                new UsernamePasswordAuthenticationToken(userGet.getUsername(), loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -73,7 +79,6 @@ public class AuthController1 {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
-
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
@@ -139,6 +144,13 @@ public class AuthController1 {
         user.setRoles(roles);
         userRepository.save(user);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(signUpRequest.getUsername(), signUpRequest.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = jwtUtils.generateJwtToken(authentication);
+
+        return ResponseEntity.ok(new RegisterResponse(jwt));
     }
 }
