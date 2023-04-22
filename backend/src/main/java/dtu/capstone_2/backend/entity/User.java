@@ -1,6 +1,10 @@
 package dtu.capstone_2.backend.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -38,6 +42,40 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+
+    private String fullName;
+
+    @Column(name = "date_of_birth")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date date_of_birth;
+
+    private String phoneNumber;
+
+    private String cccd;
+
+    private Date date_rage_cccd;
+
+    private String issuedBy;
+
+    private String permanent_residence;
+
+    private String front_side_photo_CCCD;
+
+    private String back_side_photo_CCCD;
+
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<RealEstate> realEstates;
+
+
+    public List<RealEstate> getRealEstates() {
+        return realEstates;
+    }
+
+    public void setRealEstates(List<RealEstate> realEstates) {
+        this.realEstates = realEstates;
+    }
 
     public User() {
     }
@@ -88,4 +126,98 @@ public class User {
         this.roles = roles;
     }
 
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public Date getDate_of_birth() {
+        return date_of_birth;
+    }
+
+    public void setDate_of_birth(Date date_of_birth) {
+        this.date_of_birth = date_of_birth;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getCccd() {
+        return cccd;
+    }
+
+    public void setCccd(String cccd) {
+        this.cccd = cccd;
+    }
+
+    public Date getDate_rage_cccd() {
+        return date_rage_cccd;
+    }
+
+    public void setDate_rage_cccd(Date date_rage_cccd) {
+        this.date_rage_cccd = date_rage_cccd;
+    }
+
+    public String getIssuedBy() {
+        return issuedBy;
+    }
+
+    public void setIssuedBy(String issuedBy) {
+        this.issuedBy = issuedBy;
+    }
+
+    public String getPermanent_residence() {
+        return permanent_residence;
+    }
+
+    public void setPermanent_residence(String permanent_residence) {
+        this.permanent_residence = permanent_residence;
+    }
+
+    public String getFront_side_photo_CCCD() {
+        return front_side_photo_CCCD;
+    }
+
+    public void setFront_side_photo_CCCD(String front_side_photo_CCCD) {
+        this.front_side_photo_CCCD = front_side_photo_CCCD;
+    }
+
+    public String getBack_side_photo_CCCD() {
+        return back_side_photo_CCCD;
+    }
+
+    public void setBack_side_photo_CCCD(String back_side_photo_CCCD) {
+        this.back_side_photo_CCCD = back_side_photo_CCCD;
+    }
+
+    public User(Long id) {
+        this.id = id;
+    }
+
+    public User(Long id, String username, String email, String password, Set<Role> roles, String fullName, Date date_of_birth, String phoneNumber, String cccd, Date date_rage_cccd, String issuedBy, String permanent_residence, String front_side_photo_CCCD, String back_side_photo_CCCD, List<RealEstate> realEstates) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.fullName = fullName;
+        this.date_of_birth = date_of_birth;
+        this.phoneNumber = phoneNumber;
+        this.cccd = cccd;
+        this.date_rage_cccd = date_rage_cccd;
+        this.issuedBy = issuedBy;
+        this.permanent_residence = permanent_residence;
+        this.front_side_photo_CCCD = front_side_photo_CCCD;
+        this.back_side_photo_CCCD = back_side_photo_CCCD;
+        this.realEstates = realEstates;
+    }
 }
