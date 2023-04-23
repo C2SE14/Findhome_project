@@ -1,12 +1,14 @@
+import { path } from "../../utils/constant";
+
 export const menuItems = [
   {
     title: "Trang chủ",
-    path: "/",
+    path: path.HOME,
   },
   {
     title: "Nhà đất bán",
     icon: "bi bi-chevron-compact-down",
-    path: "/nha-dat-ban",
+    path: path.REAL_ESTATE_FOR_SALE,
     submenus: [
       {
         title: "Bán căn hộ chung cư",
@@ -21,7 +23,7 @@ export const menuItems = [
   {
     title: "Nhà đất cho thuê",
     icon: "bi bi-chevron-compact-down",
-    path: "/nha-dat-cho-thue",
+    path: path.REAL_ESTATE_FOR_RENT,
     submenus: [
       {
         title: "Cho thuê căn hộ chung cư",

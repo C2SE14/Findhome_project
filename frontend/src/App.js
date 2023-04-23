@@ -14,33 +14,41 @@ import PostNew from "./pages/PostNew/PostNew";
 import ListNew from "./pages/ListNew/ListNew";
 import RegisterParticipate from "./pages/RegisterParticipate/RegisterParticipate";
 import AuctionRoom from "./pages/AuctionRoom/AuctionRoom";
+import { path } from "./utils/constant";
+import ScrollToTop from "react-scroll-to-top";
 function App() {
   return (
     <BrowserRouter>
       <div className="app">
+        <ScrollToTop
+          smooth
+          color="#b53c12"
+          className="d-flex align-items-center justify-content-center"
+        />
         <Routes>
           <Route element={<LayoutHome />}>
-            <Route path="/" element={<Home />} />
+            <Route path={path.HOME} element={<Home />} />
           </Route>
           <Route element={<LayoutDefault />}>
-            <Route path="/phong-dau-gia" element={<AuctionRoom />} />
-            <Route path="/nha-dat-ban" element={<DetailItem />}>
+            <Route path={path.AUCTION} element={<AuctionRoom />} />
+            <Route path={path.REAL_ESTATE_FOR_SALE} element={<DetailItem />}>
               <Route index element={<Details />} />
               <Route path="/nha-dat-ban/:slug" element={<Detail />} />
             </Route>
-            <Route path="/nha-dat-cho-thue" element={<DetailItem />}>
+            <Route path={path.REAL_ESTATE_FOR_RENT} element={<DetailItem />}>
               <Route index element={<Details />} />
               <Route path="/nha-dat-cho-thue/:slug" element={<Detail />} />
             </Route>
-            <Route path="/login" element={<Login />} />
+            <Route path={path.LOGIN} element={<Login />} />
+            <Route path={path.SIGNUP} element={<Login />} />
             <Route
-              path="/register-participate"
+              path={path.REGISTER_PARTICIPAE}
               element={<RegisterParticipate />}
             />
           </Route>
           <Route element={<LayoutSystem />}>
-            <Route path="/dang-tin" element={<PostNew />} />
-            <Route path="/danh-sach-tin" element={<ListNew />} />
+            <Route path={path.POST_NEWS} element={<PostNew />} />
+            <Route path={path.LIST_NEWS} element={<ListNew />} />
           </Route>
         </Routes>
       </div>

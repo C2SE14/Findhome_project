@@ -135,17 +135,7 @@ const Footer = () => {
                   <p>trogiup@findhome.com.vn</p>
                 </div>
               </div>
-              {/* <ul className="mt-14">
-                <li className="ft__title">TẢI ỨNG DỤNG TRÊN ĐIỆN THOẠI</li>
-                <li className="d-flex gap-2">
-                  <i className="bi bi-google-play"></i>
-                  <p>Google play</p>
-                </li>
-                <li className="d-flex gap-2">
-                  <i className="bi bi-apple"></i>
-                  <p>App store</p>
-                </li>
-              </ul> */}
+
               <div className="fs-16-600 mt-14">ĐĂNG KÝ NHẬN TIN</div>
               <Link
                 to="#"

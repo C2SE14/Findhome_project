@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Heading from "../../../../components/Heading/Heading";
 import "./PostNew.scss";
 import { postnews } from "../../../../assets/images";
+import { path } from "../../../../utils/constant";
 
 const PostNews = () => {
   return (
@@ -34,7 +35,9 @@ const PostNews = () => {
                 <p>Quản lý, thống kê hiệu quả tin đăng đầy đủ</p>
               </li>
             </ul>
-            <Link className="button button__thirdary">Đăng tin</Link>
+            <Link to={path.POST_NEWS} className="button button__thirdary">
+              Đăng tin
+            </Link>
           </div>
           <div className="pn__img">
             <img src={postnews} alt="postnew" />

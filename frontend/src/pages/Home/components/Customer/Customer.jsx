@@ -5,6 +5,7 @@ import Heading from "../../../../components/Heading/Heading";
 import "./Customer.scss";
 import { customer } from "../../../../assets/images";
 import { Link } from "react-router-dom";
+import { path } from "../../../../utils/constant";
 
 const Customer = () => {
   return (
@@ -38,8 +39,10 @@ const Customer = () => {
                   </p>
                 </li>
               </ul>
-              <Link to="#" className="button button__thirdary">
-                {" "}
+              <Link
+                to={path.REAL_ESTATE_FOR_RENT}
+                className="button button__thirdary"
+              >
                 Khám phá
               </Link>
             </div>

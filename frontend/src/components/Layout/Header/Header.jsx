@@ -7,6 +7,7 @@ import { logo, logoblack } from "../../../assets/images";
 import "./Header.scss";
 import { menuItems } from "../../Common/menuItems";
 import MenuItems from "../../MenuItems/MenuItems";
+import { path } from "../../../utils/constant";
 
 const Header = (props) => {
   const { setColor } = props;
@@ -45,7 +46,7 @@ const Header = (props) => {
             </div>
             <div className="header__top-right">
               <i className="bi bi-person-circle"></i>
-              <Link to="/login">ĐĂNG NHẬP/ĐĂNG KÍ </Link>
+              <Link to={path.LOGIN}>ĐĂNG NHẬP/ĐĂNG KÍ </Link>
             </div>
           </Container>
         </div>
@@ -68,7 +69,7 @@ const Header = (props) => {
               </ul>
             </nav>
             <div className="header__btn">
-              <NavLink to="/dang-tin" className="button button__primary">
+              <NavLink to={path.POST_NEWS} className="button button__primary">
                 Đăng tin
               </NavLink>
             </div>
