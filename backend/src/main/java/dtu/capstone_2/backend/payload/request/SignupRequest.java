@@ -1,12 +1,18 @@
 package dtu.capstone_2.backend.payload.request;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Date;
 import java.util.Set;
 
-public class SignupRequest {
+public class    SignupRequest {
     @NotBlank
     @Size(min = 3, max = 20)
     private String username;
@@ -18,9 +24,21 @@ public class SignupRequest {
 
     private Set<String> role;
 
-    @NotBlank
-    @Size(min = 6, max = 40)
     private String password;
+
+    private String fullName;
+
+    private Date date_of_birth;
+
+    private String phoneNumber;
+
+    private boolean gender;
+
+    private String address;
+
+    private String identityCard;
+
+    private Date identityCardDate;
 
     public String getUsername() {
         return username;
@@ -52,5 +70,61 @@ public class SignupRequest {
 
     public void setRole(Set<String> role) {
         this.role = role;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public Date getDate_of_birth() {
+        return date_of_birth;
+    }
+
+    public void setDate_of_birth(Date date_of_birth) {
+        this.date_of_birth = date_of_birth;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public boolean isGender() {
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getIdentityCard() {
+        return identityCard;
+    }
+
+    public void setIdentityCard(String identityCard) {
+        this.identityCard = identityCard;
+    }
+
+    public Date getIdentityCardDate() {
+        return identityCardDate;
+    }
+
+    public void setIdentityCardDate(Date identityCardDate) {
+        this.identityCardDate = identityCardDate;
     }
 }

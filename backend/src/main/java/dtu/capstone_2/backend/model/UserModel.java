@@ -1,10 +1,15 @@
 package dtu.capstone_2.backend.model;
 
 
-import dtu.capstone_2.backend.entity.RealEstate;
 import dtu.capstone_2.backend.entity.Role;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -30,17 +35,13 @@ public class UserModel {
 
     private String phoneNumber;
 
-    private String cccd;
+    private boolean gender;
+    //
+    private String address;
+    //
+    private String identityCard;
 
-    private Date date_rage_cccd;
+    private Date identityCardDate;
 
-    private String issuedBy;
-
-    private String permanent_residence;
-
-    private String front_side_photo_CCCD;
-
-    private String back_side_photo_CCCD;
-
-    private List<RealEstateModel> realEstateModels;
+    private List<RealEstateModel> realEstateModelList; //Model
 }
