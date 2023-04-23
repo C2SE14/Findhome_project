@@ -142,6 +142,8 @@ public class AuthController1 {
         }
 
         user.setRoles(roles);
+        user.setPhoneNumber(signUpRequest.getPhoneNumber());
+        user.setFullName(signUpRequest.getFullName());
         userRepository.save(user);
 
         Authentication authentication = authenticationManager.authenticate(

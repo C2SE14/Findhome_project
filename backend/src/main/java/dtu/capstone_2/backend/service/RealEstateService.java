@@ -52,18 +52,18 @@ public class RealEstateService {
         return  realEstateModel;
     }
     public String addRealEstate(RealEstateModel realEstateModel){
-        ModelMapper modelMapper = new ModelMapper();
-        RealEstate realEstate = modelMapper.map(realEstateModel, RealEstate.class);
-        realEstate.setNameEstate(realEstateModel.getNameEstate());
-        realEstate.setProvince(realEstateModel.getProvince());
-        realEstate.setDistrict(realEstateModel.getDistrict());
-        realEstate.setCommune(realEstateModel.getCommune());
-        realEstate.setPrice(realEstateModel.getPrice());
-        realEstate.setHouse_direction(realEstateModel.getHouse_direction());
-        realEstate.setArea(realEstateModel.getArea());
-        realEstate.setLegalStatus(realEstateModel.getLegalStatus());
-        realEstate.setNegotiablePrice(realEstateModel.getNegotiablePrice());
-        realEstate.setPost_status(realEstate.isPost_status());
+//        ModelMapper modelMapper = new ModelMapper();
+//        RealEstate realEstate = modelMapper.map(realEstateModel, RealEstate.class);
+//        realEstate.setNameEstate(realEstateModel.getNameEstate());
+//        realEstate.setProvince(realEstateModel.getProvince());
+//        realEstate.setDistrict(realEstateModel.getDistrict());
+//        realEstate.setCommune(realEstateModel.getCommune());
+//        realEstate.setPrice(realEstateModel.getPrice());
+//        realEstate.setHouse_direction(realEstateModel.getHouse_direction());
+//        realEstate.setArea(realEstateModel.getArea());
+//        realEstate.setLegalStatus(realEstateModel.getLegalStatus());
+//        realEstate.setNegotiablePrice(realEstateModel.getNegotiablePrice());
+//        realEstate.setPost_status(realEstate.isPost_status());
         return "Add success";
     }
 }

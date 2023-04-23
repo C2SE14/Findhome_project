@@ -1,11 +1,7 @@
 package dtu.capstone_2.backend.model;
 
-import dtu.capstone_2.backend.entity.User;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Getter
 @Setter
@@ -15,23 +11,41 @@ public class RealEstateModel {
 
     private String nameEstate;
 
-    private String province;
-
-    private String district;
-
-    private String commune;
-
-    private float price;
-
-    private  String house_direction;
+    private String address;
 
     private String area;
 
-    private String legalStatus;
+    private float price;
 
-    private float negotiablePrice;
+    private float depositPrice;
 
-    private boolean post_status;
+    private  String payment;
+
+    private int minRentalPeriod;
+
+    private String title;
+
+    private String description;
+
+    private String video;
+
+    private float salientFeatures;
+
+    private float usableArea;
+
+    private float streetHouse;
+
+    private String balconyDirection;
+
+    private int numberFloors;
+
+    private int numberBedRooms;
+
+    private int rentalFloorLocation;
+
+    private int numberToilets;
+
+    private String interior;
 
     private UserModel userModel;
 }

@@ -21,25 +21,43 @@ public class RealEstate {
 
     private String nameEstate;
 
-    private String province;
-
-    private String district;
-
-    private String commune;
-
-    private float price;
-
-    private  String house_direction;
+    private String address;
 
     private String area;
 
-    private String legalStatus; // lưu mục dẫn đến thư mục chư
+    private float price;
 
-    private float negotiablePrice;
+    private float depositPrice;
 
-    private boolean post_status;
+    private  String payment;
+
+    private int minRentalPeriod;
+
+    private String title;
+
+    private String description;
+
+    private String video;
+
+    private float salientFeatures;
+
+    private float usableArea;
+
+    private float streetHouse;
+
+    private String balconyDirection;
+
+    private int numberFloors;
+
+    private int numberBedRooms;
+
+    private int rentalFloorLocation;
+
+    private int numberToilets;
+
+    private String interior;
 
     @ManyToOne
-    @JoinColumn(name = "department_id")
+    @JoinColumn(name = "user_id")
     private User user;
 }

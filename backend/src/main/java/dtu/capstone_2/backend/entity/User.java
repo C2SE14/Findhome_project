@@ -42,7 +42,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-
     private String fullName;
 
     @Column(name = "date_of_birth")
@@ -52,22 +51,35 @@ public class User {
 
     private String phoneNumber;
 
-    private String cccd;
-
-    private Date date_rage_cccd;
-
-    private String issuedBy;
-
-    private String permanent_residence;
-
-    private String front_side_photo_CCCD;
-
-    private String back_side_photo_CCCD;
-
+    private boolean gender;
+//
+    private String address;
+//
+    private String identityCard;
+//
+    @Column(name = "identity_card_date")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date identityCardDate;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<RealEstate> realEstates;
 
+    public Date getIdentityCardDate() {
+        return identityCardDate;
+    }
+
+    public void setIdentityCardDate(Date identityCardDate) {
+        this.identityCardDate = identityCardDate;
+    }
+
+    public String getIdentityCard() {
+        return identityCard;
+    }
+
+    public void setIdentityCard(String identityCard) {
+        this.identityCard = identityCard;
+    }
 
     public List<RealEstate> getRealEstates() {
         return realEstates;
@@ -151,73 +163,39 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getCccd() {
-        return cccd;
+    public boolean isGender() {
+        return gender;
     }
 
-    public void setCccd(String cccd) {
-        this.cccd = cccd;
+    public void setGender(boolean gender) {
+        this.gender = gender;
     }
 
-    public Date getDate_rage_cccd() {
-        return date_rage_cccd;
+    public String getAddress() {
+        return address;
     }
 
-    public void setDate_rage_cccd(Date date_rage_cccd) {
-        this.date_rage_cccd = date_rage_cccd;
-    }
-
-    public String getIssuedBy() {
-        return issuedBy;
-    }
-
-    public void setIssuedBy(String issuedBy) {
-        this.issuedBy = issuedBy;
-    }
-
-    public String getPermanent_residence() {
-        return permanent_residence;
-    }
-
-    public void setPermanent_residence(String permanent_residence) {
-        this.permanent_residence = permanent_residence;
-    }
-
-    public String getFront_side_photo_CCCD() {
-        return front_side_photo_CCCD;
-    }
-
-    public void setFront_side_photo_CCCD(String front_side_photo_CCCD) {
-        this.front_side_photo_CCCD = front_side_photo_CCCD;
-    }
-
-    public String getBack_side_photo_CCCD() {
-        return back_side_photo_CCCD;
-    }
-
-    public void setBack_side_photo_CCCD(String back_side_photo_CCCD) {
-        this.back_side_photo_CCCD = back_side_photo_CCCD;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public User(Long id) {
         this.id = id;
     }
 
-    public User(Long id, String username, String email, String password, Set<Role> roles, String fullName, Date date_of_birth, String phoneNumber, String cccd, Date date_rage_cccd, String issuedBy, String permanent_residence, String front_side_photo_CCCD, String back_side_photo_CCCD, List<RealEstate> realEstates) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-        this.fullName = fullName;
-        this.date_of_birth = date_of_birth;
-        this.phoneNumber = phoneNumber;
-        this.cccd = cccd;
-        this.date_rage_cccd = date_rage_cccd;
-        this.issuedBy = issuedBy;
-        this.permanent_residence = permanent_residence;
-        this.front_side_photo_CCCD = front_side_photo_CCCD;
-        this.back_side_photo_CCCD = back_side_photo_CCCD;
-        this.realEstates = realEstates;
-    }
+//    public User(Long id, String username, String email, String password, Set<Role> roles, String fullName, Date date_of_birth, String phoneNumber, boolean gender, String address, String identityCard, Date identityCardDate, List<RealEstate> realEstates) {
+//        this.id = id;
+//        this.username = username;
+//        this.email = email;
+//        this.password = password;
+//        this.roles = roles;
+//        this.fullName = fullName;
+//        this.date_of_birth = date_of_birth;
+//        this.phoneNumber = phoneNumber;
+//        this.gender = gender;
+//        this.address = address;
+//        this.identityCard = identityCard;
+//        this.identityCardDate = identityCardDate;
+//        this.realEstates = realEstates;
+//    }
 }
