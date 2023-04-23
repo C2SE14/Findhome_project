@@ -183,3 +183,18 @@
     }
   }
 }
+
+.text__error {
+  color: #ef5350;
+  font-size: 0.75em;
+  animation: identifier 0.3s linear;
+}
+
+@keyframes identifier {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

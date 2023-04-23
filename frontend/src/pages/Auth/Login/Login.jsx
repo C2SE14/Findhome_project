@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./login.scss";
 import { logo, logologin } from "../../../assets/images";
 import { Link } from "react-router-dom";
@@ -6,20 +7,22 @@ import RightLogin from "./components/RightLogin/RightLogin";
 import RightRegister from "./components/RightRegister/RightRegister";
 
 const Login = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
+  const navigate = useNavigate();
   const [isLogin, setIsLoin] = useState(true);
   const handlerClick = () => {
     setIsLoin(!isLogin);
-    window.scrollTo(0, 0);
+    if (!isLogin) {
+      navigate("/dang-nhap");
+    } else {
+      navigate("/dang-ki");
+    }
   };
+
   return (
     <div className="login">
       <div
         className="container"
-        style={{ height: isLogin ? "647px" : "1164px" }}
+        style={{ height: isLogin ? "647px" : "1170px" }}
       >
         <div className="left">
           <img src={logo} alt="" className="logo" />

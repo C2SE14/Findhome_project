@@ -72,3 +72,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 # Đây là link dùng icon của thư viện boostrap : [https://icons.getbootstrap.com/]
 
 # Đây là link box-shadow-examples: [https://getcssscan.com/css-box-shadow-examples]
+
+# Sử dụng phương pháp scrape để lấy crawl data

@@ -7,92 +7,86 @@
 
 // ? Root
 :root {
-     --primary-color: #b53c12;
-     --primary-font: "Raleway", sans-serif;
-     --secondary-font: "Playfair Display", serif;
+  --primary-color: #b53c12;
+  --primary-font: "Raleway", sans-serif;
+  --secondary-font: "Playfair Display", serif;
 }
 //?Reset css
 *,
 *::before,
 *::after {
-     box-sizing: border-box;
+  box-sizing: border-box;
 }
 * {
-     margin: 0;
-     padding: 0;
-     font: inherit;
+  margin: 0;
+  padding: 0;
+  font: inherit;
 }
 img,
 picture,
 svg,
 video {
-     display: block;
-     max-width: 100%;
+  display: block;
+  max-width: 100%;
 }
 
 body {
-     font-family: var(--primary-font) !important;
-     min-height: 100vh;
-     font-size: 16px;
-     line-height: 1.5;
-     text-rendering: optimizeSpeed;
+  font-family: var(--primary-font) !important;
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
 }
 
 // !Global css viết dưới này
 
 .button {
-     display: inline-block;
-     padding: 15px 50px;
-     font-size: 18px;
-     font-weight: 500;
-     text-align: center;
-     line-height: 23.4px;
-     cursor: pointer;
-     text-decoration: none;
-     border-radius: 8px;
-     border: 1px solid transparent;
-     transition: 0.3s all linear;
-     &__primary {
-          color: #fff;
-          background-color: transparent;
-          border: 1px solid #fff;
-          &:hover {
-               color: var(--primary-color);
-               background-color: #fff;
-          }
-     }
-     &__secondary {
-          background-color: #fff;
-          color: #222222;
-          &:hover {
-               color: #fff;
-               background-color: var(--primary-color);
-          }
-     }
-     &__thirdary {
-          background-color: var(--primary-color);
-          color: #fff;
-          &:hover {
-               color: var(--primary-color);
-               background-color: #fff;
-               border: 1px solid var(--primary-color);
-          }
-     }
+  display: inline-block;
+  padding: 15px 50px;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 23.4px;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: 0.3s all linear;
+  outline: none;
+  &__primary {
+    color: #fff;
+    background-color: transparent;
+    border: 1px solid #fff;
+    &:hover {
+      color: var(--primary-color);
+      background-color: #fff;
+    }
+  }
+  &__secondary {
+    background-color: #fff;
+    color: #222222;
+    &:hover {
+      color: #fff;
+      background-color: var(--primary-color);
+    }
+  }
+  &__thirdary {
+    background-color: var(--primary-color);
+    color: #fff;
+    &:hover {
+      color: var(--primary-color);
+      background-color: #fff;
+      border: 1px solid var(--primary-color);
+    }
+  }
 }
 .app {
-     overflow: hidden;
+  overflow: hidden;
 }
 .cus {
-     &__grid {
-          display: grid;
-          grid-template-columns: auto auto;
-          gap: 10px;
-     }
-}
-
-.test {
-     color: #222222;
-}
-.testtt {
-     color: #b53c12;
+  &__grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+  }
 }

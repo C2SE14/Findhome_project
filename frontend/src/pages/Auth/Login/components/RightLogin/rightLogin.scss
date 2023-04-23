@@ -1,90 +1,94 @@
 .right-login {
-     width: 100%;
-     label {
-          position: relative;
-          display: block;
-          margin: 0;
-          padding: 0;
+  width: 100%;
+  .input__group {
+    position: relative;
+    display: block;
+    margin: 0;
+    padding: 0;
 
-          .form-style-login {
-               font-weight: 500;
-               font-size: 16px;
-               line-height: 130%;
-               width: 400px;
-               height: 52px;
-               margin-top: 16px;
-               padding-left: 55px;
-               padding-right: 50px;
-               outline: none;
-               background: #ffffff;
-               /* GREY/ABABAB */
-               color: #000000;
-               border: 1px solid #ababab;
-               border-radius: 8px;
-          }
-          .input-icon {
-               position: absolute;
-               top: 25px;
-               left: 24px;
-               font-size: 24px;
-          }
-          .eye {
-               position: absolute;
-               font-size: 24px;
-               top: 25px;
-               right: 20px;
-               cursor: pointer;
-          }
-          .eye-close {
-               display: none;
-          }
-     }
-     .button-login {
-          display: inline-block;
-          width: 100%;
-          padding: 15px 50px;
-          font-size: 18px;
-          font-weight: 500;
-          text-align: center;
-          line-height: 23.4px;
-          cursor: pointer;
-          text-decoration: none;
-          border-radius: 8px;
-          border: 1px solid transparent;
-          transition: 0.3s all linear;
-          color: white;
-          background-color: var(--primary-color);
-          margin-top: 24px;
-          &:hover {
-               background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),
-                    #b53c12;
-          }
-     }
+    .form-style-login {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 130%;
+      width: 400px;
+      height: 52px;
+      margin-top: 16px;
+      padding-left: 55px;
+      padding-right: 50px;
+      outline: none;
+      background: #ffffff;
+      /* GREY/ABABAB */
+      color: #000000;
+      border: 1px solid #ababab;
+      border-radius: 8px;
+    }
+    .input-icon {
+      position: absolute;
+      top: 25px;
+      left: 24px;
+      font-size: 24px;
+    }
+    .eye {
+      position: absolute;
+      font-size: 24px;
+      top: 25px;
+      right: 20px;
+      cursor: pointer;
+    }
+    .eye-close {
+      display: none;
+    }
+  }
+  .button-login {
+    display: inline-block;
+    width: 100%;
+    padding: 15px 50px;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 23.4px;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: 0.3s all linear;
+    color: white;
+    background-color: var(--primary-color);
+    margin-top: 24px;
+    &:hover {
+      background: linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0.2),
+          rgba(255, 255, 255, 0.2)
+        ),
+        #b53c12;
+    }
+  }
 }
 .action-login {
-     display: flex;
-     width: 100%;
-     margin-top: 16px;
-     justify-content: space-between;
-     .save-account {
-          font-weight: 500;
-          font-size: 14px;
-          line-height: 130%;
-          /* or 18px */
+  display: flex;
+  width: 100%;
+  margin-top: 16px;
+  justify-content: space-between;
+  .save-account {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 130%;
+    /* or 18px */
 
-          letter-spacing: 0.0015em;
+    letter-spacing: 0.0015em;
 
-          color: #000000;
-     }
-     .forgot-password {
-          text-decoration: none;
-          color: var(--primary-color);
-          font-weight: 500;
-          font-size: 14px;
-          line-height: 130%;
-          /* or 18px */
+    color: #000000;
+  }
+  .forgot-password {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 130%;
+    /* or 18px */
 
-          letter-spacing: 0.0015em;
-          cursor: pointer;
-     }
+    letter-spacing: 0.0015em;
+    cursor: pointer;
+  }
 }

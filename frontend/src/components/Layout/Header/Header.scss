@@ -257,6 +257,10 @@
       a {
         color: #777;
       }
+      &:hover i,
+      &:hover a {
+        color: #fff;
+      }
     }
   }
   .header__bot {
