@@ -3,44 +3,55 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import structure
 import "./App.scss";
 import LayoutDefault from "./components/Layout/LayoutDefault";
-import LayoutHome from "./components/Layout/LayoutHome";
 import Login from "./pages/Auth/Login/Login";
-import Details from "./pages/DetailItem/componetns/Details/Details";
-import DetailItem from "./pages/DetailItem/DetailItem";
 import Home from "./pages/Home/Home";
-import Detail from "./pages/DetailItem/componetns/Detail/Detail";
 import LayoutSystem from "./components/Layout/LayoutSystem";
 import PostNew from "./pages/PostNew/PostNew";
 import ListNew from "./pages/ListNew/ListNew";
 import RegisterParticipate from "./pages/RegisterParticipate/RegisterParticipate";
 import AuctionRoom from "./pages/AuctionRoom/AuctionRoom";
+import { path } from "./utils/constant";
+import ScrollToTop from "react-scroll-to-top";
+import { ToastContainer } from "react-toastify";
+import LayoutDetails from "./components/Layout/LayoutDetails";
+import RealEstateForSale from "./pages/RealEstateForSale/RealEstateForSale";
+import RealEstateForRent from "./pages/RealEstateForRent/RealEstateForRent";
+
 function App() {
   return (
     <BrowserRouter>
       <div className="app">
+        <ScrollToTop
+          smooth
+          color="#b53c12"
+          className="d-flex align-items-center justify-content-center"
+        />
+        <ToastContainer
+          containerId="an id"
+          draggable={false}
+          pauseOnHover={false}
+        />
         <Routes>
-          <Route element={<LayoutHome />}>
-            <Route path="/" element={<Home />} />
-          </Route>
           <Route element={<LayoutDefault />}>
-            <Route path="/phong-dau-gia" element={<AuctionRoom />} />
-            <Route path="/nha-dat-ban" element={<DetailItem />}>
-              <Route index element={<Details />} />
-              <Route path="/nha-dat-ban/:slug" element={<Detail />} />
-            </Route>
-            <Route path="/nha-dat-cho-thue" element={<DetailItem />}>
-              <Route index element={<Details />} />
-              <Route path="/nha-dat-cho-thue/:slug" element={<Detail />} />
-            </Route>
-            <Route path="/login" element={<Login />} />
+            <Route path={path.HOME} element={<Home />} />
+            <Route path={path.LOGIN} element={<Login />} />
+            <Route path={path.SIGNUP} element={<Login />} />
+          </Route>
+
+          <Route element={<LayoutDetails />}>
             <Route
-              path="/register-participate"
-              element={<RegisterParticipate />}
+              path={path.REAL_ESTATE_FOR_SALE}
+              element={<RealEstateForSale />}
+            />
+            <Route
+              path={path.REAL_ESTATE_FOR_RENT}
+              element={<RealEstateForRent />}
             />
           </Route>
+
           <Route element={<LayoutSystem />}>
-            <Route path="/dang-tin" element={<PostNew />} />
-            <Route path="/danh-sach-tin" element={<ListNew />} />
+            <Route path={path.POST_NEWS} element={<PostNew />} />
+            <Route path={path.LIST_NEWS} element={<ListNew />} />
           </Route>
         </Routes>
       </div>

@@ -1,164 +1,164 @@
 .navbar-system {
-     width: 259px;
-     height: 100%;
-     background-color: white;
-     padding-bottom: 30px;
-     z-index: 100;
-     top: 178.8px;
+  width: 259px;
+  height: 100%;
+  background-color: white;
+  padding-bottom: 30px;
+  z-index: 100;
+  top: 178.8px;
 
-     .nav-header {
-          position: relative;
-          width: 188px;
-          margin: 30.25px 20px 26px 25px;
-          height: 48px;
-          display: flex;
-          .avatar {
-               position: absolute;
-               height: 48px;
-               width: 48px;
-               object-fit: cover;
-               border-radius: 50%;
-               left: 0;
-               top: 0.25px;
-          }
-          .infomation {
-               width: 124px;
-               height: 51px;
-               margin-left: 64px;
+  .nav-header {
+    position: relative;
+    width: 188px;
+    margin: 30.25px 20px 26px 25px;
+    height: 48px;
+    display: flex;
+    .avatar {
+      position: absolute;
+      height: 48px;
+      width: 48px;
+      object-fit: cover;
+      border-radius: 50%;
+      left: 0;
+      top: 0.25px;
+    }
+    .infomation {
+      width: 124px;
+      height: 51px;
+      margin-left: 64px;
 
-               .username {
-                    font-weight: 500;
-                    font-size: 22px;
-                    line-height: 26px;
-                    margin-bottom: 0;
-               }
-               .phonenumber {
-                    font-weight: 400;
-                    font-size: 16px;
-                    line-height: 130%;
-               }
-          }
-     }
-     .account-balance {
-          position: relative;
-          width: 215px;
-          height: 175px;
-          margin-left: 24px;
-          background: rgba(216, 72, 21, 0.1);
-          border-radius: 8px;
+      .username {
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 26px;
+        margin-bottom: 0;
+      }
+      .phonenumber {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 130%;
+      }
+    }
+  }
+  .account-balance {
+    position: relative;
+    width: 215px;
+    height: 175px;
+    margin-left: 24px;
+    background: rgba(216, 72, 21, 0.1);
+    border-radius: 8px;
 
-          .context {
-               position: absolute;
-               width: 117px;
-               height: 21px;
-               font-weight: 600;
-               font-size: 16px;
-               line-height: 130%;
-               color: #000000;
-               top: 17px;
-               left: 10px;
-          }
-          .main {
-               position: absolute;
-               display: flex;
-               justify-content: space-between;
-               width: 90%;
-               top: 56px;
-               left: 10px;
-               font-weight: 400;
-               font-size: 16px;
-               line-height: 130%;
-          }
-          .promotion {
-               position: absolute;
-               display: flex;
-               justify-content: space-between;
-               width: 90%;
-               top: 85px;
-               left: 10px;
-               font-weight: 400;
-               font-size: 16px;
-               line-height: 130%;
-          }
-          .payment {
-               position: absolute;
-               text-decoration: none;
-               padding: 6px 12px;
-               left: 46px;
-               bottom: 17px;
-               color: #b53c12;
-               background-color: white;
-               border: 1px solid #b53c12;
-               border-radius: 8px;
-               justify-content: center;
-               align-items: center;
-               font-weight: 500;
-               font-size: 14px;
-               line-height: 130%;
-               i {
-                    font-size: 20px;
-               }
-          }
-     }
-     .nav-link {
-          padding-top: 16px;
-          margin-left: 24px;
-          width: 215px;
-          .showMenu {
-          }
-          li {
-               position: relative;
-               list-style: none;
-               width: 100%;
+    .context {
+      position: absolute;
+      width: 117px;
+      height: 21px;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 130%;
+      color: #000000;
+      top: 17px;
+      left: 10px;
+    }
+    .main {
+      position: absolute;
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+      top: 56px;
+      left: 10px;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 130%;
+    }
+    .promotion {
+      position: absolute;
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+      top: 85px;
+      left: 10px;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 130%;
+    }
+    .payment {
+      position: absolute;
+      text-decoration: none;
+      padding: 6px 12px;
+      left: 46px;
+      bottom: 17px;
+      color: #b53c12;
+      background-color: white;
+      border: 1px solid #b53c12;
+      border-radius: 8px;
+      justify-content: center;
+      align-items: center;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 130%;
+      i {
+        font-size: 20px;
+      }
+    }
+  }
+  .nav-link {
+    padding-top: 16px;
+    margin-left: 24px;
+    width: 215px;
+    li {
+      position: relative;
+      list-style: none;
+      width: 100%;
+      cursor: pointer;
 
-               .icon-links {
-                    transition: all 0.4s ease;
-                    a {
-                         text-decoration: none;
-                         font-weight: 600;
-                         color: #000000;
-                         i {
-                              font-size: 24px;
-                              color: #b53c12;
-                         }
-
-                         .link-name {
-                              position: absolute;
-                              top: 8px;
-                              font-weight: 600;
-                              font-size: 14px;
-                              line-height: 130%;
-                              padding-left: 12px;
-                         }
-                    }
-                    .bi-chevron-down {
-                         position: absolute;
-                         right: 0;
-                         top: 6px;
-                         font-size: 20px;
-                         color: #717171;
-                    }
-                    &:hover {
-                         background-color: #e6e6e6;
-                    }
-               }
+      .icon-links {
+        transition: all 0.4s ease;
+        padding: 5px;
+        a {
+          text-decoration: none;
+          font-weight: 600;
+          color: #000000;
+          i {
+            font-size: 24px;
+            color: #b53c12;
           }
-          .sub-menu {
-               transition: all 0.4s ease;
-               li {
-                    padding: 7px 0 7px 4px;
 
-                    a {
-                         color: #000000;
-                         text-decoration: none;
-                         font-weight: 500;
-                         font-size: 14px;
-                         line-height: 130%;
-                    }
-               }
-               :hover {
-                    background-color: #e6e6e6;
-               }
+          .link-name {
+            position: absolute;
+            top: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 130%;
+            padding-left: 12px;
           }
-     }
+        }
+        .bi-chevron-down {
+          position: absolute;
+          right: 0;
+          top: 6px;
+          font-size: 20px;
+          color: #717171;
+        }
+        &:hover {
+          background-color: #e6e6e6;
+        }
+      }
+    }
+    .sub-menu {
+      transition: all 0.4s ease;
+      li {
+        padding: 7px 0 7px 4px;
+
+        a {
+          color: #000000;
+          text-decoration: none;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 130%;
+        }
+      }
+      :hover {
+        background-color: #e6e6e6;
+      }
+    }
+  }
 }

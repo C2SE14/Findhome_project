@@ -1,10 +1,15 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const MenuItems = ({ menu }) => {
   return (
     <li className="menu-item">
-      <NavLink to={menu.path} className="menu-link">
+      <NavLink
+        end
+        to={menu.path}
+        className="menu-link"
+        activeClassName="active"
+      >
         {menu.title}
         <i style={{ marginLeft: "5px" }} className={menu.icon}></i>
       </NavLink>
@@ -12,7 +17,13 @@ const MenuItems = ({ menu }) => {
         <ul className="submenus">
           {menu.submenus.map((submenu, index) => (
             <li key={index}>
-              <Link path={submenu.path}>{submenu.title}</Link>
+              <NavLink
+                to={submenu.path}
+                className="submenu-link"
+                activeClassName="active"
+              >
+                {submenu.title}
+              </NavLink>
             </li>
           ))}
         </ul>
