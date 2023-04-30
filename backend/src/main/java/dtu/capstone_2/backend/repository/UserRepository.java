@@ -20,7 +20,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "select * from users\n" +
             "join real_estate on users.id = real_estate.user_id\n" +
-            "where real_estate.user_id = :id", nativeQuery = true)
+            "where real_estate.id = :id", nativeQuery = true)
     public User getUserByRealEstateId(Long id);
 
     @Query(value = "SELECT username FROM find_home.users\n" +

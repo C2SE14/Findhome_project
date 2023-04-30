@@ -31,17 +31,17 @@ public class UserModel {
 
     private String fullName;
 
-    private Date date_of_birth;
+    private Date dateOfBirth;
 
     private String phoneNumber;
 
     private boolean gender;
-    //
+
     private String address;
-    //
+
     private String identityCard;
 
     private Date identityCardDate;
 
-    private List<RealEstateModel> realEstateModelList; //Model
+    private List<RealEstateModel> realEstateModelList; 
 }

@@ -47,16 +47,16 @@ public class User {
     @Column(name = "date_of_birth")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date date_of_birth;
+    private Date dateOfBirth;
 
     private String phoneNumber;
 
     private boolean gender;
-//
+
     private String address;
-//
+
     private String identityCard;
-//
+
     @Column(name = "identity_card_date")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -147,12 +147,12 @@ public class User {
         this.fullName = fullName;
     }
 
-    public Date getDate_of_birth() {
-        return date_of_birth;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDate_of_birth(Date date_of_birth) {
-        this.date_of_birth = date_of_birth;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getPhoneNumber() {
@@ -183,19 +183,5 @@ public class User {
         this.id = id;
     }
 
-//    public User(Long id, String username, String email, String password, Set<Role> roles, String fullName, Date date_of_birth, String phoneNumber, boolean gender, String address, String identityCard, Date identityCardDate, List<RealEstate> realEstates) {
-//        this.id = id;
-//        this.username = username;
-//        this.email = email;
-//        this.password = password;
-//        this.roles = roles;
-//        this.fullName = fullName;
-//        this.date_of_birth = date_of_birth;
-//        this.phoneNumber = phoneNumber;
-//        this.gender = gender;
-//        this.address = address;
-//        this.identityCard = identityCard;
-//        this.identityCardDate = identityCardDate;
-//        this.realEstates = realEstates;
-//    }
+
 }
