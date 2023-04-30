@@ -28,7 +28,7 @@ public class    SignupRequest {
 
     private String fullName;
 
-    private Date date_of_birth;
+    private Date dateOfBirth;
 
     private String phoneNumber;
 
@@ -80,12 +80,12 @@ public class    SignupRequest {
         this.fullName = fullName;
     }
 
-    public Date getDate_of_birth() {
-        return date_of_birth;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDate_of_birth(Date date_of_birth) {
-        this.date_of_birth = date_of_birth;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getPhoneNumber() {

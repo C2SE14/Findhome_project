@@ -61,7 +61,7 @@ public class WebSecurityConfig {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/", "/home", "/api/auth/**", "/api/realEstate/**").permitAll()
+                .authorizeRequests().antMatchers("/", "/home", "/api/auth/**", "/api/realEstate/**", "/api/businessType/**", "/api/user/**", "/api/typeDetail/**").permitAll()
 //                .antMatchers("/api/test/**", "/api/v1/employees/**","/api/student/**","/studentController/**","/api/TestAPI/**").permitAll()// phân quyền/authorization // jwt chỉ chấp nhận những url có ở đây
                 .anyRequest().authenticated();
 
