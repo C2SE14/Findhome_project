@@ -1,20 +1,12 @@
 import React from "react";
-//
 import "./Heading.scss";
 
-const Heading = (props) => {
-  const { heading, title, text_white } = props;
+const Heading = ({ text, desc, text_left }) => {
   return (
-    <div className="compHead">
-      <div
-        className={
-          !text_white
-            ? "compHead__container"
-            : "compHead__container text__white"
-        }
-      >
-        <h3>{heading}</h3>
-        <h2>{title}</h2>
+    <div className="heading">
+      <div className={`heading__container ${text_left && "text-start"}`}>
+        <h2>{text}</h2>
+        {desc ? <p>{desc}</p> : null}
       </div>
     </div>
   );

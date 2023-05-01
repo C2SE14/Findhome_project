@@ -1,4 +1,5 @@
 import axiosConfig from "../config/axiosConfig";
+import { toast } from "react-toastify";
 
 export const apiRegister = (payload) =>
   new Promise(async (resolve, reject) => {
@@ -9,8 +10,10 @@ export const apiRegister = (payload) =>
         data: payload,
       });
       resolve(response);
+      toast.success("Đăng kí thành công", { autoClose: 3000 });
     } catch (error) {
       reject(error);
+      toast.error(error.response.data.message);
     }
   });
 export const apiLogin = (payload) =>
@@ -24,5 +27,6 @@ export const apiLogin = (payload) =>
       resolve(response);
     } catch (error) {
       reject(error);
+      toast.error("Email hoặc mật khẩu không chính xác!");
     }
   });

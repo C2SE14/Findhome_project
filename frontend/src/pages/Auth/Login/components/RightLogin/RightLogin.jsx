@@ -5,17 +5,18 @@ import InputField from "../../../../../components/InputField/InputField";
 import Button from "../../../../../components/Button/Button";
 import * as actions from "../../../../../store/actions";
 import { useDispatch, useSelector } from "react-redux";
+import LoadingComp from "../../../../../components/Loading/Loading";
 
 const RightLogin = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { isLoggedIn, loading } = useSelector((state) => state.auth);
   const [invalidFields, setInvalidFields] = useState([]);
 
   useEffect(() => {
     isLoggedIn && navigate("/");
   }, [isLoggedIn, navigate]);
 
-  const dispatch = useDispatch();
   const [payload, setPayload] = useState({
     email: "",
     password: "",
@@ -27,6 +28,7 @@ const RightLogin = () => {
       dispatch(actions.login(payload));
     }
   };
+
   const validate = (payload) => {
     let invalids = 0;
     let fields = Object.entries(payload);
@@ -45,15 +47,26 @@ const RightLogin = () => {
     fields.forEach((item) => {
       switch (item[0]) {
         case "password":
-          if (item[1].length < 6) {
+          const passwordRegex =
+            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()])([0-9a-zA-Z!@#$%^&*()]){8,}$/;
+          if (!passwordRegex.test(item[1])) {
             setInvalidFields((prev) => [
               ...prev,
               {
                 name: item[0],
-                message: "Mật khẩu phải có tối thiểu 6 kí tự.",
+                message:
+                  "Mật khẩu tối thiểu 8 kí tự, gồm ít nhất một chữ hoa, một chữ thường và một chữ số, một ký tự đặc biệt",
               },
             ]);
             invalids++;
+          } else {
+            setInvalidFields((prev) => [
+              ...prev,
+              {
+                name: item[0],
+                message: "",
+              },
+            ]);
           }
           break;
 
@@ -78,11 +91,18 @@ const RightLogin = () => {
   };
   return (
     <>
+      {loading ? (
+        <div className="loading__login">
+          <LoadingComp type="spin" color="#b53c12" width="50px" height="50px" />
+        </div>
+      ) : null}
+
       <form className="right-login">
         <InputField
           icons={"bi bi-person input-icon"}
           placeholder={"Email đăng nhập"}
           type={"email"}
+          keyPayload={"email"}
           name={"email"}
           className={"form-style-login"}
           value={payload.email}
@@ -101,6 +121,7 @@ const RightLogin = () => {
           setValue={setPayload}
           invalidFields={invalidFields}
           setInvalidFields={setInvalidFields}
+          keyPayload={"password"}
         />
         <Button
           className={"button-login"}

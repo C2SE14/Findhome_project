@@ -3,8 +3,8 @@ import { apiRegister, apiLogin } from "../../services/auth";
 
 export const register = (payload) => async (dispatch) => {
   try {
+    dispatch({ type: actionTypes.SET_LOADING }); // bắt đầu loading
     const response = await apiRegister(payload);
-    console.log(response);
     if (response?.data.messageSuccess) {
       dispatch({
         type: actionTypes.REGISTER_SUCCESS,
@@ -25,8 +25,10 @@ export const register = (payload) => async (dispatch) => {
 };
 export const login = (payload) => async (dispatch) => {
   try {
+    dispatch({ type: actionTypes.SET_LOADING }); // bắt đầu loading
+
     const response = await apiLogin(payload);
-    console.log(response);
+
     if (response?.data.id) {
       dispatch({
         type: actionTypes.LOGIN_SUCCESS,

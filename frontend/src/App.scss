@@ -1,15 +1,16 @@
 // ?Link google fonts
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Asap:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 // ?Link css boostrap Icon
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
 // ? Root
 :root {
-  --primary-color: #b53c12;
-  --primary-font: "Raleway", sans-serif;
-  --secondary-font: "Playfair Display", serif;
+  --primary-color: #cfa267;
+  --secondary-color: #ef5350;
+  --thirdary-color: #b53c12;
+  --primary-font: "Asap", sans-serif;
 }
 //?Reset css
 *,
@@ -29,57 +30,19 @@ video {
   display: block;
   max-width: 100%;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: var(--primary-font) !important;
   min-height: 100vh;
   font-size: 16px;
   line-height: 1.5;
   text-rendering: optimizeSpeed;
+  scroll-behavior: smooth;
 }
 
 // !Global css viết dưới này
-
-.button {
-  display: inline-block;
-  padding: 15px 50px;
-  font-size: 18px;
-  font-weight: 500;
-  text-align: center;
-  line-height: 23.4px;
-  cursor: pointer;
-  text-decoration: none;
-  border-radius: 8px;
-  border: 1px solid transparent;
-  transition: 0.3s all linear;
-  outline: none;
-  &__primary {
-    color: #fff;
-    background-color: transparent;
-    border: 1px solid #fff;
-    &:hover {
-      color: var(--primary-color);
-      background-color: #fff;
-    }
-  }
-  &__secondary {
-    background-color: #fff;
-    color: #222222;
-    &:hover {
-      color: #fff;
-      background-color: var(--primary-color);
-    }
-  }
-  &__thirdary {
-    background-color: var(--primary-color);
-    color: #fff;
-    &:hover {
-      color: var(--primary-color);
-      background-color: #fff;
-      border: 1px solid var(--primary-color);
-    }
-  }
-}
 .app {
   overflow: hidden;
 }
@@ -89,4 +52,12 @@ body {
     grid-template-columns: auto auto;
     gap: 10px;
   }
+}
+
+.divider-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  margin: 0 0.5rem;
+  background: var(--secondary-color);
 }

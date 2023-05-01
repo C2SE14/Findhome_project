@@ -5,6 +5,7 @@ const initState = {
   token: null,
   msg: "",
   update: false,
+  loading: false,
 };
 
 const authReducer = (state = initState, action) => {
@@ -15,6 +16,7 @@ const authReducer = (state = initState, action) => {
         isLoggedIn: false,
         token: action.data,
         msg: "",
+        loading: false,
       };
     case actionTypes.LOGIN_SUCCESS:
       return {
@@ -22,6 +24,7 @@ const authReducer = (state = initState, action) => {
         isLoggedIn: true,
         token: action.data,
         msg: "",
+        loading: false,
       };
     case actionTypes.REGISTER_FAIL:
       return {
@@ -30,6 +33,7 @@ const authReducer = (state = initState, action) => {
         msg: action.data,
         token: null,
         update: !state.update,
+        loading: false,
       };
     case actionTypes.LOGIN_FAIL:
       return {
@@ -38,6 +42,7 @@ const authReducer = (state = initState, action) => {
         msg: action.data,
         token: null,
         update: !state.update,
+        loading: false,
       };
     case actionTypes.LOGOUT:
       return {
@@ -45,6 +50,12 @@ const authReducer = (state = initState, action) => {
         isLoggedIn: false,
         token: null,
         msg: "",
+        loading: false,
+      };
+    case actionTypes.SET_LOADING:
+      return {
+        ...state,
+        loading: true, // bắt đầu loading
       };
 
     default:

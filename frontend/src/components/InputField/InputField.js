@@ -11,9 +11,9 @@ const InputField = ({
   required,
   value,
   setValue,
-  cfPass,
   invalidFields,
   setInvalidFields,
+  keyPayload,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
@@ -27,7 +27,7 @@ const InputField = ({
         <>
           <i className={icons}></i>
           <input
-            type={showPassword ? "text" : type}
+            type={showPassword ? type : null || "text"}
             name={name}
             id={name}
             placeholder={placeholder}
@@ -35,7 +35,7 @@ const InputField = ({
             required={required ? true : false}
             value={value}
             onChange={(e) =>
-              setValue((prev) => ({ ...prev, [type]: e.target.value }))
+              setValue((prev) => ({ ...prev, [keyPayload]: e.target.value }))
             }
             onFocus={() => setInvalidFields([])}
           />
