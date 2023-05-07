@@ -98,16 +98,21 @@
       padding: 0;
       margin-top: 20px;
     }
+    &-link {
+      display: flex;
+      gap: 12px;
+      text-decoration: none;
+    }
 
     &-item {
+      list-style: none;
       padding: 12px;
       background: #fff;
       border-radius: 5px;
       box-shadow: 0 1px 7px 0 rgba(0, 0, 0, 0.15);
-
-      display: flex;
-      gap: 12px;
-
+      &:hover .detail h3 {
+        color: var(--primary-color) !important;
+      }
       img {
         width: 236px;
         height: 170px;
@@ -119,6 +124,7 @@
 
         display: flex;
         justify-content: space-between;
+        color: #3f3424;
         .contact {
           height: 100%;
           background: #f4f2f0;
@@ -210,11 +216,19 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            margin-bottom: 8px;
             span {
+              color: #3f3424;
+              font-size: 20px;
+              font-weight: 600;
+              line-height: 1.5;
+            }
+            p {
               color: var(--secondary-color);
               font-size: 20px;
               font-weight: 600;
               line-height: 1.5;
+              margin: 0;
             }
           }
           .info {
@@ -358,6 +372,33 @@
         }
       }
     }
+  }
+
+  // Css Phân trang
+  .pagination {
+    margin-top: 10px;
+    justify-content: center;
+    gap: 8px;
+  }
+  .pagination a {
+    display: block;
+    text-decoration: none;
+    background: #fff;
+    color: var(--primary-color);
+    font-size: 16px;
+    font-weight: 600;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 5px;
+  }
+  .pagination .active a {
+    background: var(--primary-color);
+    color: #fff;
+  }
+  .previous.disabled {
+    display: none;
   }
 }
 .width-520 {

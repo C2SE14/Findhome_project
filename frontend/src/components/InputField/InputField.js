@@ -27,7 +27,7 @@ const InputField = ({
         <>
           <i className={icons}></i>
           <input
-            type={showPassword ? type : null || "text"}
+            type={!showPassword ? type : null || "text"}
             name={name}
             id={name}
             placeholder={placeholder}

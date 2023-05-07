@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "./SearchBox.scss";
 import { Container } from "react-bootstrap";
 import Dropdown from "../Dropdown/Dropdown";
@@ -22,7 +22,6 @@ const SearchBox = () => {
   const handleSelect = (event) => {
     setSelect(event.target.value);
   };
-  console.log(select);
 
   const options = [
     { label: "Volvddddddddddddddđo", value: "volvo" },
@@ -59,7 +58,7 @@ const SearchBox = () => {
                 </div>
               </div>
               <div className="search__control">
-                <div className="search__category">{/* <Dropdown /> */}</div>
+                <div className="search__category"></div>
               </div>
 
               <button type="submit">Tìm kiếm</button>

@@ -55,9 +55,8 @@ const authReducer = (state = initState, action) => {
     case actionTypes.SET_LOADING:
       return {
         ...state,
-        loading: true, // bắt đầu loading
+        loading: true,
       };
-
     default:
       return state;
   }

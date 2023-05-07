@@ -35,6 +35,7 @@ import bussiness6 from "./bussiness6.png";
 import avatar_nav from "./avatar-nav.png";
 import logologin from "./logologin.png";
 import matbang from "./matbang.jpg";
+import no_image from "./no_image.png";
 
 import map from "./map.png";
 export {
@@ -71,4 +72,5 @@ export {
   map,
   avatar_nav,
   logoFooter,
+  no_image,
 };

@@ -101,9 +101,9 @@ const Header = () => {
           <Container>
             <div className="header__bot-container">
               <div className="header-flex">
-                <Link to="/" className="logo">
+                <a href="/" className="logo">
                   <img src={logo} alt="" />
-                </Link>
+                </a>
 
                 <nav className="header__nav">
                   <ul className="menu">

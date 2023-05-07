@@ -3,6 +3,7 @@ import { Col, Container, Row, Table } from "react-bootstrap";
 import "../RealEstateForSale/RealEstateForSale.scss";
 import { Link } from "react-router-dom";
 import fetchData from "../../components/Common/fetchData";
+import { convertToSlug } from "../../components/Common/convertToSlug";
 
 const RealEstateForRent = () => {
   const currentDate = new Date();
@@ -139,66 +140,71 @@ const RealEstateForRent = () => {
                   <ul className="refs__product-list">
                     {fetchData.map((product, index) => (
                       <li className="refs__product-item" key={index}>
-                        <img src={product.imageModelList[0].image} alt="" />
-                        <div className="content">
-                          <div className="detail">
-                            <h3>{product.nameEstate}</h3>
-                            <div className="address">
-                              <i className="bi bi-geo-alt"></i>
-                              <span>{product.address}</span>
-                            </div>
-                            <div className="price">
-                              <span>{product.area}</span>
-                              <span className="divider-dot"></span>
-                              <span>{product.price} Triệu</span>
-                            </div>
-                            <div className="time">
-                              <i className="bi bi-clock-fill"></i>
-                              <span> 2 ngày trước</span>
-                            </div>
-                            <div className="info">
-                              <div className="frontage">
-                                <div>
-                                  <i className="bi bi-arrows-fullscreen"></i>
-                                  <span>Mặt tiền: </span>
-                                </div>
-                                <p>30m</p>
+                        <Link
+                          to={`/${convertToSlug(product.nameEstate)}`}
+                          className="refs__product-link"
+                        >
+                          <img src={product.imageModelList[0].image} alt="" />
+                          <div className="content">
+                            <div className="detail">
+                              <h3>{product.nameEstate}</h3>
+                              <div className="address">
+                                <i className="bi bi-geo-alt"></i>
+                                <span>{product.address}</span>
                               </div>
+                              <div className="price">
+                                <span>{product.area}</span>
+                                <span className="divider-dot"></span>
+                                <span>{product.price} Triệu</span>
+                              </div>
+                              <div className="time">
+                                <i className="bi bi-clock-fill"></i>
+                                <span> 2 ngày trước</span>
+                              </div>
+                              <div className="info">
+                                <div className="frontage">
+                                  <div>
+                                    <i className="bi bi-arrows-fullscreen"></i>
+                                    <span>Mặt tiền: </span>
+                                  </div>
+                                  <p>30m</p>
+                                </div>
 
-                              <div className="depth">
-                                <div>
-                                  <i className="bi bi-arrows-expand"></i>
-                                  <span>Chiều sâu: </span>
+                                <div className="depth">
+                                  <div>
+                                    <i className="bi bi-arrows-expand"></i>
+                                    <span>Chiều sâu: </span>
+                                  </div>
+                                  <p>6m</p>
                                 </div>
-                                <p>6m</p>
-                              </div>
 
-                              <div className="direction">
-                                <div>
-                                  <i className="bi bi-compass"></i>
-                                  <span>Hướng: </span>
+                                <div className="direction">
+                                  <div>
+                                    <i className="bi bi-compass"></i>
+                                    <span>Hướng: </span>
+                                  </div>
+                                  <p>30m</p>
                                 </div>
-                                <p>30m</p>
                               </div>
+                            </div>
+                            <div className="contact">
+                              <div className="avatar">
+                                <img
+                                  src="https://cdn.houseviet.vn/images/icons/user-avatar.png"
+                                  alt=""
+                                />
+                              </div>
+                              <div>
+                                <h3>Văn Hải</h3>
+                                <h4>Môi giới</h4>
+                              </div>
+                              <span>
+                                <i className="bi bi-telephone-plus-fill"></i>
+                                <p>0867405503</p>
+                              </span>
                             </div>
                           </div>
-                          <div className="contact">
-                            <div className="avatar">
-                              <img
-                                src="https://cdn.houseviet.vn/images/icons/user-avatar.png"
-                                alt=""
-                              />
-                            </div>
-                            <div>
-                              <h3>Văn Hải</h3>
-                              <h4>Môi giới</h4>
-                            </div>
-                            <span>
-                              <i className="bi bi-telephone-plus-fill"></i>
-                              <p>0867405503</p>
-                            </span>
-                          </div>
-                        </div>
+                        </Link>
                       </li>
                     ))}
                   </ul>
