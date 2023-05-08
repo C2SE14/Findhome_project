@@ -8,14 +8,16 @@ import Home from "./pages/Home/Home";
 import LayoutSystem from "./components/Layout/LayoutSystem";
 import PostNew from "./pages/PostNew/PostNew";
 import ListNew from "./pages/ListNew/ListNew";
-import RegisterParticipate from "./pages/RegisterParticipate/RegisterParticipate";
-import AuctionRoom from "./pages/AuctionRoom/AuctionRoom";
+// import RegisterParticipate from "./pages/RegisterParticipate/RegisterParticipate";
+// import AuctionRoom from "./pages/AuctionRoom/AuctionRoom";
 import { path } from "./utils/constant";
 import ScrollToTop from "react-scroll-to-top";
 import { ToastContainer } from "react-toastify";
 import LayoutDetails from "./components/Layout/LayoutDetails";
 import RealEstateForSale from "./pages/RealEstateForSale/RealEstateForSale";
 import RealEstateForRent from "./pages/RealEstateForRent/RealEstateForRent";
+import DetailProduct from "./pages/DetaiProduct/DetailProduct";
+import LayoutDetail from "./components/Layout/LayoutDetail";
 
 function App() {
   return (
@@ -47,6 +49,9 @@ function App() {
               path={path.REAL_ESTATE_FOR_RENT}
               element={<RealEstateForRent />}
             />
+          </Route>
+          <Route element={<LayoutDetail />}>
+            <Route path={path.REAL_ESTATE_DETAIL} element={<DetailProduct />} />
           </Route>
 
           <Route element={<LayoutSystem />}>

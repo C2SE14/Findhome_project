@@ -27,7 +27,7 @@ const RightRegister = () => {
       dispatch(actions.register(payload));
       setTimeout(function () {
         window.location.href = "/dang-nhap";
-      }, 4000);
+      }, 3000);
     }
   };
 

@@ -2,39 +2,46 @@ import React from "react";
 import "./Items.scss";
 import { Link } from "react-router-dom";
 import { convertToSlug } from "../Common/convertToSlug";
+import formatNumber from "../Common/currencyFormat";
 
 const Items = (props) => {
-  const { data } = props;
+  const { post } = props;
   return (
-    <div className="item" key={data.id}>
-      <Link to="" className="item__img">
-        <img src={data.imageUrl} alt="" />
-      </Link>
-      <div className="item__content">
-        <Link to={`/nha-dat-ban/${convertToSlug(data.name)}`}>{data.name}</Link>
-        <ul>
-          <li>
-            <p>{data.price}</p> <p>tỷ</p>
-          </li>
-          <li>
-            <p>{data.areas}</p> <p>m²</p>
-          </li>
-          <li className="item__address">{data.address}</li>
-        </ul>
-        <p>{data.description}</p>
-        <div className="item__reviews">
+    <Link
+      to={`${convertToSlug(post.nameEstate)}`}
+      state={{ id: post.id }}
+      className="pl__item"
+    >
+      {post.imageModelList.length > 0 ? (
+        <img src={post.imageModelList[0].image} alt="" />
+      ) : (
+        <img src="https://cdn.houseviet.vn/images/no-image.jpg" alt="" />
+      )}
+      <div className="pl__content">
+        <div className="pl__body">
+          <h2>{post.nameEstate}</h2>
+          <div className="pl__info">
+            <span>{post.area} m²</span>
+            <span className="divider-dot"></span>
+            <span>{formatNumber(post.price)} </span>
+          </div>
+          <div className="pl__address">
+            <i className="bi bi-geo-alt"></i>
+            <span>{post.address}</span>
+          </div>
+        </div>
+        <div className="pl__time">
           <div>
-            <i className="bi bi-alarm"></i>
-            <p>{data.createdAt}</p>
+            <i className="bi bi-clock"></i>
+            {post.postDate ? <span>{post.postDate}</span> : <span></span>}
           </div>
           <div>
-            <i className="bi bi-eye"></i>
-            <p>{data.reviews}</p>
-            <p>lượt xem</p>
+            <i className="bi bi-heart"></i>
+            <span>Lưu tin</span>
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
