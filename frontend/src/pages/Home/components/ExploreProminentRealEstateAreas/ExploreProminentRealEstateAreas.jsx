@@ -5,45 +5,52 @@ import Heading from "../../../../components/Heading/Heading";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { Link } from "react-router-dom";
 
-const ExploreProminentRealEstateAreas = () => {
-  const DataProvide = [
-    {
-      district: "Quận 2",
-      estate_total: "21.223",
-      image:
-        "https://cdn.houseviet.vn/images/location/quan-2.jpg?v=637733640492814302",
-    },
-    {
-      district: "Quận 7",
-      estate_total: "21.223",
-      image:
-        "https://cdn.houseviet.vn/images/location/quan-7.jpg?v=637733644431659209",
-    },
-    {
-      district: "Quận 9",
-      estate_total: "21.223",
-      image:
-        "https://cdn.houseviet.vn/images/location/quan-7.jpg?v=637733644431659209",
-    },
-    {
-      district: "Quận Tân Bình",
-      estate_total: "21.223",
-      image:
-        "https://cdn.houseviet.vn/images/location/tan-binh.jpg?v=637733644931170997",
-    },
-    {
-      district: "Thành phố Thủ Đức",
-      estate_total: "21.223",
-      image:
-        "https://cdn.houseviet.vn/images/location/thu-duc.jpg?v=637832033737631702",
-    },
-    {
-      district: "Huyện Bình Chánh",
-      estate_total: "21.223",
-      image:
-        "https://cdn.houseviet.vn/images/location/binh-chanh.jpg?v=637733645114553263",
-    },
-  ];
+const ExploreProminentRealEstateAreas = ({ posts }) => {
+  const locations = [];
+  posts.forEach((realEstate) => {
+    const { cityProvince, district } = realEstate;
+    const location = locations.find((loc) => loc.cityProvince === cityProvince);
+    if (location) {
+      const subLocation = location.subLocations.find(
+        (subLoc) => subLoc.district === district
+      );
+      if (subLocation) {
+        subLocation.realEstates.push(realEstate);
+      } else {
+        const newSubLocation = {
+          district: district,
+          realEstates: [realEstate],
+        };
+        location.subLocations.push(newSubLocation);
+      }
+    } else {
+      const newLocation = {
+        cityProvince: cityProvince,
+        subLocations: [
+          {
+            district: district,
+            realEstates: [realEstate],
+          },
+        ],
+      };
+      locations.push(newLocation);
+    }
+  });
+
+  locations.sort((a, b) => b.subLocations.length - a.subLocations.length);
+  // Lấy ra 8 tỉnh đầu tiên
+  const top8Tinh = locations.slice(0, 8);
+
+  const getTotalRealEstates = (cityProvince) => {
+    const location = locations.find((loc) => loc.cityProvince === cityProvince);
+    let total = 0;
+    if (location) {
+      location.subLocations.forEach((subLocation) => {
+        total += subLocation.realEstates.length;
+      });
+    }
+    return total;
+  };
   return (
     <div className="eprea">
       <Container>
@@ -54,82 +61,46 @@ const ExploreProminentRealEstateAreas = () => {
           />
           <Tabs>
             <TabList>
-              <Tab>
-                <h4>Hồ Chí Minh</h4>
-                <span>21.223 bất động sản</span>
-              </Tab>
-              <Tab>
-                <h4>Hà Nội</h4>
-                <span>21.223 bất động sản</span>
-              </Tab>
-              <Tab>
-                <h4>Bình Dương</h4>
-                <span>21.223 bất động sản</span>
-              </Tab>
-              <Tab>
-                <h4>Đồng Nai</h4>
-                <span>21.223 bất động sản</span>
-              </Tab>
-
-              <Tab>
-                <h4>Bà Rịa Vũng Tàu</h4>
-                <span>21.223 bất động sản</span>
-              </Tab>
-              <Tab>
-                <h4>Đà Nẵng</h4>
-                <span>21.223 bất động sản</span>
-              </Tab>
-              <Tab>
-                <h4>Long An</h4>
-                <span>21.223 bất động sản</span>
-              </Tab>
-              <Tab>
-                <h4>Quảng Ninh</h4>
-                <span>21.223 bất động sản</span>
-              </Tab>
+              {top8Tinh.map((location, index) => (
+                <Tab key={index}>
+                  <h4>{location.cityProvince}</h4>
+                  <span>{getTotalRealEstates(location.cityProvince)}</span>
+                </Tab>
+              ))}
             </TabList>
 
-            <TabPanel>
-              <div className="eprea__tabs">
-                {DataProvide.map((data, index) => (
-                  <div className="eprea__tabs-item" key={index}>
-                    <img src={data.image} alt="" />
-                    <h3>{data.district}</h3>
-                    <div className="estate__pending">
-                      <span>{data.estate_total}</span>
-                      <span>bất động sản đang bán</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="eprea__btn">
-                <Link to="#">
-                  Xem thêm 123443 tin Mua bán nhà đất tại Hồ Chí Minh
-                  <i className="bi bi-arrow-right"></i>
-                </Link>
-              </div>
-            </TabPanel>
-            <TabPanel>
-              <h2>Đây là Hà Nội</h2>
-            </TabPanel>
-            <TabPanel>
-              <h2>Đây là Bình Dương</h2>
-            </TabPanel>
-            <TabPanel>
-              <h2>Đây là Đồng Nai</h2>
-            </TabPanel>
-            <TabPanel>
-              <h2>Đây là bà rịa vũng tàu</h2>
-            </TabPanel>
-            <TabPanel>
-              <h2>Đây là Đà Nẵng</h2>
-            </TabPanel>
-            <TabPanel>
-              <h2>Đây là Long An</h2>
-            </TabPanel>
-            <TabPanel>
-              <h2>Đây là Quảng Ninh</h2>
-            </TabPanel>
+            {top8Tinh.map((location, index) => (
+              <TabPanel key={index}>
+                <div className="eprea__tabs">
+                  {location.subLocations
+                    .slice(0, 6)
+                    .map((subLocation, index) => (
+                      <div className="eprea__tabs-item" key={index}>
+                        {
+                          <img
+                            src={
+                              subLocation.realEstates[0].imageModelList[0].image
+                            }
+                            alt=""
+                          />
+                        }
+                        <h3>{subLocation.district}</h3>
+                        <div className="estate__pending">
+                          <span>{subLocation.realEstates.length}</span>
+                          <span>bất động sản đang bán</span>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+                <div className="eprea__btn">
+                  <Link to="#">
+                    Xem thêm {location.subLocations.length} tin Mua bán nhà đất
+                    tại {location.cityProvince}
+                    <i className="bi bi-arrow-right"></i>
+                  </Link>
+                </div>
+              </TabPanel>
+            ))}
           </Tabs>
         </div>
       </Container>

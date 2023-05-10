@@ -7,6 +7,15 @@ import Login from "./pages/Auth/Login/Login";
 import Home from "./pages/Home/Home";
 <<<<<<< HEAD
 <<<<<<< HEAD
+import Aution from "./pages/Home/components/Autioninfo/Aution";
+import Information from "./pages/Home/Details/Information";
+import Product from "./pages/Home/Product/Product";
+
+=======
+import Detail from "./pages/DetailItem/componetns/Detail/Detail";
+>>>>>>> dfdfc60489ce212c7d22367da749696e0ca2fbe5
+=======
+<<<<<<< HEAD
 import AuctionRoom from "./pages/Auction/AuctionRoom/AuctionRoom";
 
 function App() {
@@ -45,6 +54,7 @@ import RealEstateForRent from "./pages/RealEstateForRent/RealEstateForRent";
 import DetailProduct from "./pages/DetaiProduct/DetailProduct";
 import LayoutDetail from "./components/Layout/LayoutDetail";
 >>>>>>> e6473f2760239137393205d740d782a850fb7a06
+>>>>>>> 5cd2efa16c5d15af6d399cb43f7044f69702835d
 
 function App() {
   return (
@@ -61,6 +71,17 @@ function App() {
           pauseOnHover={false}
         />
         <Routes>
+<<<<<<< HEAD
+          <Route element={<LayoutHome />}>
+            <Route path="/" element={<Home />} />
+          </Route>
+<<<<<<< HEAD
+          <Route path="/aution" element={<Aution />} />
+          <Route path="/information" element={<Information />} />
+          <Route path="/product" element={<Product />} />
+=======
+=======
+>>>>>>> 5cd2efa16c5d15af6d399cb43f7044f69702835d
           <Route element={<LayoutDefault />}>
             <Route path={path.HOME} element={<Home />} />
             <Route path={path.LOGIN} element={<Login />} />
@@ -85,6 +106,7 @@ function App() {
             <Route path={path.POST_NEWS} element={<PostNew />} />
             <Route path={path.LIST_NEWS} element={<ListNew />} />
           </Route>
+>>>>>>> dfdfc60489ce212c7d22367da749696e0ca2fbe5
         </Routes>
       </div>
     </BrowserRouter>

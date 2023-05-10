@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,18 +9,22 @@ import LoadingComp from "../../components/Loading/Loading";
 import { convertToSlug } from "../../components/Common/convertToSlug";
 import ThumbsGalleyCarousel from "../../components/ThumbsGalleryCarousel/ThumbsGalleryCarousel";
 import formatNumber from "../../components/Common/currencyFormat";
-import Carousel from "../../components/Carousel/Carousel";
+import { ProductContext } from "../../context";
 
 const DetailProduct = () => {
   const { id } = useLocation().state;
   const dispatch = useDispatch();
-
+  const { setProductTypeValue } = useContext(ProductContext);
   useEffect(() => {
     dispatch(getRealEstateById(id));
   }, [dispatch, id]);
 
   const { post, loading } = useSelector((state) => state.postRealEstate);
-
+  useEffect(() => {
+    if (post.businessTypeModel) {
+      setProductTypeValue(post.businessTypeModel.id === 1 ? 1 : 2);
+    }
+  }, [post.businessTypeModel, setProductTypeValue]);
   return (
     <>
       {loading ? (
@@ -269,8 +273,10 @@ const DetailProduct = () => {
                           />
                         </div>
                         <div className="info">
-                          <span>VĂN HẢI</span>
-                          <p>Chính chủ</p>
+                          <span>
+                            {post.brokerModel && post.brokerModel.name}
+                          </span>
+                          <p>{post.broker ? "Môi giới" : "Chính chủ"}</p>
                         </div>
                       </div>
                       <div className="phone">
