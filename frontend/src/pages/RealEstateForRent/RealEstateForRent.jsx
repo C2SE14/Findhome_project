@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import "../RealEstateForSale/RealEstateForSale.scss";
 import { Link } from "react-router-dom";
-import fetchData from "../../components/Common/fetchData";
 import { convertToSlug } from "../../components/Common/convertToSlug";
+import { useDispatch, useSelector } from "react-redux";
+import { getRealEstateByBusinessTypeId } from "../../store/actions/postRealEstate";
+import formatNumber from "../../components/Common/currencyFormat";
+import ReactPaginate from "react-paginate";
 
 const RealEstateForRent = () => {
+  const { dataByType } = useSelector((state) => state.postRealEstate);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getRealEstateByBusinessTypeId(2));
+  }, [dispatch]);
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth() + 1;
   const currentYear = currentDate.getFullYear();
@@ -76,6 +85,23 @@ const RealEstateForRent = () => {
     },
   ];
 
+  // Phân trang
+  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(0);
+
+  // Tính số lượng trang
+  const totalPages = Math.ceil(dataByType.length / itemsPerPage);
+
+  // Tính chỉ số của các phần tử hiển thị trên trang hiện tại
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentItems = dataByType.slice(startIndex, endIndex);
+
+  // Xử lý sự kiện khi chuyển trang
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
   return (
     <div className="refs">
       <Container>
@@ -84,13 +110,14 @@ const RealEstateForRent = () => {
             <Col md={9}>
               <div className="refs__left">
                 <h2 className="refs__title">
-                  CHO THUÊ NHÀ ĐẤT - BẤT ĐỘNG SẢN FINDHOME THÁNG {currentMonth}{" "}
-                  / {currentYear}
+                  CHO THUÊ NHÀ ĐẤT - DANH SÁCH BẤT ĐỘNG SẢN CHO THUÊ MỚI THÁNG{" "}
+                  {currentMonth} / {currentYear}
                 </h2>
                 <div className="refs__subtitle">
                   <p>
-                    Bạn đang xem 15 tin rao trong tổng số 72.881 tin{" "}
-                    <Link>Cho thuể nhà đất</Link>
+                    Bạn đang xem {itemsPerPage} tin rao trong tổng số{" "}
+                    {dataByType.length} tin{" "}
+                    <a href="/nha-dat-ban">Mua bán nhà đất.</a>
                   </p>
                   <div className="refs__filter">
                     <select id="filter__price" placeholder="Sắp sếp tin đăng">
@@ -138,24 +165,32 @@ const RealEstateForRent = () => {
 
                 <div className="refs__product">
                   <ul className="refs__product-list">
-                    {fetchData.map((product, index) => (
+                    {currentItems.map((data, index) => (
                       <li className="refs__product-item" key={index}>
                         <Link
-                          to={`/${convertToSlug(product.nameEstate)}`}
+                          to={`/${convertToSlug(data.nameEstate)}`}
                           className="refs__product-link"
+                          state={{ id: data.id }}
                         >
-                          <img src={product.imageModelList[0].image} alt="" />
+                          <img
+                            src={
+                              data.imageModelList > 0
+                                ? data.imageModelList[0].image
+                                : "https://cdn.houseviet.vn/images/no-image.jpg"
+                            }
+                            alt=""
+                          />
                           <div className="content">
                             <div className="detail">
-                              <h3>{product.nameEstate}</h3>
+                              <h3>{data.nameEstate}</h3>
                               <div className="address">
                                 <i className="bi bi-geo-alt"></i>
-                                <span>{product.address}</span>
+                                <span>{data.address}</span>
                               </div>
                               <div className="price">
-                                <span>{product.area}</span>
+                                <span>{data.area} m²</span>
                                 <span className="divider-dot"></span>
-                                <span>{product.price} Triệu</span>
+                                <p> {formatNumber(data.price)}</p>
                               </div>
                               <div className="time">
                                 <i className="bi bi-clock-fill"></i>
@@ -167,7 +202,11 @@ const RealEstateForRent = () => {
                                     <i className="bi bi-arrows-fullscreen"></i>
                                     <span>Mặt tiền: </span>
                                   </div>
-                                  <p>30m</p>
+                                  {data.frontispiece ? (
+                                    <p>{data.frontispiece}</p>
+                                  ) : (
+                                    <p> --- </p>
+                                  )}
                                 </div>
 
                                 <div className="depth">
@@ -175,7 +214,11 @@ const RealEstateForRent = () => {
                                     <i className="bi bi-arrows-expand"></i>
                                     <span>Chiều sâu: </span>
                                   </div>
-                                  <p>6m</p>
+                                  {data.depth ? (
+                                    <p>{data.depth}</p>
+                                  ) : (
+                                    <p> --- </p>
+                                  )}
                                 </div>
 
                                 <div className="direction">
@@ -183,7 +226,11 @@ const RealEstateForRent = () => {
                                     <i className="bi bi-compass"></i>
                                     <span>Hướng: </span>
                                   </div>
-                                  <p>30m</p>
+                                  {data.directionOfHouse ? (
+                                    <p>{data.directionOfHouse}</p>
+                                  ) : (
+                                    <p> --- </p>
+                                  )}
                                 </div>
                               </div>
                             </div>
@@ -196,7 +243,7 @@ const RealEstateForRent = () => {
                               </div>
                               <div>
                                 <h3>Văn Hải</h3>
-                                <h4>Môi giới</h4>
+                                <h4>Chính chủ</h4>
                               </div>
                               <span>
                                 <i className="bi bi-telephone-plus-fill"></i>
@@ -207,6 +254,22 @@ const RealEstateForRent = () => {
                         </Link>
                       </li>
                     ))}
+                    <ReactPaginate
+                      pageCount={totalPages}
+                      marginPagesDisplayed={2}
+                      pageRangeDisplayed={5}
+                      onPageChange={handlePageChange}
+                      containerClassName="pagination"
+                      activeClassName="active"
+                      previousLabel={
+                        currentPage > 0 && <i className="bi bi-arrow-left"></i>
+                      }
+                      nextLabel={
+                        currentPage < totalPages && (
+                          <i className="bi bi-arrow-right"></i>
+                        )
+                      }
+                    />
                   </ul>
                 </div>
 
