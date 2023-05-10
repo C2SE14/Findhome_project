@@ -1,0 +1,101 @@
+.overlay {
+     position: fixed;
+     top: -150px;
+     left: 0;
+     z-index: 100000000;
+     width: 100%;
+     height: calc(100vh + 150px);
+     background-color: rgba(0, 0, 0, 0.5);
+     opacity: 0;
+     visibility: hidden;
+     transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.overlay.open {
+     opacity: 1;
+     visibility: visible;
+}
+
+.form-container {
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     background-color: #fff;
+     padding: 20px;
+     margin-top: 60px;
+     form {
+          .heading-form {
+               width: 100%;
+               height: auto;
+               display: flex;
+               justify-content: space-between;
+               border-bottom: 1px solid #aaa;
+               position: relative;
+               p {
+                    font-size: 20px;
+                    font-weight: 600;
+                    text-transform: uppercase;
+               }
+               .close-button {
+                    position: absolute;
+
+                    right: 10px;
+                    border: none;
+                    background-color: #fff;
+                    border: 1px solid var(--primary-color);
+                    padding: 4px 5px;
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: var(--primary-color);
+                    border-radius: 50%;
+               }
+          }
+          span {
+               font-size: 16px;
+               font-weight: 600;
+               color: var(--primary-color);
+          }
+          .content {
+               width: 100%;
+               height: auto;
+               .row {
+                    margin-bottom: 5px;
+                    .title-name {
+                         font-size: 16px;
+                         font-weight: 500;
+                    }
+                    input {
+                         border: none;
+                         border-bottom: 1px solid #ababab;
+                         outline: none;
+                         height: 30px;
+                    }
+               }
+          }
+          .check-regis {
+               width: 100%;
+               height: auto;
+               display: flex;
+               margin-top: 10px;
+               p {
+                    height: auto;
+                    margin: 0;
+                    padding-left: 5px;
+               }
+          }
+
+          .btn-register {
+               width: 100%;
+               display: flex;
+               background-color: var(--primary-color);
+               text-decoration: none;
+               color: white;
+               font-size: 20px;
+               text-transform: uppercase;
+               padding: 10px;
+               justify-content: center;
+               margin-top: 10px;
+          }
+     }
+}
