@@ -11,7 +11,7 @@ const LayoutDefault = () => {
   return (
     <div className="layout">
       <Header setColor />
-      <div className="layout__content" style={{ marginTop: "178.8px" }}>
+      <div className="layout__content">
         <Outlet />
       </div>
       <Footer />

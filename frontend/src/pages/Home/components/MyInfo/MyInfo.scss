@@ -1,0 +1,45 @@
+.myinfo {
+  position: relative;
+  min-height: 500px;
+  background: url(https://cdn.houseviet.vn/images/bg-social.jpg?v=1.0.1)
+    no-repeat center center;
+  background-size: cover;
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  &__heading {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 50px;
+    span {
+      height: 5px;
+      width: 80px;
+      background: #fff;
+      z-index: 1;
+    }
+    h2 {
+      color: #fff;
+      font-size: 32px;
+      font-weight: 600;
+      position: relative;
+      margin: 0;
+    }
+  }
+  .slick-dots li button {
+    background: var(--primary-color) !important;
+    border-radius: 50%;
+    &::before {
+      color: var(--secondary-color);
+      font-size: 13px;
+    }
+  }
+}
