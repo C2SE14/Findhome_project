@@ -245,11 +245,7 @@ const Profile = () => {
 
     if (Object.keys(formErrors).length === 0) {
       const bodyData = {
-        id: userData.id,
-        username: userData.username,
-        email: userData.email,
-        password: userData.password,
-        roles: userData.roles,
+        ...userData,
         fullName,
         dateOfBirth,
         phoneNumber,
@@ -257,8 +253,6 @@ const Profile = () => {
         address,
         identityCard,
         identityCardDate,
-        avatar: userData.avatar,
-        realEstateModelList: userData.realEstateModelList,
         frontOfTheIdentityCard,
         backOfTheIdentityCard,
       };

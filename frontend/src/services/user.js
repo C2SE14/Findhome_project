@@ -26,6 +26,23 @@ export const apiGetRealEstateByUserId = (id) =>
     }
   });
 
+export const apiDeleteRealEstate = (realEstateId, userId) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "delete",
+        url: `/api/realEstate/deleteRealEstate`,
+        params: {
+          "real-estate-id": realEstateId,
+          "user-id": userId,
+        },
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+
 export const apiUpdateUser = (body) =>
   new Promise(async (resolve, reject) => {
     try {

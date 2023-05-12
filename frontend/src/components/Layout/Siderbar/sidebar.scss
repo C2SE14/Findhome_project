@@ -13,6 +13,39 @@
         border-radius: 50%;
         object-fit: cover;
         margin: 0 auto;
+        border: 1px solid #ccc;
+      }
+      label {
+        position: relative;
+        .loading__comp {
+          background: rgba($color: #ccc, $alpha: 0.3);
+          border-radius: 50%;
+          position: absolute;
+          width: 100% !important;
+          height: 100% !important;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          svg {
+            width: 30px !important;
+            height: 30px;
+          }
+        }
+        i {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          font-size: 20px;
+          font-weight: 600;
+
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+          color: var(--primary-color);
+          background: #fff;
+          line-height: 20px;
+          padding: 0 5px;
+          border-radius: 2px;
+        }
       }
     }
     .name {

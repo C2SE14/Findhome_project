@@ -4,24 +4,30 @@ import "../RealEstateForSale/RealEstateForSale.scss";
 import { Link } from "react-router-dom";
 import { convertToSlug } from "../../components/Common/convertToSlug";
 import { useDispatch, useSelector } from "react-redux";
-import { getFilterRealEstate } from "../../store/actions/postRealEstate";
+import {
+  getFilterRealEstate,
+  getRealEstateByBusinessTypeId,
+} from "../../store/actions/postRealEstate";
 import formatNumber from "../../components/Common/currencyFormat";
 import ReactPaginate from "react-paginate";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import { iconKhongcosanpham } from "../../assets/images";
 import LoadingComp from "../../components/Loading/Loading";
+import Others from "../../components/Others/Others";
 
-const RealEstateForRent = () => {
+const RealEstateForRent = ({ categoryId }) => {
   const dispatch = useDispatch();
   const [isExpanded, setIsExpanded] = useState(false);
   const handleToggle = () => {
     setIsExpanded(!isExpanded);
   };
 
-  const { filterDatas, loading } = useSelector((state) => state.postRealEstate);
+  const { filterDatas, dataByType, loading } = useSelector(
+    (state) => state.postRealEstate
+  );
   const [searchValues, setSearchValues] = useState({
     businessTypeId: 2,
-    typeDetailId: -1,
+    typeDetailId: categoryId ? categoryId : -1,
     district: "",
     minPrice: -1,
     maxPrice: -1,
@@ -34,6 +40,9 @@ const RealEstateForRent = () => {
     dispatch(getFilterRealEstate(searchValues));
   };
   useEffect(() => {
+    dispatch(getRealEstateByBusinessTypeId(1));
+  }, [dispatch]);
+  useEffect(() => {
     // Lấy dữ liệu ban đầu khi vào trang
     dispatch(getFilterRealEstate(searchValues));
   }, [dispatch, searchValues]);
@@ -43,7 +52,7 @@ const RealEstateForRent = () => {
   const currentYear = currentDate.getFullYear();
   const searchPrice = [
     {
-      price: "Dưới 5 triệu",
+      price: "Dưới 500 triệu",
     },
     {
       price: "500 đến 1 tỷ",
@@ -102,7 +111,7 @@ const RealEstateForRent = () => {
   ];
 
   // Phân trang
-  const itemsPerPage = filterDatas.length > 10 ? 10 : filterDatas.le;
+  const itemsPerPage = filterDatas.length > 10 ? 10 : filterDatas.length;
   const [currentPage, setCurrentPage] = useState(0);
   const totalPages = Math.ceil(filterDatas.length / itemsPerPage);
   const startIndex = currentPage * itemsPerPage;
@@ -112,13 +121,96 @@ const RealEstateForRent = () => {
     setCurrentPage(selected);
   };
 
-  // console.log(filterDatas);
+  const handleSortChange = (event) => {
+    const selectedSort = event.target.value;
+    setSearchValues((prevValues) => ({
+      ...prevValues,
+      typeSort: selectedSort,
+    }));
+    dispatch(getFilterRealEstate(searchValues));
+  };
+
+  const handlePriceRangeChange = (selectedPrice) => {
+    let minPrice = -1;
+    let maxPrice = -1;
+
+    // Xử lý lựa chọn giá
+    if (selectedPrice.price === "Dưới 500 triệu") {
+      minPrice = 1;
+      maxPrice = 50000000;
+    } else if (selectedPrice.price === "500 đến 1 tỷ") {
+      minPrice = 500000000;
+      maxPrice = 1000000000;
+    } else if (selectedPrice.price === "1 dến 2 tỷ") {
+      minPrice = 1000000000;
+      maxPrice = 2000000000;
+    } else if (selectedPrice.price === "2 dến 3 tỷ") {
+      minPrice = 2000000000;
+      maxPrice = 3000000000;
+    } else if (selectedPrice.price === "3 dến 5 tỷ") {
+      minPrice = 3000000000;
+      maxPrice = 5000000000;
+    } else if (selectedPrice.price === "5 dến 7 tỷ") {
+      minPrice = 5000000000;
+      maxPrice = 7000000000;
+    } else if (selectedPrice.price === "7 dến 10 tỷ") {
+      minPrice = 7000000000;
+      maxPrice = 10000000000;
+    } else if (selectedPrice.price === "10 dến 20 tỷ") {
+      minPrice = 10000000000;
+      maxPrice = 20000000000;
+    } else if (selectedPrice.price === "20 dến 30 tỷ") {
+      minPrice = 20000000000;
+      maxPrice = 30000000000;
+    } else if (selectedPrice.price === "Trên 30 tỷ") {
+      minPrice = 30000000000;
+    }
+    const updatedSearchValues = { ...searchValues, minPrice, maxPrice };
+    setSearchValues(updatedSearchValues);
+    dispatch(getFilterRealEstate(updatedSearchValues));
+  };
+  const handleAreaRangeChange = (selectedArea) => {
+    let minSquare = -1;
+    let maxSquare = -1;
+
+    // Xử lý lựa chọn diện tích
+    if (selectedArea.area === "Dưới 30 m²") {
+      minSquare = 1;
+      maxSquare = 30;
+    } else if (selectedArea.area === "30 đến 50 m²") {
+      minSquare = 30;
+      maxSquare = 50;
+    } else if (selectedArea.area === "50 đến 80 m²") {
+      minSquare = 50;
+      maxSquare = 80;
+    } else if (selectedArea.area === "80 đến 100 m²") {
+      minSquare = 80;
+      maxSquare = 100;
+    } else if (selectedArea.area === "100 đến 150 m²") {
+      minSquare = 100;
+      maxSquare = 150;
+    } else if (selectedArea.area === "150 đến 300 m²") {
+      minSquare = 150;
+      maxSquare = 300;
+    } else if (selectedArea.area === "300 đến 500 m²") {
+      minSquare = 300;
+      maxSquare = 500;
+    } else if (selectedArea.area === "Trên 500 m²") {
+      minSquare = 500;
+    }
+
+    const updatedSearchValues = { ...searchValues, minSquare, maxSquare };
+    setSearchValues(updatedSearchValues);
+    dispatch(getFilterRealEstate(updatedSearchValues));
+  };
+
   return (
     <>
       <SearchBox
         onSubmit={handleSearch}
         setSearchValues={setSearchValues}
         searchValues={searchValues}
+        type={2}
       />
       <div className="refs">
         <Container>
@@ -134,19 +226,21 @@ const RealEstateForRent = () => {
                     <p>
                       Bạn đang xem {itemsPerPage} tin rao trong tổng số{" "}
                       {filterDatas.length} tin{" "}
-                      <a href="/cho-thue-nha-dat">Cho thuê nhà đất.</a>
+                      <a href="/cho-thue-nha-dat">Cho thuê nhà đất</a>
                     </p>
                     <div className="refs__filter">
-                      <select id="filter__price" placeholder="Sắp sếp tin đăng">
-                        <option value="" disabled defaultValue hidden>
+                      <select
+                        id="filter__price"
+                        placeholder="Sắp sếp tin đăng"
+                        onChange={handleSortChange}
+                      >
+                        <option value="-1" disabled defaultValue hidden>
                           Sắp xếp tin đăng
                         </option>
-                        <option value="tinmoidang">Tin đăng mới nhất</option>
-                        <option value="giatangdan">Giá tăng dần</option>
-                        <option value="giagiamdan">Giá giảm dần</option>
-                        <option value="dientichtangdan">
-                          Diện tích tăng dần
-                        </option>
+                        <option value="1">Tin đăng mới nhất</option>
+                        <option value="2">Giá tăng dần</option>
+                        <option value="3">Giá giảm dần</option>
+                        <option value="4">Diện tích tăng dần</option>
                         <option value="dientichgiamdan">
                           Diện tích giảm dần
                         </option>
@@ -159,7 +253,11 @@ const RealEstateForRent = () => {
                     <div className="price__container">
                       <div className="price__list">
                         {searchPrice.map((price, index) => (
-                          <div key={index} className="price__item">
+                          <div
+                            key={index}
+                            className="price__item"
+                            onClick={() => handlePriceRangeChange(price)}
+                          >
                             {price.price}
                           </div>
                         ))}
@@ -172,7 +270,11 @@ const RealEstateForRent = () => {
                     <div className="area__container">
                       <div className="area__list">
                         {searchArea.map((area, index) => (
-                          <div key={index} className="area__item">
+                          <div
+                            key={index}
+                            className="area__item"
+                            onClick={() => handleAreaRangeChange(area)}
+                          >
                             {area.area}
                           </div>
                         ))}
@@ -1078,97 +1180,104 @@ const RealEstateForRent = () => {
               </Col>
               <Col md={3}>
                 <div className="refs__right">
+                  <div className="suggest">
+                    <Others
+                      title={"DỰ ÁN BÁN NHÀ ĐẤT NỔI BẬT"}
+                      datas={dataByType}
+                      setCss
+                    />
+                  </div>
                   <div className="outstanding">
-                    <h2>Cho thuê nhà đất nổi bật</h2>
+                    <h2> Mua bán nhà đất Ở các tỉnh nổi bật</h2>
                     <ul>
                       <li>
                         <Link>
                           <p>Hồ Chí Minh</p>
-                          <span>2123</span>
+                          <span>20</span>
                         </Link>
                       </li>
                       <li>
                         <Link>
                           <p>Hà Nội</p>
-                          <span>2123</span>
+                          <span>12</span>
                         </Link>
                       </li>
                       <li>
                         <Link>
                           <p>Bình Dương</p>
-                          <span>2123</span>
+                          <span>1</span>
                         </Link>
                       </li>
                       <li>
                         <Link>
                           <p>Đồng Nai</p>
-                          <span>2123</span>
+                          <span>2</span>
                         </Link>
                       </li>
                       <li>
                         <Link>
                           <p>Bà rịa vũng tàu</p>
-                          <span>2123</span>
+                          <span>5</span>
                         </Link>
                       </li>
                       <li>
                         <Link>
                           <p>Đà Nẵng</p>
-                          <span>2123</span>
+                          <span>2</span>
                         </Link>
                       </li>
                       <li>
                         <Link>
                           <p>Long an</p>
-                          <span>2123</span>
+                          <span>1</span>
                         </Link>
                       </li>
                       <li>
                         <Link>
                           <p>Khánh hoà</p>
-                          <span>2123</span>
+                          <span>9</span>
                         </Link>
                       </li>
                       <li>
                         <Link>
                           <p>Lâm đồng</p>
-                          <span>2123</span>
+                          <span>2</span>
                         </Link>
                       </li>
                       <li>
                         <Link>
                           <p>Quảng Ninh</p>
-                          <span>2123</span>
+                          <span>1</span>
                         </Link>
                       </li>
                       <li>
                         <Link>
                           <p>Hải Phòng</p>
-                          <span>2123</span>
+                          <span>2</span>
                         </Link>
                       </li>
                       <li>
                         <Link>
                           <p>Bình Thuận</p>
-                          <span>2123</span>
+                          <span>3</span>
                         </Link>
                       </li>
                       <li>
                         <Link>
                           <p>Thừa Thiên Huế</p>
-                          <span>2123</span>
+                          <span>3</span>
                         </Link>
                       </li>
                       <li>
                         <Link>
                           <p>Bình Phước</p>
-                          <span>2123</span>
+                          <span>1</span>
                         </Link>
                       </li>
                       <li>
                         <Link>
                           <p>Bình Định</p>
-                          <span>2123</span>
+                          <span></span>
                         </Link>
                       </li>
                     </ul>

@@ -3,15 +3,30 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 //
-import { getRealEstateById } from "../../store/actions/postRealEstate";
+import {
+  getRealEstateByBusinessTypeId,
+  getRealEstateById,
+  getRealEstateByTypeDetailId,
+} from "../../store/actions/postRealEstate";
 import "./DetailProduct.scss";
 import LoadingComp from "../../components/Loading/Loading";
 import { convertToSlug } from "../../components/Common/convertToSlug";
 import ThumbsGalleyCarousel from "../../components/ThumbsGalleryCarousel/ThumbsGalleryCarousel";
 import formatNumber from "../../components/Common/currencyFormat";
 import { ProductContext } from "../../context";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../../store/actions/favorites";
+import Others from "../../components/Others/Others";
+import Carousel from "../../components/Carousel/Carousel";
 
 const DetailProduct = () => {
+  window.scrollTo({
+    top: 500,
+    behavior: "smooth",
+  });
+
   const { id } = useLocation().state;
   const dispatch = useDispatch();
   const { setProductTypeValue } = useContext(ProductContext);
@@ -19,12 +34,42 @@ const DetailProduct = () => {
     dispatch(getRealEstateById(id));
   }, [dispatch, id]);
 
-  const { post, loading } = useSelector((state) => state.postRealEstate);
+  const { post, dataByType, loading, dataDetailId } = useSelector(
+    (state) => state.postRealEstate
+  );
   useEffect(() => {
     if (post.businessTypeModel) {
       setProductTypeValue(post.businessTypeModel.id === 1 ? 1 : 2);
     }
   }, [post.businessTypeModel, setProductTypeValue]);
+
+  useEffect(() => {
+    if (post.typeDetailModel) {
+      dispatch(getRealEstateByTypeDetailId(post.typeDetailModel.id));
+    }
+  }, [dispatch, post.typeDetailModel]);
+
+  useEffect(() => {
+    if (post.businessTypeModel) {
+      dispatch(getRealEstateByBusinessTypeId(post.businessTypeModel.id));
+    }
+  }, [dispatch, post.businessTypeModel]);
+
+  const favorites = useSelector((state) => state.favoritesReducer);
+  const isFavorite = favorites.favorites.some(
+    (favorite) => favorite.id === post.id
+  );
+
+  const handleFavorites = (e) => {
+    e.preventDefault();
+
+    if (isFavorite) {
+      dispatch(removeFromFavorites(post.id));
+    } else {
+      dispatch(addToFavorites(post));
+    }
+  };
+
   return (
     <>
       {loading ? (
@@ -68,10 +113,18 @@ const DetailProduct = () => {
                       )}
                     </div>
                     <div className="deb__savenews">
-                      <>
-                        <i className="bi bi-heart"></i>
+                      <div
+                        className={` favorites ${isFavorite ? "active" : ""}`}
+                        onClick={handleFavorites}
+                      >
+                        {isFavorite ? (
+                          <i className="bi bi-heart-fill"></i>
+                        ) : (
+                          <i className="bi bi-heart"></i>
+                        )}
+
                         <span>Lưu tin yêu thích</span>
-                      </>{" "}
+                      </div>
                       |<p>Thông tin </p>
                     </div>
                     <div className="deb__desc">
@@ -285,10 +338,11 @@ const DetailProduct = () => {
                       </div>
                     </div>
                     <div className="content">
-                      {post.typeDetailModel && (
-                        <h2>
-                          MỘT SỐ LOẠI {post.typeDetailModel.typeDetailName} KHÁC
-                        </h2>
+                      {post.typeDetailModel && dataDetailId && (
+                        <Others
+                          datas={dataDetailId}
+                          title={`MỘT SỐ LOẠI ${post.typeDetailModel.typeDetailName}`}
+                        />
                       )}
                     </div>
                   </div>
@@ -300,7 +354,7 @@ const DetailProduct = () => {
                 ) : (
                   <h2 className="title"> MỘT SỐ NHÀ ĐẤT ĐANG ĐƯỢC CHO THUÊ </h2>
                 )}
-                {/* <Carousel /> */}
+                <Carousel items={dataByType} show />
               </div>
             </div>
           </Container>

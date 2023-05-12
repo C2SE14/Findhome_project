@@ -2,16 +2,34 @@ import React, { useEffect } from "react";
 import "./Listnews.scss";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getRealEstateByUserId } from "../../store/actions/user";
+import {
+  getRealEstateByUserId,
+  deleteRealEstateByUserId,
+} from "../../store/actions/user";
+import { toast } from "react-toastify";
 
 const ListNews = () => {
   const dispatch = useDispatch();
   const { userId } = useSelector((state) => state.auth);
-  const { listUserPostNew } = useSelector((state) => state.user);
+  const { listUserPostNew, loading } = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(getRealEstateByUserId(1));
+    dispatch(getRealEstateByUserId(userId));
   }, [dispatch, userId]);
+
+  const handleDelete = (userId, postId) => {
+    dispatch(deleteRealEstateByUserId(userId, postId));
+    toast.success("Cập nhật thông tin thành công", {
+      autoClose: 2000,
+      onClose: () => {
+        // Tắt toast và tải lại trang sau 1 giây
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      },
+    });
+  };
+
   return (
     <div className="listnews">
       <div className="listnews__container">
@@ -34,33 +52,57 @@ const ListNews = () => {
             </thead>
             <tbody>
               {listUserPostNew.map((item) => (
-                <tr key={item.id}>
-                  <td style={{ width: "70px" }}>{item.id}</td>
-                  <td
-                    style={{
-                      maxWidth: "500px",
-                      display: "flex",
-                      gap: "5px",
-                      fontWeight: "700",
-                    }}
-                  >
-                    {item?.imageModelList[0] && (
-                      <img
-                        src={item?.imageModelList[0].image}
-                        style={{
-                          width: "70px",
-                          height: "50px",
-                          objectFit: "cover",
-                        }}
-                        alt=""
-                      />
-                    )}
-                    {item.nameEstate}
-                  </td>
-
-                  <td>{item.address}</td>
-                  <td style={{ width: "100px" }}>{item.postDate}</td>
-                </tr>
+                <React.Fragment key={item.id}>
+                  <tr>
+                    <td style={{ width: "70px" }}>{item.id}</td>
+                    <td
+                      style={{
+                        maxWidth: "500px",
+                        display: "flex",
+                        gap: "5px",
+                        fontWeight: "700",
+                      }}
+                    >
+                      {item?.imageModelList[0] && (
+                        <img
+                          src={item?.imageModelList[0].image}
+                          style={{
+                            width: "70px",
+                            height: "50px",
+                            objectFit: "cover",
+                          }}
+                          alt=""
+                        />
+                      )}
+                      {item.nameEstate}
+                    </td>
+                    <td>{item.address}</td>
+                    <td style={{ width: "100px" }}>{item.postDate}</td>
+                  </tr>
+                  <tr>
+                    <td colSpan="4" style={{ textAlign: "right" }}>
+                      <div className="actions">
+                        <div className="edit">
+                          <i className="bi bi-pencil-square"></i>
+                          <span>Sửa</span>
+                        </div>
+                        <div
+                          className="delete"
+                          onClick={() => handleDelete(userId, item.id)}
+                        >
+                          {loading ? (
+                            <span>Loading...</span>
+                          ) : (
+                            <>
+                              <i className="bi bi-trash"></i>
+                              <span>Xoá</span>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </React.Fragment>
               ))}
             </tbody>
           </Table>

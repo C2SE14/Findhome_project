@@ -1,29 +1,19 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
 const MenuItems = ({ menu }) => {
   return (
     <li className="menu-item">
-      <NavLink
-        end
-        to={menu.path}
-        className="menu-link"
-        activeClassName="active"
-      >
+      <a href={menu.path} className="menu-link">
         {menu.title}
         <i style={{ marginLeft: "5px" }} className={menu.icon}></i>
-      </NavLink>
+      </a>
       {menu.submenus && (
         <ul className="submenus">
           {menu.submenus.map((submenu, index) => (
             <li key={index}>
-              <NavLink
-                to={submenu.path}
-                className="submenu-link"
-                activeClassName="active"
-              >
+              <a href={submenu.path} className="submenu-link">
                 {submenu.title}
-              </NavLink>
+              </a>
             </li>
           ))}
         </ul>

@@ -45,8 +45,93 @@ function App() {
               element={<RealEstateForSale />}
             />
             <Route
+              path={path.BAN_CAN_HO_CHUNG_CU}
+              element={<RealEstateForSale categoryId={1} />}
+            />
+            <Route
+              path={path.BAN_NHA_RIENG_NHA_MAT_PHO}
+              element={<RealEstateForSale categoryId={2} />}
+            />
+
+            <Route
+              path={path.BAN_BIET_THU_NHA_LIEN_KE}
+              element={<RealEstateForSale categoryId={3} />}
+            />
+            <Route
+              path={path.BAN_DAT_NEN}
+              element={<RealEstateForSale categoryId={4} />}
+            />
+
+            <Route
+              path={path.BAN_DAT_THO_CU}
+              element={<RealEstateForSale categoryId={5} />}
+            />
+
+            <Route
+              path={path.BAN_TOA_NHA_VAN_PHONG}
+              element={<RealEstateForSale categoryId={6} />}
+            />
+
+            <Route
+              path={path.BAN_CAN_HO_CONDOTEL}
+              element={<RealEstateForSale categoryId={7} />}
+            />
+
+            <Route
+              path={path.BAN_CAN_HO_OFFICETEL}
+              element={<RealEstateForSale categoryId={8} />}
+            />
+
+            <Route
+              path={path.BAN_DAT_TRANG_TRAI_NGHI_DUONG}
+              element={<RealEstateForSale categoryId={9} />}
+            />
+            <Route
+              path={path.BAN_KHO_NHA_XUONG_KIOT}
+              element={<RealEstateForSale categoryId={10} />}
+            />
+            <Route
+              path={path.BAN_DAT_NHA_KHAC}
+              element={<RealEstateForSale categoryId={11} />}
+            />
+            {/*  */}
+
+            <Route
               path={path.REAL_ESTATE_FOR_RENT}
               element={<RealEstateForRent />}
+            />
+
+            <Route
+              path={path.CHO_THUE_CAN_HO_CHUNG_CU}
+              element={<RealEstateForRent categoryId={12} />}
+            />
+            <Route
+              path={path.CHO_THUE_PHONG_TRO_NHA_TRO}
+              element={<RealEstateForRent categoryId={13} />}
+            />
+            <Route
+              path={path.CHO_THUE_VAN_PHONG}
+              element={<RealEstateForRent categoryId={14} />}
+            />
+            <Route
+              path={path.CHO_THUE_NHA_RIENG_NHA_MAT_PHO}
+              element={<RealEstateForRent categoryId={15} />}
+            />
+            <Route
+              path={path.CHO_THUE_CAN_HO_CONDOTEL}
+              element={<RealEstateForRent categoryId={16} />}
+            />
+            <Route
+              path={path.CHO_THUE_cAN_HO_OFFICETEL}
+              element={<RealEstateForRent categoryId={17} />}
+            />
+            <Route
+              path={path.CHO_THUE_NHA_KHO_NHA_XUONG}
+              element={<RealEstateForRent categoryId={18} />}
+            />
+            <Route
+              path={path.CHO_THUE_NHA_DAT_KHAC}
+              element={<RealEstateForRent categoryId={18} />}
             />
           </Route>
           <Route element={<LayoutDetail />}>

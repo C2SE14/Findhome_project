@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./SearchBox.scss";
 import { Container } from "react-bootstrap";
 import { ProductContext } from "../../context";
 import { apiGetPublicProvinces } from "../../services/app";
 
-const SearchBox = ({ onSubmit, setSearchValues, searchValues }) => {
-  const location = useLocation();
+const SearchBox = ({ onSubmit, setSearchValues, searchValues, type }) => {
   const { productType } = useContext(ProductContext);
 
   // Của thèn đĩ search
@@ -71,10 +70,8 @@ const SearchBox = ({ onSubmit, setSearchValues, searchValues }) => {
       maxSquare,
       keySearch: query,
     });
-
     onSubmit();
   };
-  console.log(searchValues);
   const handleClearInput = () => {
     setQuery("");
     setShowIconCancel(false);
@@ -89,7 +86,7 @@ const SearchBox = ({ onSubmit, setSearchValues, searchValues }) => {
               <nav className="search__nav">
                 <NavLink
                   to="/nha-dat-ban"
-                  className={productType === 1 ? "active" : ""}
+                  className={productType === 1 || type === 1 ? "active" : ""}
                 >
                   Bán
                 </NavLink>
@@ -118,7 +115,7 @@ const SearchBox = ({ onSubmit, setSearchValues, searchValues }) => {
                 </div>
               </div>
               <div className="search__control">
-                {productType === 1 || location.pathname === "/nha-dat-ban" ? (
+                {productType === 1 || type === 1 ? (
                   <div className="search__group">
                     <label htmlFor="category1">Loại nhà đất</label>
                     <select
@@ -127,7 +124,7 @@ const SearchBox = ({ onSubmit, setSearchValues, searchValues }) => {
                       id="category1"
                     >
                       <option value="-1">Tất cả</option>
-                      <option value="1">Bán Căn hộ chung cư</option>
+                      <option value="1"> Bán Căn hộ chung cư</option>
                       <option value="2">Bán Nhà riêng, nhà mặt phố</option>
                       <option value="3">Bán Biệt thự, nhà liền kề</option>
                       <option value="4">Bán Đất liền</option>
@@ -140,8 +137,7 @@ const SearchBox = ({ onSubmit, setSearchValues, searchValues }) => {
                       <option value="11">Bán Nhà đất khác</option>
                     </select>
                   </div>
-                ) : productType === 2 ||
-                  location.pathname === "/nha-dat-cho-thue" ? (
+                ) : (
                   <div className="search__group">
                     <label htmlFor="category2">Loại nhà đất</label>
                     <select name="category" id="category2">
@@ -160,7 +156,7 @@ const SearchBox = ({ onSubmit, setSearchValues, searchValues }) => {
                       <option value="19">Cho thuê Nhà đất khác</option>
                     </select>
                   </div>
-                ) : null}
+                )}
               </div>
 
               <div className="search__control">

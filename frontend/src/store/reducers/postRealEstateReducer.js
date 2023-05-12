@@ -7,6 +7,7 @@ const initState = {
   loading: false,
   dataByType: [],
   filterDatas: [],
+  dataDetailId: [],
 };
 
 const postRealEstateReducer = (state = initState, action) => {
@@ -39,6 +40,12 @@ const postRealEstateReducer = (state = initState, action) => {
       return {
         ...state,
         msg: action.errorMsg,
+      };
+    case actionTypes.GET_REAL_ESTATE_BY_TYPE_DETAILID:
+      return {
+        ...state,
+        dataDetailId: action.dataDetailId || [],
+        msg: action.msg || "",
       };
     case actionTypes.SET_LOADING:
       return {

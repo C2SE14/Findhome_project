@@ -81,10 +81,14 @@ const Header = () => {
               ) : (
                 <div className="header__user">
                   <>
-                    <img
-                      src="https://cdn.houseviet.vn/images/icons/user-avatar.png"
-                      alt=""
-                    />
+                    {userData.avatar ? (
+                      <img src={userData.avatar} alt="" />
+                    ) : (
+                      <img
+                        src="https://cdn.houseviet.vn/images/icons/user-avatar.png"
+                        alt=""
+                      />
+                    )}
                     <span>
                       {userData.username}
                       <i className="bi bi-caret-down-fill"></i>

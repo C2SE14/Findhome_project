@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./Sidebar.scss";
 import { Link } from "react-router-dom";
 import { path } from "../../../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById, updateUser } from "../../../store/actions/user";
 import { apiUploadImages } from "../../../services/post";
+import LoadingComp from "../../Loading/Loading";
+import { toast } from "react-toastify";
 
 const Siderbar = () => {
   const dispatch = useDispatch();
   const { userId } = useSelector((state) => state.auth);
-  const { userData } = useSelector((state) => state.user);
+  const { loading, userData } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getUserById(userId));
   }, [dispatch, userId]);
-
-  const [avatar, setAvatar] = useState(userData.avatar || null);
 
   const handleFileUpload = async (e) => {
     const image = e.target.files[0];
@@ -23,33 +23,51 @@ const Siderbar = () => {
     formData.append("file", image);
     formData.append("upload_preset", process.env.REACT_APP_UPLOAD_ASSET_NAME);
     const response = await apiUploadImages(formData);
-    if (response.status === 200) {
-      setAvatar(response.data.secure_url);
-    }
 
-    const bodyData = {
-      id: userData.id,
-      username: userData.username,
-      email: userData.email,
-      password: userData.password,
-      avatar,
-      frontOfTheIdentityCard: userData.frontOfTheIdentityCard,
-      backOfTheIdentityCard: userData.backOfTheIdentityCard,
-    };
-    dispatch(updateUser(bodyData));
+    if (response.status === 200) {
+      const updatedData = {
+        ...userData,
+        avatar: response.data.secure_url,
+      };
+      dispatch(updateUser(updatedData));
+
+      toast.success("Cập nhật thông tin thành công", {
+        autoClose: 2000,
+        onClose: () => {
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
+        },
+      });
+    } else {
+      toast.error("Có lỗi xảy ra khi tải lên ảnh");
+    }
   };
+
   return (
     <div className="sidebar">
       <div className="user">
         <div className="avatar">
-          <img
-            src={
-              avatar ||
-              "https://cdn.houseviet.vn/images/icons/user-avatar.png?fbclid=IwAR2lmfuhm4G_5HUPUpe_T6wAnfSiyXW391GJ-AwH8OxoFwVgVazf64vfMuM"
-            }
-            alt="avatar"
-          />
-          <input onChange={handleFileUpload} type="file" />
+          <label htmlFor="file">
+            {loading ? (
+              <LoadingComp
+                type="spokes"
+                color="red"
+                width="30px"
+                height="30px"
+              />
+            ) : null}
+            <img
+              src={
+                userData.avatar
+                  ? userData.avatar
+                  : "https://cdn.houseviet.vn/images/icons/user-avatar.png?fbclid=IwAR2lmfuhm4G_5HUPUpe_T6wAnfSiyXW391GJ-AwH8OxoFwVgVazf64vfMuM"
+              }
+              alt="avatar"
+            />
+            <i className="bi bi-camera"></i>
+          </label>
+          <input onChange={handleFileUpload} hidden type="file" id="file" />
         </div>
         <div className="name">{userData.fullName}</div>
         <div className="br-line"></div>

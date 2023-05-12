@@ -39,6 +39,19 @@ export const apiGetRealEstateByBusinessTypeId = (id) =>
     }
   });
 
+export const apiGetRealEstateByTypeDetailId = (id) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "get",
+        url: `/api/typeDetail/getRealEstateByTypeDetailId/${id}`,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+
 export const apiGetFilterRealEstate = (body) =>
   new Promise(async (resolve, reject) => {
     try {

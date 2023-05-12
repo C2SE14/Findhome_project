@@ -44,4 +44,24 @@
       }
     }
   }
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+    cursor: pointer;
+    padding: 0;
+    i {
+      margin-right: 5px;
+    }
+    .edit {
+      padding-right: 15px;
+      border-right: 1px solid var(--primary-color);
+    }
+    span,
+    i {
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+  }
 }

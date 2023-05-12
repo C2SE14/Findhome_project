@@ -4,6 +4,7 @@ import {
   apiGetFilterRealEstate,
   apiGetRealEstateByBusinessTypeId,
   apiGetRealEstateById,
+  apiGetRealEstateByTypeDetailId,
 } from "../../services/postRealEstate";
 export const getAllPostRealEstate = () => async (dispatch) => {
   try {
@@ -70,6 +71,28 @@ export const getRealEstateByBusinessTypeId = (id) => async (dispatch) => {
     dispatch({
       type: actionTypes.GET_REAL_ESTATE_BY_BUSSINESS_TYPE_ID,
       dataByType: null,
+    });
+  }
+};
+
+export const getRealEstateByTypeDetailId = (id) => async (dispatch) => {
+  try {
+    const response = await apiGetRealEstateByTypeDetailId(id);
+    if (response.status === 200) {
+      dispatch({
+        type: actionTypes.GET_REAL_ESTATE_BY_TYPE_DETAILID,
+        dataDetailId: response.data,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_REAL_ESTATE_BY_TYPE_DETAILID,
+        msg: response.data.statusText,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_REAL_ESTATE_BY_TYPE_DETAILID,
+      dataDetailId: null,
     });
   }
 };

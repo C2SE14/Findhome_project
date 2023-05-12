@@ -1,5 +1,6 @@
 import actionTypes from "./actionTypes";
 import {
+  apiDeleteRealEstate,
   apiGetRealEstateByUserId,
   apiGetUserById,
   apiUpdateUser,
@@ -48,6 +49,35 @@ export const getRealEstateByUserId = (id) => async (dispatch) => {
     });
   }
 };
+
+export const deleteRealEstateByUserId =
+  (realEstateId, userId) => async (dispatch) => {
+    try {
+      dispatch({ type: actionTypes.SET_LOADING, loading: true });
+
+      const response = await apiDeleteRealEstate(realEstateId, userId);
+      if (response.status === 200) {
+        dispatch({
+          type: actionTypes.DELETE_REAL_ESTATE_BY_USERID_SUCCESS,
+          realEstateId: realEstateId,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.DELETE_REAL_ESTATE_BY_USERID_FAILURE,
+          errorMsg: response.data.statusText,
+        });
+      }
+
+      dispatch({ type: actionTypes.SET_LOADING, loading: false });
+    } catch (error) {
+      dispatch({
+        type: actionTypes.DELETE_REAL_ESTATE_BY_USERID_FAILURE,
+        errorMsg: error.message,
+      });
+
+      dispatch({ type: actionTypes.SET_LOADING, loading: false });
+    }
+  };
 export const updateUser = (body) => async (dispatch) => {
   try {
     dispatch({ type: actionTypes.SET_LOADING, loading: true });

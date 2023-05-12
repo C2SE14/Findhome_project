@@ -5,11 +5,10 @@ import "slick-carousel/slick/slick-theme.css";
 import "./Carousel.scss";
 import formatNumber from "../Common/currencyFormat";
 import { Link } from "react-router-dom";
-import { path } from "../../utils/constant";
 import { convertToSlug } from "../Common/convertToSlug";
 
-const Carousel = ({ items, noimage, info }) => {
-  const slidesToShow = info ? 1 : 3;
+const Carousel = ({ items, noimage, info, show }) => {
+  const slidesToShow = info ? 1 : show ? 4 : 3;
   const speed = 500;
   const slidesToScroll = 1;
   const autoplaySpeed = 5000;

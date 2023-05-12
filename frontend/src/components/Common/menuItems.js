@@ -12,48 +12,48 @@ export const menuItems = [
     submenus: [
       {
         title: "Bán căn hộ chung cư",
-        path: "/ban-can-ho-chung-cu",
+        path: path.BAN_CAN_HO_CHUNG_CU,
       },
       {
         title: "Bán nhà riêng,nhà mặt phố",
-        path: "/ban-nha-rieng-nha-mat-pho",
+        path: path.BAN_NHA_RIENG_NHA_MAT_PHO,
       },
       {
         title: "Bán biệt thự, nhà liền kề",
-        path: "/ban-biet-thu-nha-lien-ke",
+        path: path.BAN_BIET_THU_NHA_LIEN_KE,
       },
       {
         title: "Bán đất nền",
-        path: "/ban-dat-nen",
+        path: path.BAN_DAT_NEN,
       },
       {
         title: "Bán đất thổ cư",
-        path: "/ban-dat-tho-cu",
+        path: path.BAN_DAT_THO_CU,
       },
       {
         title: "Bán toà nhà văn phòng",
-        path: "/ban-toa-nha-van-phong",
+        path: path.BAN_TOA_NHA_VAN_PHONG,
       },
       {
         title: "Bán căn hộ condotel",
-        path: "/ban-can-ho-condotel",
+        path: path.BAN_CAN_HO_CONDOTEL,
       },
       {
         title: "Bán căn hộ officetel",
-        path: "/ban-can-ho-officetel",
+        path: path.BAN_CAN_HO_OFFICETEL,
       },
 
       {
         title: "Bán đất trang trại nghĩ dưỡng",
-        path: "/ban-dat-trang-trai-nghi-duong",
+        path: path.BAN_DAT_TRANG_TRAI_NGHI_DUONG,
       },
       {
         title: "Bán kho,nhà xưởng,kiot",
-        path: "/ban-dat-nha-khac",
+        path: path.BAN_KHO_NHA_XUONG_KIOT,
       },
       {
         title: "Bán đất nhà khác",
-        path: "/ban-kho-nha-xuong-kiot",
+        path: path.BAN_DAT_NHA_KHAC,
       },
     ],
   },
@@ -64,35 +64,35 @@ export const menuItems = [
     submenus: [
       {
         title: "Cho thuê căn hộ chung cư",
-        path: "/cho-thue-can-ho-chung-cu",
+        path: path.CHO_THUE_CAN_HO_CHUNG_CU,
       },
       {
         title: "Cho thuê phòng trọ,nhà trọ",
-        path: "/cho-thue-phong-tro-nha-tro",
+        path: path.CHO_THUE_PHONG_TRO_NHA_TRO,
       },
       {
         title: "Cho thuê văn phòng",
-        path: "/cho-thue-van-phong",
+        path: path.CHO_THUE_VAN_PHONG,
       },
       {
         title: "Cho thuê nhà riêng,nhà mặt phố",
-        path: "/cho-thue-nha-rieng-nha-ma-pho",
+        path: path.CHO_THUE_NHA_RIENG_NHA_MAT_PHO,
       },
       {
         title: "Cho thuê căn hộ condotel",
-        path: "/cho-thue-can-ho-condotel",
+        path: path.CHO_THUE_CAN_HO_CONDOTEL,
       },
       {
         title: "Cho thuê căn hộ officetel",
-        path: "/cho-thue-can-ho-officetel",
+        path: path.CHO_THUE_cAN_HO_OFFICETEL,
       },
       {
         title: "Cho thuê cửa hàng, kiot",
-        path: "/cho-thue-kho-nha-xuong",
+        path: path.CHO_THUE_NHA_KHO_NHA_XUONG,
       },
       {
         title: "Cho thuê nhà đất khác",
-        path: "/cho-thue-nha-dat-khac",
+        path: path.CHO_THUE_NHA_DAT_KHAC,
       },
     ],
   },

@@ -37,6 +37,19 @@ const userReducer = (state = initState, action) => {
         ...state,
         loading: action.loading,
       };
+    case actionTypes.DELETE_REAL_ESTATE_BY_USERID_SUCCESS:
+      return {
+        ...state,
+        listUserPostNew: state.listUserPostNew.filter(
+          (post) => post.id !== action.realEstateId
+        ),
+        msg: "",
+      };
+    case actionTypes.DELETE_REAL_ESTATE_BY_USERID_FAILURE:
+      return {
+        ...state,
+        msg: action.errorMsg,
+      };
     default:
       return state;
   }
