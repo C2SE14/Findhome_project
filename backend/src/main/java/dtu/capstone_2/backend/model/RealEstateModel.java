@@ -87,4 +87,6 @@ public class RealEstateModel {
 
     private List<ImageModel> imageModelList;
 
+    private BrokerModel brokerModel;
+
 }

@@ -4,6 +4,7 @@ package dtu.capstone_2.backend.payload.request;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
+import javax.persistence.Lob;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
@@ -39,6 +40,12 @@ public class    SignupRequest {
     private String identityCard;
 
     private Date identityCardDate;
+
+    private String avatar;
+
+    private String frontOfTheIdentityCard;
+
+    private String backOfTheIdentityCard;
 
     public String getUsername() {
         return username;
@@ -126,5 +133,29 @@ public class    SignupRequest {
 
     public void setIdentityCardDate(Date identityCardDate) {
         this.identityCardDate = identityCardDate;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getFrontOfTheIdentityCard() {
+        return frontOfTheIdentityCard;
+    }
+
+    public void setFrontOfTheIdentityCard(String frontOfTheIdentityCard) {
+        this.frontOfTheIdentityCard = frontOfTheIdentityCard;
+    }
+
+    public String getBackOfTheIdentityCard() {
+        return backOfTheIdentityCard;
+    }
+
+    public void setBackOfTheIdentityCard(String backOfTheIdentityCard) {
+        this.backOfTheIdentityCard = backOfTheIdentityCard;
     }
 }

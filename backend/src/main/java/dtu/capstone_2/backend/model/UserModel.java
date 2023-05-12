@@ -43,5 +43,11 @@ public class UserModel {
 
     private Date identityCardDate;
 
-    private List<RealEstateModel> realEstateModelList; 
+    private String avatar;
+
+    private List<RealEstateModel> realEstateModelList;
+
+    private String frontOfTheIdentityCard;
+
+    private String backOfTheIdentityCard;
 }

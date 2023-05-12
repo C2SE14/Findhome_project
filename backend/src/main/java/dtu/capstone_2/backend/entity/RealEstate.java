@@ -113,4 +113,9 @@ public class RealEstate {
     @ManyToOne
     @JoinColumn(name = "business_type_id")
     private BusinessType businessType;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "broker_id", referencedColumnName = "id")
+    private Broker broker;
+
 }

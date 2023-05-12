@@ -2,6 +2,8 @@ package dtu.capstone_2.backend.controller;
 
 import dtu.capstone_2.backend.entity.RealEstate;
 import dtu.capstone_2.backend.exception.NullObjectExeption;
+import dtu.capstone_2.backend.model.EstateSearchModel;
+import dtu.capstone_2.backend.model.QuickSearchEstateModel;
 import dtu.capstone_2.backend.model.RealEstateModel;
 import dtu.capstone_2.backend.repository.RealEstateRepository;
 import dtu.capstone_2.backend.service.RealEstateService;
@@ -49,17 +51,30 @@ public class RealEstateController {
         return ok(realEstateService.deleteRealEstate(id));
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public ResponseEntity<?> findRealEstateByAddressOrEstateName(@RequestBody String data) throws NullObjectExeption {
+//    @RequestMapping(value = "/search", method = RequestMethod.POST)
+//    public ResponseEntity<?> findRealEstateByAddressOrEstateName(@RequestBody String data) throws NullObjectExeption {
+//
+//        if(data.isEmpty() || data.isBlank()){
+//            data = "";
+//        }
+//        return ok(realEstateService.findRealEstateByAddressOrEstateName(data));
+//    }
 
-        if(data.isEmpty() || data.isBlank()){
-            data = "";
-        }
-        return ok(realEstateService.findRealEstateByAddressOrEstateName(data));
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public ResponseEntity<?> searchData(@RequestBody EstateSearchModel model) {
+        return ok(realEstateService.searchData(model));
     }
 
-//    @RequestMapping(value = "/{filterPath}", method = RequestMethod.DELETE)
-//    public ResponseEntity<?> filterSearch(@PathVariable(value = "filterPath") String filterPath) {
-//        return ok(realEstateService.filterSearchPath(filterPath));
-//    }
+    @RequestMapping(value = "/QuickSearch", method = RequestMethod.POST)
+    public ResponseEntity<?> QuickSearchEstate(@RequestBody QuickSearchEstateModel model) {
+        return ok(realEstateService.QuickSearchEstate(model));
+    }
+
+    @RequestMapping(value = "/deleteRealEstate", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteRealEstate(@RequestParam(name = "real-estate-id") Long realEstateId, // file js trả về 2 tham số này ở đâu
+                                              @RequestParam(name = "user-id", required = false) Long userId) {
+        return ok(realEstateService.deleteRealEstateOfUser(realEstateId, userId));
+    }
+//http://localhost:8080/product?category-id=1&sort=date
+
 }

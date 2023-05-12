@@ -143,6 +143,9 @@ public class AuthController {
         user.setRoles(roles);
         user.setPhoneNumber(signUpRequest.getPhoneNumber());
         user.setFullName(signUpRequest.getFullName());
+        user.setAvatar(signUpRequest.getAvatar());
+        user.setFrontOfTheIdentityCard(signUpRequest.getFrontOfTheIdentityCard());
+        user.setBackOfTheIdentityCard(signUpRequest.getBackOfTheIdentityCard());
         userRepository.save(user);
 
         Authentication authentication = authenticationManager.authenticate(

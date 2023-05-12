@@ -9,6 +9,9 @@ import dtu.capstone_2.backend.repository.TypeDetailRepository;
 import dtu.capstone_2.backend.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -121,6 +124,14 @@ public class RealEstateService {
         }
         realEstateModel.setImageModelList(imageModelList);
 
+        Broker broker = realEstate.getBroker();
+        if(broker == null){
+            realEstateModel.setBrokerModel(null);
+        }else{
+            BrokerModel brokerModel = modelMapper.map(broker, BrokerModel.class);
+            realEstateModel.setBrokerModel(brokerModel);
+        }
+
         return  realEstateModel;
     }
     public String addRealEstate(RealEstateModel realEstateModel) throws ParseException {
@@ -150,6 +161,9 @@ public class RealEstateService {
         RealEstate realEstate = realEstateRepository.findRealEstateById(realEstateModel.getId());
 
         realEstate.setNameEstate(realEstateModel.getNameEstate());
+        realEstate.setCityProvince(realEstateModel.getCityProvince());
+        realEstate.setDistrict(realEstateModel.getDistrict());
+        realEstate.setWards(realEstateModel.getWards());
         realEstate.setAddress(realEstateModel.getAddress());
         realEstate.setArea(realEstateModel.getArea());
         realEstate.setPrice(realEstateModel.getPrice());
@@ -167,13 +181,23 @@ public class RealEstateService {
         realEstate.setNumberBedRooms(realEstateModel.getNumberBedRooms());
         realEstate.setRentalFloorLocation(realEstateModel.getRentalFloorLocation());
         realEstate.setNumberToilets(realEstateModel.getNumberToilets());
+        realEstate.setRentCost(realEstateModel.getRentCost());
+        realEstate.setLegalDocument(realEstateModel.getLegalDocument());
         realEstate.setInterior(realEstateModel.getInterior());
+        realEstate.setDirectionOfHouse(realEstateModel.getDirectionOfHouse());
+        realEstate.setFrontispiece(realEstateModel.getFrontispiece());
+        realEstate.setDepth(realEstateModel.getDepth());
+        realEstate.setPostDate(realEstateModel.getPostDate());
+        realEstate.setExpirationDate(realEstateModel.getExpirationDate());
+        realEstate.setNegotiablePrice(realEstateModel.isNegotiablePrice());
+
 
         realEstate.setBusinessType(modelMapper.map(realEstateModel.getBusinessTypeModel(), BusinessType.class));
         realEstate.setTypeDetail(modelMapper.map(realEstateModel.getTypeDetailModel(), TypeDetail.class));
 
         realEstateRepository.save(realEstate);
 
+        imageRepository.deleteImageByRealEstateId(realEstate.getId());
         for(ImageModel imageModelItem: realEstateModel.getImageModelList()){
             imageRepository.insertImage(imageModelItem.getImage(), realEstate.getId() );
         }
@@ -187,12 +211,55 @@ public class RealEstateService {
         return "delete success";
     }
 
-    public List<RealEstateModel> findRealEstateByAddressOrEstateName(String data) throws NullObjectExeption {
+    public  String deleteRealEstateOfUser(long realEstateId, long  userId){
+        imageRepository.deleteImageByRealEstateId(realEstateId);
+        realEstateRepository.deleteRealEstateOfUser(realEstateId, userId);
+        return "delete success";
+    }
+
+    public List<RealEstateModel> searchData(EstateSearchModel model) throws NullPointerException {
 
         ModelMapper modelMapper = new ModelMapper();
-        List<RealEstate> realEstateList =  realEstateRepository.findRealEstateByNameOrAddress(data);
+
+        Pageable pageable;
+
+        switch ( model.getTypeSort()) {
+            case  -1:
+                pageable = PageRequest.of(0, 1000, Sort.by("id").ascending());
+                break;
+            case  1:
+                pageable = PageRequest.of(0, 1000, Sort.by("post_date").descending());
+                break;
+            case  2:
+                pageable = PageRequest.of(0, 1000, Sort.by("price").ascending());
+                break;
+            case  3:
+                pageable = PageRequest.of(0, 1000, Sort.by("price").descending());
+                break;
+            case  4:
+                pageable = PageRequest.of(0, 1000, Sort.by("area").ascending());
+                break;
+            case  5:
+                pageable = PageRequest.of(0, 1000, Sort.by("area").descending());
+                break;
+            default:
+                pageable = PageRequest.of(0, 1000, Sort.by("id").descending());
+        }
+
+        List<RealEstate> realEstateList =  new ArrayList<>();
+
+        if(model.getBusinessTypeId() == 1){
+             realEstateList = realEstateRepository.searchDataPurchase(model.getKeySearch(), model.getDistrict(),
+                    model.getMinPrice(), model.getMaxPrice(), model.getMinSquare(), model.getMaxSquare(),
+                    model.getBusinessTypeId(), model.getTypeDetailId(), pageable).getContent();
+        } else if (model.getBusinessTypeId() == 2) {
+            realEstateList = realEstateRepository.searchDataLease(model.getKeySearch(), model.getDistrict(),
+                    model.getMinPrice(), model.getMaxPrice(), model.getMinSquare(), model.getMaxSquare(),
+                    model.getBusinessTypeId(), model.getTypeDetailId(), pageable).getContent();
+        }
+
         if(realEstateList == null){
-            throw new NullObjectExeption("realEstateList is null from findRealEstateByNameOrAddress()");
+            throw new NullPointerException("realEstateList is null from searchData()");
         }
 
         List<RealEstateModel> realEstateModelList = new ArrayList<>();
@@ -227,209 +294,79 @@ public class RealEstateService {
         return realEstateModelList;
     }
 
-//    public List<RealEstateModel> filterSearchPath(String filterPath){
-//
-//        List<RealEstateModel> realEstateModelList = new ArrayList<>();
-//
-//        boolean business = false;
-//        String typeDetailName = "";
-//        Double priceStart = (double) 0;
-//        Double priceEnd = null;
-//        float areaStart = 0;
-//        float areaEnd = 0;
-//        String address = "";
-//        Double renCostStart = (double) 0;
-//        Double renCostEnd = null;
-//
-//        if(filterPath.isBlank() || filterPath.isEmpty()){// TỪ LIST NÀY CÓ THỂ LẤY BDS MUA HAY BÁN
-//            filterPath = "";
-//        }else{// lam sao de biet dang loc mua hay ban -> tren url co chu ban(can ho chung cu)
-//            // cho 5 biến tương úng với 5 tham số trong query
-//            //-> bỏ hết gạch ngang giữa các từ trong chuổi
-//            //-> lấy hết type detail name từ db lên(cho thành chữ thường hết) so sánh xem những phần tử này có cái nào chứa trong chuổi gửi về không nếu có -> gán cho biến typeDetailName biến đó rồi xóa cum dó khỏi chuổi(để sau cùng chỉ còn lại địa chỉ )
-//            filterPath = filterPath.replace("-", " ").toUpperCase();
-//            List<TypeDetail> typeDetails =  typeDetailRepository.findAll();
-////            List<RealEstate> realEstateList = realEstateRepository.findAll();
-//
-//            if(filterPath.contains("ban")  == true){
-//                business = true;
-//            }else if(filterPath.contains("cho thue")  == true){
-//                business = false;
-//            }
-//
-//
-//
-//            for(TypeDetail item: typeDetails){// láy từng phần tử trong mảng kiểm tra xem có tồn tại trong chuổi path ko
-//                if(filterPath.contains(Normalizer.normalize(item.getTypeDetailName(), Normalizer.Form.NFKD))){
-//                    typeDetailName = item.getTypeDetailName();
-//                    filterPath = filterPath.replace(item.getTypeDetailName(), ""); // xóa tên loại chi tiết khỏi chuổi
-//                }
-//            }
-//
-//
-//            filterPath =  filterPath.toLowerCase();
-//
-//            if(filterPath.contains("gia duoi 500 trieu") == true){
-//                priceStart = 1000000000.0;
-//                filterPath = filterPath.replace("gia duoi 500 trieu", "");
-//            }else if(filterPath.contains("gia tu 1 den 2 ty") == true){
-//                priceStart = 1000000000.0;
-//                priceEnd = 2000000000.0;
-//                filterPath = filterPath.replace("gia tu 1 den 2 ty", "");
-//            }else if(filterPath.contains("gia tu 2 den 3 ty") == true){
-//                priceStart = 2000000000.0;
-//                priceEnd = 3000000000.0;
-//                filterPath = filterPath.replace("gia tu 2 den 3 ty", "");
-//            }else if(filterPath.contains("gia tu 3 den 5 ty") == true){
-//                priceStart = 3000000000.0;
-//                priceEnd =   5000000000.0;
-//                filterPath = filterPath.replace("gia tu 3 den 5 ty", "");
-//            }else if(filterPath.contains("gia tu 5 den 7 ty") == true){
-//                priceStart = 5000000000.0;
-//                priceEnd =   7000000000.0;
-//                filterPath = filterPath.replace("gia tu 5 den 7 ty", "");
-//            }else if(filterPath.contains("gia tu 7 den 10 ty") == true){
-//                priceStart = 7000000000.0;
-//                priceEnd =   10000000000.0;
-//                filterPath = filterPath.replace("gia tu 7 den 10 ty", "");
-//            }else if(filterPath.contains("gia tu 10 den 20 ty") == true){
-//                priceStart = 10000000000.0;
-//                priceEnd =   20000000000.0;
-//                filterPath = filterPath.replace("gia tu 10 den 20 ty", "");
-//            }else if(filterPath.contains("gia tu 20 den 30 ty") == true){
-//                priceStart = 20000000000.0;
-//                priceEnd =   30000000000.0;
-//                filterPath = filterPath.replace("gia tu 20 den 30 ty", "");
-//            }
-//
-//
-//            else if(filterPath.contains("gia duoi 1 trieu") == true){
-//                renCostEnd = 1000000.0;
-//                filterPath = filterPath.replace("tu 1 den 3 trieu", "");
-//            }else if(filterPath.contains("gia tu 1 den 3 trieu") == true){
-//                renCostStart = 1000000.0;
-//                renCostEnd =   3000000.0;
-//                filterPath = filterPath.replace("tu 1 den 3 trieu", "");
-//            }
-//            else if(filterPath.contains("gia tu 3 den 5 trieu") == true){
-//                renCostStart = 3000000.0;
-//                renCostEnd =   5000000.0;
-//                filterPath = filterPath.replace("gia tu 3 den 5 trieu", "");
-//            }
-//            else if(filterPath.contains("gia tu 5 den 10 trieu") == true){
-//                renCostStart = 5000000.0;
-//                renCostEnd =   10000000.0;
-//                filterPath = filterPath.replace("gia tu 5 den 10 trieu", "");
-//            }
-//            else if(filterPath.contains("gia tu 10 den 40 trieu") == true){
-//                renCostStart = 10000000.0;
-//                renCostEnd =   40000000.0;
-//                filterPath = filterPath.replace("gia tu 10 den 40 trieu", "");
-//            }
-//            else if(filterPath.contains("gia tu 40 den 70 trieu") == true){
-//                renCostStart = 40000000.0;
-//                renCostEnd =   70000000.0;
-//                filterPath = filterPath.replace("gia tu 40 den 70 trieu", "");
-//            }
-//            else if(filterPath.contains("gia tu 70 den 100 trieu") == true){
-//                renCostStart = 70000000.0;
-//                renCostEnd =   100000000.0;
-//                filterPath = filterPath.replace("gia tu 70 den 100 trieu", "");
-//            }
-//            else if(filterPath.contains("gia tren 100 trieu") == true){
-//                renCostStart = 20000000000.0;
-//                filterPath = filterPath.replace("gia tren 100 trieu", "");
-//            }
-//
-//            if(filterPath.contains("dien tich duoi 30 m2") == true){
-//                areaEnd = 30;
-//                filterPath = filterPath.replace("dien tich duoi 30 m2", "");
-//            }else if(filterPath.contains("dien tich tu 30 m2 den 50 m2") == true){
-//                areaStart = 30;
-//                areaEnd = 50;
-//                filterPath = filterPath.replace("dien tich tu 30 m2 den 50 m2", "");
-//            }else if(filterPath.contains("dien tich tu 50 m2 den 80 m2") == true){
-//                areaStart = 50;
-//                areaEnd = 80;
-//                filterPath = filterPath.replace("dien tich tu 50 m2 den 80 m2", "");
-//            }else if(filterPath.contains("dien tich tu 80 m2 den 100 m2") == true){
-//                areaStart = 80;
-//                areaEnd = 100;
-//                filterPath = filterPath.replace("dien tich tu 80 m2 den 100 m2", "");
-//            }else if(filterPath.contains("dien tich tu 100 m2 den 150 m2") == true){
-//                areaStart = 100;
-//                areaEnd = 150;
-//                filterPath = filterPath.replace("dien tich tu 100 m2 den 150 m2", "");
-//            }else if(filterPath.contains("dien tich tu 150 m2 den 300 m2") == true){
-//                areaStart = 150;
-//                areaEnd = 300;
-//                filterPath = filterPath.replace("dien tich tu 150 m2 den 300 m2", "");
-//            }else if(filterPath.contains("dien tich tu 300 m2 den 500 m2") == true){
-//                areaStart = 300;
-//                areaEnd = 500;
-//                filterPath = filterPath.replace("dien tich tu 300 m2 den 500 m2", "");
-//            }else if(filterPath.contains("dien tich tren 500 m2") == true){
-//                areaStart = 500;
-//                filterPath = filterPath.replace("dien tich tren 500 m2", "");
-//            }
-//
-//            address = filterPath;
-//
-//
-//            List<RealEstate> realEstateList = null;
-//
-//            if(business == true){
-//                 realEstateList = realEstateRepository.filterSearchPath(typeDetailName, priceStart, priceEnd, areaStart, areaEnd, address);
-//            }else if(business == false){
-//                 realEstateList = realEstateRepository.filterSearchPath(typeDetailName, renCostStart, renCostEnd, areaStart, areaEnd, address);
-//            }
-//
-//
-//            ModelMapper modelMapper = new ModelMapper();
-//            if (realEstateList == null) {
-////                throw new NullObjectExeption("realEstateList is null from getRealEstateByBusinessTypeId()");
-//            }
-//
-//
-//
-//            for (RealEstate item : realEstateList) {
-//
-//                User user = realEstateRepository.getReferenceById(item.getId()).getUser();
-//                UserModel userModel = modelMapper.map(user, UserModel.class);
-//
-//                BusinessType businessType = realEstateRepository.getReferenceById(item.getId()).getBusinessType();
-//                BusinessTypeModel businessTypeModel = modelMapper.map(businessType, BusinessTypeModel.class);
-//
-//                TypeDetail typeDetail = realEstateRepository.getReferenceById(item.getId()).getTypeDetail();
-//                TypeDetailModel typeDetailModel = modelMapper.map(typeDetail, TypeDetailModel.class);
-//
-//                List<ImageModel> imageModelList = new ArrayList<>();
-//                List<Image> imageList = realEstateRepository.findRealEstateById(item.getId()).getImageList();
-//                for (Image imageItem : imageList) {
-//                    ImageModel imageModelItem = modelMapper.map(imageItem, ImageModel.class);
-//                    imageModelList.add(imageModelItem);
-//                }
-//
-//                RealEstateModel realEstateModel = modelMapper.map(item, RealEstateModel.class);
-//
-//                realEstateModel.setUserModel(userModel);
-//                realEstateModel.setBusinessTypeModel(businessTypeModel);
-//                realEstateModel.setTypeDetailModel(typeDetailModel);
-//                realEstateModel.setImageModelList(imageModelList);
-//
-//                realEstateModelList.add(realEstateModel);
-//            }
-//        }
-//        return realEstateModelList;
-//    }
-//
-//
-//    public static void main(String[] args) {
-//            String ham_entry = "bán-căn-hộ-chung-cu";
-//            String new_ham_entry = Normalizer.normalize(ham_entry.replace("-", " ").toUpperCase(), Normalizer.Form.NFKD);
-//            new_ham_entry = new_ham_entry.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
-//            System.out.println(new_ham_entry);
-//        }
+    public List<RealEstateModel> QuickSearchEstate(QuickSearchEstateModel model) throws NullPointerException {
+
+        ModelMapper modelMapper = new ModelMapper();
+
+        Pageable pageable;
+
+        switch ( model.getTypeSort()) {
+            case  1:
+                pageable = PageRequest.of(0, 1000, Sort.by("post_date").descending());
+                break;
+            case  2:
+                pageable = PageRequest.of(0, 1000, Sort.by("price").ascending());
+                break;
+            case  3:
+                pageable = PageRequest.of(0, 1000, Sort.by("price").descending());
+                break;
+            case  4:
+                pageable = PageRequest.of(0, 1000, Sort.by("area").ascending());
+                break;
+            case  5:
+                pageable = PageRequest.of(0, 1000, Sort.by("area").descending());
+                break;
+            default:
+                pageable = PageRequest.of(0, 1000, Sort.by("id").descending());
+        }
+
+        List<RealEstate> realEstateList =  new ArrayList<>();
+
+        if(model.getBusinessTypeId() == 1){
+            realEstateList = realEstateRepository.searchDataPurchase("", "",
+                    model.getMinPrice(), model.getMaxPrice(), model.getMinSquare(), model.getMaxSquare(),
+                    model.getBusinessTypeId(), model.getTypeDetailId(), pageable).getContent();
+        } else if (model.getBusinessTypeId() == 2) {
+            realEstateList = realEstateRepository.searchDataLease("", "",
+                    model.getMinPrice(), model.getMaxPrice(), model.getMinSquare(), model.getMaxSquare(),
+                    model.getBusinessTypeId(), model.getTypeDetailId(), pageable).getContent();
+        }
+        if(realEstateList == null){
+            throw new NullPointerException("realEstateList is null from searchData()");
+        }
+
+        List<RealEstateModel> realEstateModelList = new ArrayList<>();
+
+        for(RealEstate item : realEstateList){
+
+            User user = realEstateRepository.getReferenceById(item.getId()).getUser();
+            UserModel userModel = modelMapper.map(user, UserModel.class);
+
+            BusinessType businessType = realEstateRepository.getReferenceById(item.getId()).getBusinessType();
+            BusinessTypeModel businessTypeModel = modelMapper.map(businessType, BusinessTypeModel.class);
+
+            TypeDetail typeDetail = realEstateRepository.getReferenceById(item.getId()).getTypeDetail();
+            TypeDetailModel typeDetailModel = modelMapper.map(typeDetail, TypeDetailModel.class);
+
+            List<ImageModel> imageModelList = new ArrayList<>();
+            List<Image> imageList = realEstateRepository.findRealEstateById(item.getId()).getImageList();
+            for(Image imageItem: imageList){
+                ImageModel imageModelItem =modelMapper.map(imageItem, ImageModel.class);
+                imageModelList.add(imageModelItem);
+            }
+
+            RealEstateModel realEstateModel = modelMapper.map(item, RealEstateModel.class);
+
+            realEstateModel.setUserModel(userModel);
+            realEstateModel.setBusinessTypeModel(businessTypeModel);
+            realEstateModel.setTypeDetailModel(typeDetailModel);
+            realEstateModel.setImageModelList(imageModelList);
+
+            realEstateModelList.add(realEstateModel);
+        }
+        return realEstateModelList;
+    }
+
 }
 
 

@@ -62,6 +62,18 @@ public class User {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date identityCardDate;
 
+    @Lob
+    private String avatar;
+
+
+    @Column(name = "front_of_the_identity_card")
+    @Lob
+    private String frontOfTheIdentityCard;
+
+    @Column(name = "back_of_the_identity_card")
+    @Lob
+    private String backOfTheIdentityCard;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<RealEstate> realEstates;
 
@@ -184,4 +196,27 @@ public class User {
     }
 
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getFrontOfTheIdentityCard() {
+        return frontOfTheIdentityCard;
+    }
+
+    public void setFrontOfTheIdentityCard(String frontOfTheIdentityCard) {
+        this.frontOfTheIdentityCard = frontOfTheIdentityCard;
+    }
+
+    public String getBackOfTheIdentityCard() {
+        return backOfTheIdentityCard;
+    }
+
+    public void setBackOfTheIdentityCard(String backOfTheIdentityCard) {
+        this.backOfTheIdentityCard = backOfTheIdentityCard;
+    }
 }
