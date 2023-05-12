@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 //
 import { logo } from "../../../assets/images";
 
@@ -10,16 +10,47 @@ import MenuItems from "../../MenuItems/MenuItems";
 import { path } from "../../../utils/constant";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "../../../store/actions";
+import { getUserById } from "../../../store/actions/user";
+import { convertToSlug } from "../../Common/convertToSlug";
+import {
+  removeAllFavorites,
+  removeFromFavorites,
+} from "../../../store/actions/favorites";
 
 const Header = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isLoggedIn } = useSelector((state) => state.auth);
-  const handleLogout = (e) => {
-    e.preventDefault();
-    dispatch(actions.logout());
-    navigate("/dang-nhap");
+  const { isLoggedIn, userId } = useSelector((state) => state.auth);
+  const { userData } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    dispatch(getUserById(userId));
+  }, [dispatch, userId]);
+
+  const favorites = useSelector((state) => state.favoritesReducer);
+  const date = new Date(favorites.saveDate);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1; // Lưu ý: Tháng bắt đầu từ 0 (0 - 11)
+  const day = date.getDate();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+
+  const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const handleDeleteSave = (productId) => {
+    dispatch(removeFromFavorites(productId));
+    setIsPopupOpen(false);
   };
+
+  const handleGetRealEstate = () => {
+    setIsPopupOpen((prevState) => !prevState);
+  };
+  const handleDeleteAllSave = () => {
+    dispatch(removeAllFavorites());
+    setIsPopupOpen(false);
+  };
+  //
   return (
     <div className="header">
       <div className="header__container">
@@ -45,7 +76,7 @@ const Header = () => {
               {!isLoggedIn ? (
                 <div className="header__top-right">
                   <i className="bi bi-person-circle"></i>
-                  <Link to={path.LOGIN}>ĐĂNG NHẬP/ĐĂNG KÍ </Link>
+                  <a href={path.LOGIN}>ĐĂNG NHẬP/ĐĂNG KÍ </a>
                 </div>
               ) : (
                 <div className="header__user">
@@ -55,16 +86,18 @@ const Header = () => {
                       alt=""
                     />
                     <span>
-                      NGUYỄN VĂN HẢI <i className="bi bi-caret-down-fill"></i>
+                      {userData.username}
+                      <i className="bi bi-caret-down-fill"></i>
                     </span>
                   </>
+
                   <div className="header__user-sub">
                     <ul>
                       <li>
-                        <Link to="#">
+                        <a href={path.LIST_NEWS}>
                           <i className="bi bi-card-checklist"></i>Danh sách tin
                           đăng
-                        </Link>
+                        </a>
                       </li>
                       <li>
                         <Link to="#">
@@ -73,22 +106,25 @@ const Header = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link to="#">
+                        <a href={path.PROFILE}>
                           <i className="bi bi-person-circle"></i>Thông tin cá
                           nhân
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link to="#">
+                        <a href={path.POST_NEWS}>
                           <i className="bi bi-pencil-square"></i>
                           Đăng tin
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link to="#" onClick={handleLogout}>
+                        <a
+                          href={path.LOGIN}
+                          onClick={() => dispatch(actions.logout())}
+                        >
                           <i className="bi bi-box-arrow-right"></i>
                           Đăng xuất
-                        </Link>
+                        </a>
                       </li>
                     </ul>
                   </div>
@@ -114,8 +150,66 @@ const Header = () => {
                 </nav>
               </div>
               <div className="header__btn">
-                <div className="header__btn-favorite">
-                  <i className="bi bi-heart"></i>
+                <div
+                  className="header__btn-favorite"
+                  onClick={handleGetRealEstate}
+                >
+                  <>
+                    <i className="bi bi-heart"></i>
+                    {favorites.count > 0 && (
+                      <span className="count">{favorites.count}</span>
+                    )}
+                  </>
+                  {isPopupOpen ? (
+                    <div className="favorite">
+                      {favorites.count > 0 ? (
+                        <div className="favorite__container">
+                          <div className="group__flex">
+                            <h2>TIN ĐÃ LƯU</h2>
+                            <div onClick={handleDeleteAllSave}>Xoá tất cả</div>
+                          </div>
+                          <ul className="content">
+                            {favorites.favorites.length > 0 &&
+                              favorites.favorites.map((item, index) => (
+                                <li key={index}>
+                                  <Link
+                                    state={{ id: item.id }}
+                                    to={`/${convertToSlug(item.nameEstate)}`}
+                                  >
+                                    <img
+                                      src={item.imageModelList[0].image}
+                                      alt=""
+                                    />
+                                    <div className="text">
+                                      <h6>{item.nameEstate}</h6>
+                                      <div>Đã lưu: {formattedDate}</div>
+                                    </div>
+                                  </Link>
+                                  <span
+                                    onClick={() => handleDeleteSave(item.id)}
+                                    className="delete"
+                                  >
+                                    x
+                                  </span>
+                                </li>
+                              ))}
+                          </ul>
+                        </div>
+                      ) : (
+                        <div className="favorite__container">
+                          <div className="group__flex">
+                            <h2>TIN ĐÃ LƯU</h2>
+                          </div>
+                          <div className="content">
+                            <div className="no-favorite">
+                              Bạn chưa lưu tin nào, vui lòng bấm{" "}
+                              <i className="bi bi-heart"></i> để lưu tin
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ) : null}
                 </div>
                 <NavLink to={path.POST_NEWS} className="header__btn-post">
                   <i className="bi bi-pencil-square"></i>

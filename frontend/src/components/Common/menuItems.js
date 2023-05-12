@@ -97,10 +97,6 @@ export const menuItems = [
     ],
   },
   {
-    title: "Dự án",
-    path: path.REAL_ESTATE_FOR_PROJECT,
-  },
-  {
     title: "Đấu giá",
     path: path.AUCTION,
   },

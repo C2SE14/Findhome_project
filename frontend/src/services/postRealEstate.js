@@ -38,3 +38,17 @@ export const apiGetRealEstateByBusinessTypeId = (id) =>
       reject(error);
     }
   });
+
+export const apiGetFilterRealEstate = (body) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "post",
+        url: `/api/realEstate/search`,
+        data: body,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });

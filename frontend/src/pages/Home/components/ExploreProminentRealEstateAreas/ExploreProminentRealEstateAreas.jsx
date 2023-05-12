@@ -3,7 +3,7 @@ import "./ExploreProminentRealEstateAreas.scss";
 import { Container } from "react-bootstrap";
 import Heading from "../../../../components/Heading/Heading";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { Link } from "react-router-dom";
+import { path } from "../../../../utils/constant";
 
 const ExploreProminentRealEstateAreas = ({ posts }) => {
   const locations = [];
@@ -93,11 +93,11 @@ const ExploreProminentRealEstateAreas = ({ posts }) => {
                     ))}
                 </div>
                 <div className="eprea__btn">
-                  <Link to="#">
+                  <a href={path.REAL_ESTATE_FOR_SALE}>
                     Xem thêm {location.subLocations.length} tin Mua bán nhà đất
                     tại {location.cityProvince}
                     <i className="bi bi-arrow-right"></i>
-                  </Link>
+                  </a>
                 </div>
               </TabPanel>
             ))}

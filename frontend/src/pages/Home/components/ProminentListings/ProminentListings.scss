@@ -59,6 +59,14 @@
     align-items: center;
     justify-content: space-between;
     color: #3f3424;
+    button {
+      border: none;
+      outline: none;
+      background: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
 
     div {
       display: flex;

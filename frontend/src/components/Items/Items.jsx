@@ -3,9 +3,30 @@ import "./Items.scss";
 import { Link } from "react-router-dom";
 import { convertToSlug } from "../Common/convertToSlug";
 import formatNumber from "../Common/currencyFormat";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../../store/actions/favorites";
 
 const Items = (props) => {
+  const dispatch = useDispatch();
   const { post } = props;
+  const favorites = useSelector((state) => state.favoritesReducer);
+  const isFavorite = favorites.favorites.some(
+    (favorite) => favorite.id === post.id
+  );
+
+  const handleFavorites = (e) => {
+    e.preventDefault();
+
+    if (isFavorite) {
+      dispatch(removeFromFavorites(post.id));
+    } else {
+      dispatch(addToFavorites(post));
+    }
+  };
+
   return (
     <Link
       to={`${convertToSlug(post.nameEstate)}`}
@@ -35,10 +56,18 @@ const Items = (props) => {
             <i className="bi bi-clock"></i>
             {post.postDate ? <span>{post.postDate}</span> : <span></span>}
           </div>
-          <div>
-            <i className="bi bi-heart"></i>
+          <button
+            className={`favorites ${isFavorite ? "active" : ""}`}
+            onClick={handleFavorites}
+          >
+            {isFavorite ? (
+              <i className="bi bi-heart-fill"></i>
+            ) : (
+              <i className="bi bi-heart"></i>
+            )}
+
             <span>Lưu tin</span>
-          </div>
+          </button>
         </div>
       </div>
     </Link>

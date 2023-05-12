@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "react-dropdown/style.css";
 import "react-toastify/dist/ReactToastify.css";
 import "react-tabs/style/react-tabs.css";
+import "reactjs-popup/dist/index.css";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import reduxStore from "./redux/redux";

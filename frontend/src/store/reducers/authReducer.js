@@ -6,6 +6,7 @@ const initState = {
   msg: "",
   update: false,
   loading: false,
+  userId: null,
 };
 
 const authReducer = (state = initState, action) => {
@@ -22,6 +23,7 @@ const authReducer = (state = initState, action) => {
       return {
         ...state,
         isLoggedIn: true,
+        userId: action.userId,
         token: action.data,
         msg: "",
         loading: false,
@@ -51,6 +53,7 @@ const authReducer = (state = initState, action) => {
         token: null,
         msg: "",
         loading: false,
+        userId: null,
       };
     case actionTypes.SET_LOADING:
       return {

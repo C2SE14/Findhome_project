@@ -32,6 +32,7 @@ export const login = (payload) => async (dispatch) => {
     if (response?.data.id) {
       dispatch({
         type: actionTypes.LOGIN_SUCCESS,
+        userId: response.data.id,
         data: response.data.accessToken,
       });
     } else {

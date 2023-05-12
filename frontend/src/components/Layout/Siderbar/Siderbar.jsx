@@ -1,37 +1,55 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Sidebar.scss";
 import { Link } from "react-router-dom";
 import { path } from "../../../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserById } from "../../../store/actions/user";
-// import { FileUploader } from "fileuploader";
+import { getUserById, updateUser } from "../../../store/actions/user";
+import { apiUploadImages } from "../../../services/post";
 
 const Siderbar = () => {
   const dispatch = useDispatch();
   const { userId } = useSelector((state) => state.auth);
   const { userData } = useSelector((state) => state.user);
-  console.log(userData);
 
   useEffect(() => {
     dispatch(getUserById(userId));
   }, [dispatch, userId]);
 
-  const handleFileUpload = (file) => {
-    // Gửi dữ liệu hình ảnh đã chọn đến server để lưu trữ hoặc xử lý
-    // Ví dụ: sử dụng Fetch API hoặc axios để gửi dữ liệu hình ảnh
-    // fetch('/upload', {
-    //   method: 'POST',
-    //   body: file
-    // });
+  const [avatar, setAvatar] = useState(userData.avatar || null);
+
+  const handleFileUpload = async (e) => {
+    const image = e.target.files[0];
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("upload_preset", process.env.REACT_APP_UPLOAD_ASSET_NAME);
+    const response = await apiUploadImages(formData);
+    if (response.status === 200) {
+      setAvatar(response.data.secure_url);
+    }
+
+    const bodyData = {
+      id: userData.id,
+      username: userData.username,
+      email: userData.email,
+      password: userData.password,
+      avatar,
+      frontOfTheIdentityCard: userData.frontOfTheIdentityCard,
+      backOfTheIdentityCard: userData.backOfTheIdentityCard,
+    };
+    dispatch(updateUser(bodyData));
   };
   return (
     <div className="sidebar">
       <div className="user">
         <div className="avatar">
           <img
-            src="https://scontent.fdad8-1.fna.fbcdn.net/v/t39.30808-6/342769895_1334163300473694_849409973138336677_n.jpg?stp=cp6_dst-jpg&_nc_cat=109&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=9BvdjsvFJUAAX93ps53&_nc_ht=scontent.fdad8-1.fna&oh=00_AfC372jc1Kwk3KJK5xf-UWo0xfrZ3n7_lba4_uIZvPvsxg&oe=645DF677"
-            alt=""
+            src={
+              avatar ||
+              "https://cdn.houseviet.vn/images/icons/user-avatar.png?fbclid=IwAR2lmfuhm4G_5HUPUpe_T6wAnfSiyXW391GJ-AwH8OxoFwVgVazf64vfMuM"
+            }
+            alt="avatar"
           />
+          <input onChange={handleFileUpload} type="file" />
         </div>
         <div className="name">{userData.fullName}</div>
         <div className="br-line"></div>

@@ -6,6 +6,7 @@ const initState = {
   post: {},
   loading: false,
   dataByType: [],
+  filterDatas: [],
 };
 
 const postRealEstateReducer = (state = initState, action) => {
@@ -22,12 +23,22 @@ const postRealEstateReducer = (state = initState, action) => {
         post: action.post || {},
         msg: action.msg || "",
       };
-
     case actionTypes.GET_REAL_ESTATE_BY_BUSSINESS_TYPE_ID:
       return {
         ...state,
         dataByType: action.dataByType || [],
         msg: action.msg || "",
+      };
+    case actionTypes.GET_FILTER_REAL_ESTATE_SUCCESS:
+      return {
+        ...state,
+        filterDatas: action.filterDatas,
+        msg: "",
+      };
+    case actionTypes.GET_FILTER_REAL_ESTATE_FAILURE:
+      return {
+        ...state,
+        msg: action.errorMsg,
       };
     case actionTypes.SET_LOADING:
       return {

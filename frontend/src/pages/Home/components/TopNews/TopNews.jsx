@@ -6,14 +6,15 @@ import Heading from "../../../../components/Heading/Heading";
 const dataNews = [
   {
     image:
-      "https://cdn.houseviet.vn/images/news/27042023/toan-canh-gia-nha-va-mot-so-loai-bat-dong-san-quy-1-2023.jpg",
-    title: "Bình Tân - 'miền đất hứa' của bất động sản giá trị thật",
+      "https://cdn.houseviet.vn/images/news/05052023/can-ho-dang-e-nhung-moi-gioi-van-ke-chenh-600-trieu-dong-rao-ban-cho-khach-m.jpg",
+    title:
+      "Căn hộ đang “ế” nhưng môi giới vẫn kê chênh 600 triệu đồng rao bán cho khách",
     createDate: "26/04/2023 - 09:13",
   },
   {
     image:
-      "https://cdn.houseviet.vn/images/news/27042023/toan-canh-gia-nha-va-mot-so-loai-bat-dong-san-quy-1-2023.jpg",
-    title: "Bình Tân - 'miền đất hứa' của bất động sản giá trị thật",
+      "https://cdn.houseviet.vn/images/news/04052023/gioi-dai-gia-bat-dong-san-am-tham-san-hang-m.jpg",
+    title: "Giới đại gia bất động sản âm thầm “săn hàng",
     createDate: "26/04/2023 - 09:13",
   },
   {
@@ -25,7 +26,7 @@ const dataNews = [
   },
   {
     image:
-      "https://cdn.houseviet.vn/images/news/27042023/toan-canh-gia-nha-va-mot-so-loai-bat-dong-san-quy-1-2023.jpg",
+      "https://cdn.houseviet.vn/images/news/03042023/nha-dat-chua-co-so-do-co-vay-the-chap-ngan-hang-duoc-khong-m.jpg",
     title: "Bình Tân - 'miền đất hứa' của bất động sản giá trị thật",
     createDate: "26/04/2023 - 09:13",
   },
@@ -37,20 +38,21 @@ const dataNews = [
   },
   {
     image:
-      "https://cdn.houseviet.vn/images/news/27042023/toan-canh-gia-nha-va-mot-so-loai-bat-dong-san-quy-1-2023.jpg",
+      "https://cdn.houseviet.vn/images/news/24032023/nhieu-diem-moi-trong-du-thao-luat-kinh-doanh-bat-dong-san-sua-doi-m.jpg",
     title: "Bình Tân - 'miền đất hứa' của bất động sản giá trị thật",
     createDate: "26/04/2023 - 09:13",
   },
   {
     image:
-      "https://cdn.houseviet.vn/images/news/27042023/toan-canh-gia-nha-va-mot-so-loai-bat-dong-san-quy-1-2023.jpg",
+      "https://cdn.houseviet.vn/images/news/15032023/chi-tiet-nghi-quyet-so-33-nq-cp-cua-chinh-phu-thuc-day-thao-go-kho-khan-thi-truong-bat-dong-san-m.jpg",
     title: "Bình Tân - 'miền đất hứa' của bất động sản giá trị thật",
     createDate: "26/04/2023 - 09:13",
   },
   {
     image:
-      "https://cdn.houseviet.vn/images/news/27042023/toan-canh-gia-nha-va-mot-so-loai-bat-dong-san-quy-1-2023.jpg",
-    title: "Bình Tân - 'miền đất hứa' của bất động sản giá trị thật",
+      "https://cdn.houseviet.vn/images/news/08032023/cach-ban-bat-dong-san-nhanh-nhat-hieu-qua-m.jpg",
+    title:
+      "Chi tiết Nghị quyết số 33/NQ-CP của Chính phủ thúc đẩy, tháo gỡ khó khăn thị ...",
     createDate: "26/04/2023 - 09:13",
   },
 ];

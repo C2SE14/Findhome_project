@@ -1,8 +1,14 @@
 .carousel {
   &__item {
+    display: block;
+    text-decoration: none;
     position: relative;
     padding: 10px 15px;
     border-radius: 5px;
+    color: #3f3424;
+    &:hover {
+      color: #3f3424;
+    }
     img {
       object-fit: cover;
       width: 100%;
@@ -110,6 +116,9 @@
     }
   }
   &__content2 {
+    display: block;
+    text-decoration: none;
+    color: #3f3424;
     padding: 15px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 5px;
@@ -145,10 +154,12 @@
     display: flex;
     gap: 8px;
     margin-bottom: 8px;
+    color: #3f3424;
   }
   &__time2 {
     display: flex;
     gap: 8px;
+    color: #3f3424;
   }
   &__info {
     width: 60%;

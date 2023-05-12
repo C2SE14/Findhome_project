@@ -1,6 +1,7 @@
 import actionTypes from "./actionTypes";
 import {
   apiGetAllPostRealEstate,
+  apiGetFilterRealEstate,
   apiGetRealEstateByBusinessTypeId,
   apiGetRealEstateById,
 } from "../../services/postRealEstate";
@@ -70,5 +71,33 @@ export const getRealEstateByBusinessTypeId = (id) => async (dispatch) => {
       type: actionTypes.GET_REAL_ESTATE_BY_BUSSINESS_TYPE_ID,
       dataByType: null,
     });
+  }
+};
+
+export const getFilterRealEstate = (body) => async (dispatch) => {
+  try {
+    dispatch({ type: actionTypes.SET_LOADING, loading: true });
+
+    const response = await apiGetFilterRealEstate(body);
+    if (response.status === 200) {
+      dispatch({
+        type: actionTypes.GET_FILTER_REAL_ESTATE_SUCCESS,
+        filterDatas: response.data,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_FILTER_REAL_ESTATE_FAILURE,
+        errorMsg: response.data.statusText,
+      });
+    }
+
+    dispatch({ type: actionTypes.SET_LOADING, loading: false });
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_FILTER_REAL_ESTATE_FAILURE,
+      errorMsg: error.message,
+    });
+
+    dispatch({ type: actionTypes.SET_LOADING, loading: false });
   }
 };

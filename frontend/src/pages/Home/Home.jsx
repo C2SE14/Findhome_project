@@ -29,10 +29,10 @@ const Home = () => {
     <div className="home">
       <Banner />
       <main>
-        <ProminentProjects />
+        <ProminentProjects posts={posts} />
         <ProminentListings posts={posts} />
-        <NewRealEstateListing />
-        <ExploreProminentRealEstateAreas />
+        <NewRealEstateListing posts={posts} />
+        <ExploreProminentRealEstateAreas posts={posts} />
         <TopNews />
         <MyInfo />
       </main>

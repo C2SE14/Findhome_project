@@ -1,6 +1,7 @@
 import authReducer from "./authReducer";
-import useReducer from "./userReducer";
+import userReducer from "./userReducer";
 import postRealEstateReducer from "./postRealEstateReducer";
+import favoritesReducer from "./favoritesReducer";
 import { combineReducers } from "redux";
 import storage from "redux-persist/lib/storage";
 import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
@@ -14,13 +15,14 @@ const commonConfig = {
 const authConfig = {
   ...commonConfig,
   key: "auth",
-  whitelist: ["isLoggedIn", "token"],
+  whitelist: ["isLoggedIn", "token", "userId"],
 };
 
 const rootReducer = combineReducers({
   auth: persistReducer(authConfig, authReducer),
-  user: useReducer,
+  user: userReducer,
   postRealEstate: postRealEstateReducer,
+  favoritesReducer: favoritesReducer,
 });
 
 export default rootReducer;

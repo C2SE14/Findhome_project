@@ -3,6 +3,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Carousel.scss";
+import formatNumber from "../Common/currencyFormat";
+import { Link } from "react-router-dom";
+import { path } from "../../utils/constant";
+import { convertToSlug } from "../Common/convertToSlug";
 
 const Carousel = ({ items, noimage, info }) => {
   const slidesToShow = info ? 1 : 3;
@@ -25,19 +29,19 @@ const Carousel = ({ items, noimage, info }) => {
     <div className="carousel">
       <div className="carousel__container">
         <Slider {...settings}>
-          {items.map((item, index) => (
-            <div className="carousel__item" key={index}>
-              {info ? (
-                <div className="carousel__info">
-                  <h2>{item.title}</h2>
-                  <p>{item.desc}</p>
-                </div>
-              ) : !noimage ? (
+          {items.slice(8, 13).map((item, index) => (
+            <Link
+              to={`/${convertToSlug(item.nameEstate)}`}
+              state={{ id: item.id }}
+              className="carousel__item"
+              key={index}
+            >
+              {!noimage ? (
                 <>
                   <img src={item.imageModelList[0].image} alt="" />
                   <div className="carousel__content">
                     <span className="carousel__price">
-                      {item.price} Triệu/m²
+                      {formatNumber(item.price)} / m²
                     </span>
                     <h2 className="carousel__name">{item.nameEstate}</h2>
                     <div className="carousel__address">
@@ -48,7 +52,7 @@ const Carousel = ({ items, noimage, info }) => {
                       <i className="bi bi-pie-chart"></i>
                       <div>
                         <span>
-                          <strong>Quy mô: </strong>1753 căn
+                          <strong>Quy mô: </strong> ---
                         </span>
                       </div>
                     </div>
@@ -57,7 +61,7 @@ const Carousel = ({ items, noimage, info }) => {
                       <div>
                         <span>
                           {" "}
-                          <strong>Pháp lý: </strong>Sổ hồng
+                          <strong>Pháp lý: </strong> {item.legalDocument}
                         </span>
                       </div>
                     </div>
@@ -65,12 +69,16 @@ const Carousel = ({ items, noimage, info }) => {
                   <div className="carousel__status">Đang mở bán</div>
                 </>
               ) : (
-                <div className="carousel__content2">
+                <Link
+                  to={`/${convertToSlug(item.nameEstate)}`}
+                  state={{ id: item.id }}
+                  className="carousel__content2"
+                >
                   <h2 className="carousel__name2">{item.nameEstate}</h2>
                   <div className="carousel__price2">
-                    <span>{item.area}</span>
+                    <span>{item.area} m²</span>
                     <span className="divider-dot"></span>
-                    <span>{item.price} Tỷ</span>
+                    <span>{formatNumber(item.price)} </span>
                   </div>
                   <div className="carousel__address2">
                     <i className="bi bi-geo-alt"></i>
@@ -78,12 +86,21 @@ const Carousel = ({ items, noimage, info }) => {
                   </div>
                   <div className="carousel__time2">
                     <i className="bi bi-clock"></i>
-                    <span>Hôm qua</span>
+                    <span>{item.postDate}</span>
                   </div>
-                </div>
+                </Link>
               )}
-            </div>
+            </Link>
           ))}
+          {info &&
+            items.map((item, index) => (
+              <div className="carousel__item">
+                <div className="carousel__info" key={index}>
+                  <h2>{item.title}</h2>
+                  <p>{item.desc}</p>
+                </div>
+              </div>
+            ))}
         </Slider>
       </div>
     </div>
