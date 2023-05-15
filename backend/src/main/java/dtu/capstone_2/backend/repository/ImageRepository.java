@@ -18,6 +18,12 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
             "VALUES (:name, :realEstateId);", nativeQuery = true)
     public void insertImage(@Param("name")String name, @Param("realEstateId") Long realEstateId);
 
+    @Transactional// resolve "Executing an update/delete query"
+    @Modifying
+    @Query(value = "INSERT INTO image (image, auction_id)\n" +
+            "VALUES (:name, :actionId);", nativeQuery = true)
+    public void insertImageOfAction(@Param("name")String name, @Param("actionId") Long actionId);
+
     @Modifying // allow delete
     @Transactional // allow delete
     @Query(value = "delete from image where real_estate_id = :id", nativeQuery = true)

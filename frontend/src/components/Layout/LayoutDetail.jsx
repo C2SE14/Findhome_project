@@ -2,7 +2,6 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
-import SearchBox from "../SearchBox/SearchBox";
 import { ProductProvider } from "../../context";
 import Banner from "../../pages/Home/components/Banner/Banner";
 
@@ -16,7 +15,6 @@ const LayoutDetail = () => {
     <ProductProvider>
       <div className="layout">
         <Header />
-        {/* <SearchBox /> */}
         <Banner />
         <div className="layout__content" style={{ background: "#f4f2f0" }}>
           <Outlet />

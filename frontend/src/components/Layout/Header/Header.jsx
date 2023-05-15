@@ -104,10 +104,10 @@ const Header = () => {
                         </a>
                       </li>
                       <li>
-                        <Link to="#">
+                        <a href={path.LIST_AUCTION}>
                           <i className="bi bi-buildings"></i>
                           Danh sách đăng kí đấu giá bất động sản
-                        </Link>
+                        </a>
                       </li>
                       <li>
                         <a href={path.PROFILE}>
@@ -115,6 +115,7 @@ const Header = () => {
                           nhân
                         </a>
                       </li>
+
                       <li>
                         <a href={path.POST_NEWS}>
                           <i className="bi bi-pencil-square"></i>
@@ -215,6 +216,10 @@ const Header = () => {
                     </div>
                   ) : null}
                 </div>
+                <NavLink to={path.POST_NEWS} className="header__btn-post">
+                  <i className="bi bi-bar-chart-line"></i>
+                  Đăng đấu giá
+                </NavLink>
                 <NavLink to={path.POST_NEWS} className="header__btn-post">
                   <i className="bi bi-pencil-square"></i>
                   Đăng tin

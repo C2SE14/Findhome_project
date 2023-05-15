@@ -9,13 +9,13 @@ import LoadingComp from "../../../../../components/Loading/Loading";
 
 const RightLogin = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { isLoggedIn, loading } = useSelector((state) => state.auth);
   const [invalidFields, setInvalidFields] = useState([]);
 
   useEffect(() => {
-    isLoggedIn && navigate("/");
-  }, [isLoggedIn, navigate]);
+    isLoggedIn && (window.location.href = "/");
+  }, [isLoggedIn]);
 
   const [payload, setPayload] = useState({
     email: "",

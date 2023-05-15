@@ -101,7 +101,7 @@ export const menuItems = [
     path: path.AUCTION,
   },
   {
-    title: "Liên hệ",
-    path: path.CONTACT,
+    title: "Kết quả đấu giá",
+    path: path.KET_QUA_DAU_GIA,
   },
 ];

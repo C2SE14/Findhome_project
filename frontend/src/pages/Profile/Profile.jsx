@@ -75,6 +75,12 @@ const Profile = () => {
     if (userData.address) {
       setAddress(userData.address);
     }
+    if (userData.frontOfTheIdentityCard) {
+      setFrontOfTheIdentityCard(userData.frontOfTheIdentityCard);
+    }
+    if (userData.backOfTheIdentityCard) {
+      setBackOfTheIdentityCard(userData.backOfTheIdentityCard);
+    }
   }, [userData]);
   //
   // Tỉnh
@@ -207,7 +213,13 @@ const Profile = () => {
     ) {
       errors.address = "Vui lòng chọn địa chỉ";
     }
-
+    // Kiểm tra trường Ngày sinh
+    if (!frontOfTheIdentityCard) {
+      errors.frontOfTheIdentityCard = "Vui lòng chọn ảnh mặt trước CCCD";
+    }
+    if (!backOfTheIdentityCard) {
+      errors.backOfTheIdentityCard = "Vui lòng chọn ảnh mặt sau trước CCCD";
+    }
     return errors;
   };
   const [isLoading, setIsLoading] = useState({
@@ -271,6 +283,7 @@ const Profile = () => {
       setErrors(formErrors);
     }
   };
+
   return (
     <>
       {loading ? (
@@ -490,30 +503,38 @@ const Profile = () => {
                     <div className="col">
                       <div className="frontOfTheIdentityCard">
                         <div className="image">
-                          {isLoading.front ? (
-                            <LoadingComp
-                              type="spinningBubbles"
-                              color="#fff"
-                              width="50px"
-                              height="50px"
-                            />
-                          ) : null}
+                          <label htmlFor="frontOfTheIdentityCard">
+                            {isLoading.front ? (
+                              <LoadingComp
+                                type="spinningBubbles"
+                                color="#fff"
+                                width="50px"
+                                height="50px"
+                              />
+                            ) : null}
 
-                          <img
-                            src={
-                              frontOfTheIdentityCard ||
-                              "https://e7.pngegg.com/pngimages/80/222/png-clipart-computer-icons-graphy-camera-camera-text-rectangle.png"
-                            }
-                            alt=""
-                          />
+                            <img
+                              src={
+                                frontOfTheIdentityCard
+                                  ? frontOfTheIdentityCard
+                                  : "https://e7.pngegg.com/pngimages/80/222/png-clipart-computer-icons-graphy-camera-camera-text-rectangle.png"
+                              }
+                              alt=""
+                            />
+                          </label>
                         </div>
 
                         <input
                           onChange={(e) => handleFileUpload(e, true)}
                           type="file"
+                          hidden
+                          id="frontOfTheIdentityCard"
                         />
                       </div>
                     </div>
+                    {errors.frontOfTheIdentityCard && (
+                      <small>{errors.frontOfTheIdentityCard}</small>
+                    )}
                   </div>
                 </div>
               </div>
@@ -529,29 +550,37 @@ const Profile = () => {
                     <div className="col">
                       <div className="frontOfTheIdentityCard">
                         <div className="image">
-                          {isLoading.back ? (
-                            <LoadingComp
-                              type="spinningBubbles"
-                              color="#fff"
-                              width="50px"
-                              height="50px"
-                            />
-                          ) : null}
+                          <label htmlFor="backOfTheIdentityCard">
+                            {isLoading.back ? (
+                              <LoadingComp
+                                type="spinningBubbles"
+                                color="#fff"
+                                width="50px"
+                                height="50px"
+                              />
+                            ) : null}
 
-                          <img
-                            src={
-                              backOfTheIdentityCard ||
-                              "https://e7.pngegg.com/pngimages/80/222/png-clipart-computer-icons-graphy-camera-camera-text-rectangle.png"
-                            }
-                            alt=""
-                          />
+                            <img
+                              src={
+                                backOfTheIdentityCard
+                                  ? backOfTheIdentityCard
+                                  : "https://e7.pngegg.com/pngimages/80/222/png-clipart-computer-icons-graphy-camera-camera-text-rectangle.png"
+                              }
+                              alt=""
+                            />
+                          </label>
                         </div>
 
                         <input
                           onChange={(e) => handleFileUpload(e, false)}
                           type="file"
+                          id="backOfTheIdentityCard"
+                          hidden
                         />
                       </div>
+                      {errors.backOfTheIdentityCard && (
+                        <small>{errors.backOfTheIdentityCard}</small>
+                      )}
                     </div>
                   </div>
                 </div>

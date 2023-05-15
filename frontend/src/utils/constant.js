@@ -1,8 +1,11 @@
 export const path = {
   HOME: "/",
-  AUCTION: "/phong-dau-gia",
-  REAL_ESTATE_FOR_SALE: "/nha-dat-ban",
+  AUCTION: "/dau-gia",
+  AUCTION_DETAIL: "/dau-gia/:id",
+  LIST_AUCTION: "/danh-sach-dang-ki-dau-gia",
+  KET_QUA_DAU_GIA: "/ket-qua-dau-gia",
   //
+  REAL_ESTATE_FOR_SALE: "/nha-dat-ban",
   BAN_CAN_HO_CHUNG_CU: "/ban-can-ho-chung-cu",
   BAN_NHA_RIENG_NHA_MAT_PHO: "/ban-nha-rieng-nha-mat-pho",
   BAN_BIET_THU_NHA_LIEN_KE: "/ban-biet-thu-nha-lien-ke",

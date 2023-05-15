@@ -31,4 +31,9 @@ public class AuctionController {
     public ResponseEntity<?> getAllAuction() throws NullObjectExeption {
         return ok(auctionService.getAllAuctionModel());
     }
+
+    @GetMapping("/getAuctionById/{id}")
+    public ResponseEntity<?> getAuctionById(@PathVariable(value = "id") Long id) throws NullObjectExeption {
+        return ok(auctionService.getAuctionById(id));
+    }
 }

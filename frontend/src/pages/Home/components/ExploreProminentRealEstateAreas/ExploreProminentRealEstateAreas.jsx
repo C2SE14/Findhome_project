@@ -51,6 +51,7 @@ const ExploreProminentRealEstateAreas = ({ posts }) => {
     }
     return total;
   };
+
   return (
     <div className="eprea">
       <Container>
@@ -76,14 +77,14 @@ const ExploreProminentRealEstateAreas = ({ posts }) => {
                     .slice(0, 6)
                     .map((subLocation, index) => (
                       <div className="eprea__tabs-item" key={index}>
-                        {
+                        {subLocation.realEstates[0].imageModelList > 0 && (
                           <img
                             src={
                               subLocation.realEstates[0].imageModelList[0].image
                             }
                             alt=""
                           />
-                        }
+                        )}
                         <h3>{subLocation.district}</h3>
                         <div className="estate__pending">
                           <span>{subLocation.realEstates.length}</span>

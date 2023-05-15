@@ -77,6 +77,8 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<RealEstate> realEstates;
 
+
+
     public Date getIdentityCardDate() {
         return identityCardDate;
     }

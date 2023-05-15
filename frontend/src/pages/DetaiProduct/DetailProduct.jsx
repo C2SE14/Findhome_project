@@ -26,8 +26,9 @@ const DetailProduct = () => {
     top: 500,
     behavior: "smooth",
   });
+  const location = useLocation();
 
-  const { id } = useLocation().state;
+  const id = location.state ? location.state.id : null;
   const dispatch = useDispatch();
   const { setProductTypeValue } = useContext(ProductContext);
   useEffect(() => {

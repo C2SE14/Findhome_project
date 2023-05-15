@@ -31,7 +31,7 @@ const Siderbar = () => {
       };
       dispatch(updateUser(updatedData));
 
-      toast.success("Cập nhật thông tin thành công", {
+      toast.success("Cập nhật avatar thành công!", {
         autoClose: 2000,
         onClose: () => {
           setTimeout(() => {
@@ -48,7 +48,7 @@ const Siderbar = () => {
     <div className="sidebar">
       <div className="user">
         <div className="avatar">
-          <label htmlFor="file">
+          <label htmlFor="avatar">
             {loading ? (
               <LoadingComp
                 type="spokes"
@@ -67,7 +67,7 @@ const Siderbar = () => {
             />
             <i className="bi bi-camera"></i>
           </label>
-          <input onChange={handleFileUpload} hidden type="file" id="file" />
+          <input onChange={handleFileUpload} hidden type="file" id="avatar" />
         </div>
         <div className="name">{userData.fullName}</div>
         <div className="br-line"></div>
@@ -93,9 +93,9 @@ const Siderbar = () => {
                 <i className="bi bi-card-list"></i>
                 <span>DANH SÁCH TIN ĐĂNG</span>
               </Link>
-              <Link to={"#"} className="group">
+              <Link to={path.LIST_AUCTION} className="group">
                 <i className="bi bi-card-checklist"></i>
-                <span>DANH SÁCH ĐĂNG KÝ THAM GIA BẤT ĐỘNG SẢN</span>
+                <span>DANH SÁCH ĐĂNG KÝ THAM GIA ĐẤU GIÁ</span>
               </Link>
             </div>
           </li>

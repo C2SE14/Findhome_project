@@ -1,6 +1,7 @@
 import authReducer from "./authReducer";
 import userReducer from "./userReducer";
 import postRealEstateReducer from "./postRealEstateReducer";
+import auctionReducer from "./auctionReducer";
 import favoritesReducer from "./favoritesReducer";
 import { combineReducers } from "redux";
 import storage from "redux-persist/lib/storage";
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   postRealEstate: postRealEstateReducer,
   favoritesReducer: favoritesReducer,
+  auctionReducer: auctionReducer,
 });
 
 export default rootReducer;

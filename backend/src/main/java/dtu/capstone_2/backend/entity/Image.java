@@ -26,4 +26,8 @@ public class Image {
     @JoinColumn(name = "realEstate_id")
     private RealEstate realEstate;
 
+    @ManyToOne
+    @JoinColumn(name = "auction_id")
+    private Auction auction;
+
 }
