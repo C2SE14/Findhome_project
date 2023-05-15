@@ -1,67 +1,67 @@
 .listnews {
-  background: #fff;
-  box-shadow: 0 1px 7px 0 rgba(0, 0, 0, 0.15) !important;
-  border-radius: 5px;
-  &__header {
-    h2 {
-      padding: 8px 16px;
-      font-size: 17px;
-      font-weight: 600;
-      text-transform: uppercase;
-      color: var(--primary-color);
-      border-bottom: 1px solid #dee2e6 !important;
-    }
-    .history {
-      display: flex;
-      align-items: center;
-      padding: 0 16px;
-      i {
-        font-size: 11px;
-        color: var(--thirdary-color);
-        font-weight: 600;
-        margin-right: 5px;
-      }
-      span {
-        font-size: 12px;
-        color: #3f3424;
-      }
-    }
-  }
+     background: #fff;
+     box-shadow: 0 1px 7px 0 rgba(0, 0, 0, 0.15) !important;
+     border-radius: 5px;
+     &__header {
+          h2 {
+               padding: 8px 16px;
+               font-size: 17px;
+               font-weight: 600;
+               text-transform: uppercase;
+               color: var(--primary-color);
+               border-bottom: 1px solid #dee2e6 !important;
+          }
+          .history {
+               display: flex;
+               align-items: center;
+               padding: 0 16px;
+               i {
+                    font-size: 11px;
+                    color: var(--thirdary-color);
+                    font-weight: 600;
+                    margin-right: 5px;
+               }
+               span {
+                    font-size: 12px;
+                    color: #3f3424;
+               }
+          }
+     }
 
-  &__body {
-    padding: 8px 16px;
+     &__body {
+          padding: 8px 16px;
 
-    thead {
-      background: #cfa267;
-      color: #fff;
-      font-size: 15px;
-    }
-    tbody {
-      tr {
-        td {
-          font-size: 14px;
-        }
-      }
-    }
-  }
-  .actions {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 15px;
-    cursor: pointer;
-    padding: 0;
-    i {
-      margin-right: 5px;
-    }
-    .edit {
-      padding-right: 15px;
-      border-right: 1px solid var(--primary-color);
-    }
-    span,
-    i {
-      font-weight: 600;
-      color: var(--primary-color);
-    }
-  }
+          thead {
+               background: #cfa267;
+               color: #fff;
+               font-size: 15px;
+          }
+          tbody {
+               tr {
+                    td {
+                         font-size: 14px;
+                    }
+               }
+          }
+     }
+     .actions {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 15px;
+          cursor: pointer;
+          padding: 0;
+          i {
+               margin-right: 5px;
+          }
+          .edit {
+               padding-right: 15px;
+               border-right: 1px solid var(--primary-color);
+          }
+          span,
+          i {
+               font-weight: 600;
+               color: var(--primary-color);
+          }
+     }
 }
