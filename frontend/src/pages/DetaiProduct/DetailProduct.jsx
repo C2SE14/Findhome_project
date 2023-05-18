@@ -130,7 +130,11 @@ const DetailProduct = () => {
                     </div>
                     <div className="deb__desc">
                       <h3>Thông tin mô tả:</h3>
-                      {post.description ? <p>{post.description}</p> : null}
+                      {post.description
+                        ? post.description
+                            .split("\n")
+                            .map((line, index) => <p key={index}>{line}</p>)
+                        : null}
                     </div>
 
                     <div className="deb__characteristic">
@@ -170,7 +174,7 @@ const DetailProduct = () => {
                             <li>
                               <span>Mặt tiền:</span>
                               {post.frontispiece ? (
-                                <p>{post.frontispiece}</p>
+                                <p>{post.frontispiece}m</p>
                               ) : (
                                 <p> --- </p>
                               )}
@@ -178,14 +182,14 @@ const DetailProduct = () => {
                             <li>
                               <span>Đường trước nhà/đất:</span>
                               {post.streetHouse ? (
-                                <p>{post.streetHouse} m</p>
+                                <p>{post.streetHouse}m</p>
                               ) : (
                                 <p> --- </p>
                               )}
                             </li>
                             <li>
                               <span>Chiều sâu:</span>
-                              {post.depth ? <p>{post.depth}</p> : <p> --- </p>}
+                              {post.depth ? <p>{post.depth}m</p> : <p> --- </p>}
                             </li>
                             <li>
                               <span>Hướng nhà/đất</span>
@@ -328,14 +332,19 @@ const DetailProduct = () => {
                         </div>
                         <div className="info">
                           <span>
-                            {post.brokerModel && post.brokerModel.name}
+                            {post.userModel && post.userModel.fullName}
                           </span>
-                          <p>{post.broker ? "Môi giới" : "Chính chủ"}</p>
+                          <p>
+                            {post.brokerModel &&
+                            post.brokerModel.broker === true
+                              ? "Môi giới"
+                              : "Chính chủ"}
+                          </p>
                         </div>
                       </div>
                       <div className="phone">
                         <i className="bi bi-telephone"></i>
-                        0867405503
+                        {post.userModel ? post.userModel.phoneNumber : ""}
                       </div>
                     </div>
                     <div className="content">

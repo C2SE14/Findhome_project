@@ -13,6 +13,7 @@ export const apiGetUserById = (id) =>
     }
   });
 
+// Lấy danh sách tin đăng user đã đăng
 export const apiGetRealEstateByUserId = (id) =>
   new Promise(async (resolve, reject) => {
     try {
@@ -25,6 +26,35 @@ export const apiGetRealEstateByUserId = (id) =>
       reject(error);
     }
   });
+//  Lây danh sách đấu giá user đã đăng
+export const apiGetAuctionPostOfUser = (id) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "get",
+        url: `/api/auction/getAuctionPostOfUser/${id}`,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+
+//  Lây danh sách user đã đăng kí đấu giá
+export const apiGetAuctionRegisterOfUser = (id) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "get",
+        url: `/api/auctionRegistration/getAuctionRegistrationsByRegisterId/${id}`,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+
+//
 
 export const apiDeleteRealEstate = (realEstateId, userId) =>
   new Promise(async (resolve, reject) => {

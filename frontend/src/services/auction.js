@@ -1,5 +1,6 @@
 import axiosConfig from "../config/axiosConfig";
 
+// Lây tất cả đấu giá
 export const apigetAllAuction = () =>
   new Promise(async (resolve, reject) => {
     try {
@@ -13,6 +14,7 @@ export const apigetAllAuction = () =>
     }
   });
 
+// Lây đấu giá theo id
 export const apiGetAuctionById = (id) =>
   new Promise(async (resolve, reject) => {
     try {
@@ -26,6 +28,7 @@ export const apiGetAuctionById = (id) =>
     }
   });
 
+// Đăng kí đấu giá
 export const apiPostRegisterAuction = (body) =>
   new Promise(async (resolve, reject) => {
     try {

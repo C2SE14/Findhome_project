@@ -82,7 +82,7 @@ const AuctionDetalPopup = (props) => {
                               <li>
                                 <span>Mặt tiền:</span>
                                 {post.frontispiece ? (
-                                  <p>{post.frontispiece}</p>
+                                  <p>{post.frontispiece}m</p>
                                 ) : (
                                   <p> --- </p>
                                 )}
@@ -98,7 +98,7 @@ const AuctionDetalPopup = (props) => {
                               <li>
                                 <span>Chiều sâu:</span>
                                 {post.depth ? (
-                                  <p>{post.depth}</p>
+                                  <p>{post.depth}m</p>
                                 ) : (
                                   <p> --- </p>
                                 )}

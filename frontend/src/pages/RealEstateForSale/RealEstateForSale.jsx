@@ -319,11 +319,11 @@ const RealEstateForSale = ({ categoryId }) => {
                                     <div className="price">
                                       <span>{data.area} m²</span>
                                       <span className="divider-dot"></span>
-                                      <p> {formatNumber(data.price)}</p>
+                                      <p> {formatNumber(data.price)} đồng</p>
                                     </div>
                                     <div className="time">
                                       <i className="bi bi-clock-fill"></i>
-                                      <span> 2 ngày trước</span>
+                                      <span>{data.postDate}</span>
                                     </div>
                                     <div className="info">
                                       <div className="frontage">
@@ -332,7 +332,7 @@ const RealEstateForSale = ({ categoryId }) => {
                                           <span>Mặt tiền: </span>
                                         </div>
                                         {data.frontispiece ? (
-                                          <p>{data.frontispiece}</p>
+                                          <p>{data.frontispiece}m</p>
                                         ) : (
                                           <p> --- </p>
                                         )}
@@ -344,7 +344,7 @@ const RealEstateForSale = ({ categoryId }) => {
                                           <span>Chiều sâu: </span>
                                         </div>
                                         {data.depth ? (
-                                          <p>{data.depth}</p>
+                                          <p>{data.depth}m</p>
                                         ) : (
                                           <p> --- </p>
                                         )}
@@ -371,12 +371,24 @@ const RealEstateForSale = ({ categoryId }) => {
                                       />
                                     </div>
                                     <div>
-                                      <h3>Văn Hải</h3>
-                                      <h4>Chính chủ</h4>
+                                      <h3>
+                                        {data.userModel &&
+                                          data.userModel.fullName}
+                                      </h3>
+                                      <h4>
+                                        {data.brokerModel &&
+                                        data.brokerModel.broker === true
+                                          ? "Môi giới"
+                                          : "Chính chủ"}
+                                      </h4>
                                     </div>
                                     <span>
                                       <i className="bi bi-telephone-plus-fill"></i>
-                                      <p>0867405503</p>
+                                      <p>
+                                        {data.userModel
+                                          ? data.userModel.phoneNumber
+                                          : ""}
+                                      </p>
                                     </span>
                                   </div>
                                 </div>

@@ -123,7 +123,7 @@ const Address = ({ payload, setPayload, auction }) => {
       <div className="header-title">VỊ TRÍ BẤT ĐỘNG SẢN</div>
       <div className="content">
         <InputValue
-          label={"Dự án"}
+          label={!auction ? "Dự án" : "Tên đấu giá"}
           placeholder={"Nhập dữ liệu"}
           type={"text"}
           name={auction ? "nameRealEstate" : "nameEstate"}

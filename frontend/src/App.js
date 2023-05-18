@@ -1,8 +1,8 @@
-// import library
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ScrollToTop from "react-scroll-to-top";
 import { ToastContainer } from "react-toastify";
-// import structure
+import { useSelector } from "react-redux";
+//
 import "./App.scss";
 import LayoutDefault from "./components/Layout/LayoutDefault";
 import Login from "./pages/Auth/Login/Login";
@@ -19,13 +19,13 @@ import PostNew from "./pages/PostNew/PostNew";
 import ListNews from "./pages/ListNews/ListNews";
 import Auction from "./pages/Auction/Auction";
 import AuctionResults from "./pages/Auction/components/AuctionResults";
-import { useSelector } from "react-redux";
 import LayoutAdmin from "./AdminPage/components/LayoutAdmin/LayoutAdmin";
 import AdminRouter from "./AdminPage/AdminRouter";
 import DetailAuction from "./pages/Auction/components/DetailAuction";
 import AuctionRoom from "./pages/Auction/components/AuctionRoom";
 import ListRegisterAuction from "./pages/Auction/components/ListRegisterAuction";
 import AuctionPost from "./pages/AuctionPost/AuctionPost";
+import AuctionList from "./pages/Auction/components/AuctionList";
 
 function App() {
   const { userData } = useSelector((state) => state.user);
@@ -175,7 +175,12 @@ function App() {
                 <Route path={path.LIST_NEWS} element={<ListNews />} />
                 <Route path={path.POST_AUCTION} element={<AuctionPost />} />
                 <Route
-                  path={path.LIST_AUCTION}
+                  path={path.DANH_SACH_DANG_DAU_GIA}
+                  element={<AuctionList />}
+                />
+
+                <Route
+                  path={path.DANH_SACH_DANG_KI_DAU_GIA}
                   element={<ListRegisterAuction />}
                 />
               </Route>

@@ -2,6 +2,8 @@ import actionTypes from "./actionTypes";
 import {
   apiDeleteRealEstate,
   apiGetAllUser,
+  apiGetAuctionPostOfUser,
+  apiGetAuctionRegisterOfUser,
   apiGetRealEstateByUserId,
   apiGetUserById,
   apiUpdateUser,
@@ -57,7 +59,7 @@ export const getRealEstateByUserId = (id) => async (dispatch) => {
     if (response.status === 200) {
       dispatch({
         type: actionTypes.GET_REAL_ESTATE_BY_USERID,
-        data: response.data,
+        listUserPostNew: response.data,
       });
     } else {
       dispatch({
@@ -68,7 +70,53 @@ export const getRealEstateByUserId = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: actionTypes.GET_REAL_ESTATE_BY_USERID,
-      dataByType: null,
+      listUserPostNew: null,
+    });
+  }
+};
+
+// Danh sách đăng đấu giá của user
+export const getAuctionPostOfUser = (id) => async (dispatch) => {
+  try {
+    const response = await apiGetAuctionPostOfUser(id);
+    if (response.status === 200) {
+      dispatch({
+        type: actionTypes.GET_AUCTION_BY_USERID,
+        listUserPostAuction: response.data,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_AUCTION_BY_USERID,
+        msg: response.data.statusText,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_AUCTION_BY_USERID,
+      listUserPostAuction: null,
+    });
+  }
+};
+// Danh sách đăng kí đấu giá CỦA USER
+
+export const getAuctionRegisterOfUser = (id) => async (dispatch) => {
+  try {
+    const response = await apiGetAuctionRegisterOfUser(id);
+    if (response.status === 200) {
+      dispatch({
+        type: actionTypes.GET_AUCTION_REGISTER_OF_USER,
+        listUserRegisterAuction: response.data,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_AUCTION_REGISTER_OF_USER,
+        msg: response.data.statusText,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_AUCTION_REGISTER_OF_USER,
+      listUserRegisterAuction: null,
     });
   }
 };

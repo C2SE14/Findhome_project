@@ -60,7 +60,8 @@ const Carousel = ({ items, noimage, info, show }) => {
                       <div>
                         <span>
                           {" "}
-                          <strong>Pháp lý: </strong> {item.legalDocument}
+                          <strong>Pháp lý: </strong>{" "}
+                          {item.legalDocument ? item.legalDocument : "---"}
                         </span>
                       </div>
                     </div>

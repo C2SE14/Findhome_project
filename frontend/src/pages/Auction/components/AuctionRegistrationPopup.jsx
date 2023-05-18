@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import "../Auction.scss";
 import { toast } from "react-toastify";
@@ -62,13 +62,6 @@ const AuctionRegistrationPopup = ({
         console.error(error);
       });
   };
-
-  // const videoConstraints = {
-  //   width: 1280,
-  //   height: 720,
-  //   facingMode: "user", // Sử dụng camera mặt trước
-  // };
-
   return (
     <Modal show={showPopup} onHide={handleClose} className="custom-modal">
       <Modal.Header closeButton>

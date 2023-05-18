@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 //
 import { logo } from "../../../assets/images";
 
@@ -104,7 +104,13 @@ const Header = () => {
                         </a>
                       </li>
                       <li>
-                        <a href={path.LIST_AUCTION}>
+                        <a href={path.DANH_SACH_DANG_DAU_GIA}>
+                          <i className="bi bi-card-checklist"></i>Danh sách đăng
+                          đấu giá
+                        </a>
+                      </li>
+                      <li>
+                        <a href={path.DANH_SACH_DANG_KI_DAU_GIA}>
                           <i className="bi bi-buildings"></i>
                           Danh sách đăng kí đấu giá bất động sản
                         </a>
@@ -120,6 +126,12 @@ const Header = () => {
                         <a href={path.POST_NEWS}>
                           <i className="bi bi-pencil-square"></i>
                           Đăng tin
+                        </a>
+                      </li>
+                      <li>
+                        <a href={path.POST_AUCTION}>
+                          <i className="bi bi-pencil"></i>
+                          Đăng đấu giá
                         </a>
                       </li>
                       <li>
@@ -216,13 +228,13 @@ const Header = () => {
                     </div>
                   ) : null}
                 </div>
-                <NavLink
-                  to={isLoggedIn ? path.POST_AUCTION : path.LOGIN}
+                <a
+                  href={isLoggedIn ? path.POST_AUCTION : path.LOGIN}
                   className="header__btn-post"
                 >
                   <i className="bi bi-bar-chart-line"></i>
                   Đăng đấu giá
-                </NavLink>
+                </a>
                 <a
                   href={isLoggedIn ? path.POST_NEWS : path.LOGIN}
                   className="header__btn-post"

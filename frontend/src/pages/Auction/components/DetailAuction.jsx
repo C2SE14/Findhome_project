@@ -5,6 +5,7 @@ import AuctionRegistrationPopup from "./AuctionRegistrationPopup";
 import { useLocation } from "react-router-dom";
 import { getAuctionById } from "../../../store/actions/auction";
 import LoadingComp from "../../../components/Loading/Loading";
+import { formatDate } from "../../../components/Common/convertToSlug";
 
 const DetailAuction = () => {
   const location = useLocation();
@@ -72,7 +73,6 @@ const DetailAuction = () => {
     }
     return true;
   };
-  console.log(auction);
 
   return (
     <>
@@ -120,23 +120,23 @@ const DetailAuction = () => {
                         </li>
                         <li>
                           <span> Ngày công bố:</span>
-                          <p>{auction.dateOfPublication}</p>
+                          <p>{formatDate(auction.dateOfPublication)}</p>
                         </li>
                         <li>
                           <span>Hạn đăng kí từ:</span>
-                          <p>{auction.registrationDateStart}</p>
+                          <p>{formatDate(auction.registrationDateStart)}</p>
                         </li>
                         <li>
                           <span>Hạn đăng kí đến:</span>
-                          <p>{auction.registrationDateEnd}</p>
+                          <p>{formatDate(auction.registrationDateEnd)}</p>
                         </li>
                         <li>
                           <span>Thời gian bắt đầu cuộc đấu giá:</span>
-                          <p>{auction.auctionStartDate}</p>
+                          <p>{formatDate(auction.auctionStartDate)}</p>
                         </li>
                         <li>
                           <span>Thời gian kết thúc cuộc đấu giá:</span>
-                          <p>{auction.auctionEndDate}</p>
+                          <p>{formatDate(auction.auctionEndDate)}</p>
                         </li>
                         <li>
                           <span>Giá khởi điểm:</span>

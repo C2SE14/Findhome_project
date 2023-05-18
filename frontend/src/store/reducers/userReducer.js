@@ -3,6 +3,8 @@ import actionTypes from "../actions/actionTypes";
 const initState = {
   userData: {},
   listUserPostNew: [],
+  listUserPostAuction: [],
+  listUserRegisterAuction: [],
   msg: "",
   loading: false,
   users: [],
@@ -25,7 +27,19 @@ const userReducer = (state = initState, action) => {
     case actionTypes.GET_REAL_ESTATE_BY_USERID:
       return {
         ...state,
-        listUserPostNew: action.data || [],
+        listUserPostNew: action.listUserPostNew || [],
+        msg: action.msg || "",
+      };
+    case actionTypes.GET_AUCTION_REGISTER_OF_USER:
+      return {
+        ...state,
+        listUserRegisterAuction: action.listUserRegisterAuction || [],
+        msg: action.msg || "",
+      };
+    case actionTypes.GET_AUCTION_BY_USERID:
+      return {
+        ...state,
+        listUserPostAuction: action.listUserPostAuction || [],
         msg: action.msg || "",
       };
     case actionTypes.UPDATE_USER_SUCCESS:

@@ -28,7 +28,7 @@ export const FormInfo = ({
       });
       setImagesPreview(images);
     }
-  }, [payload]);
+  }, [payload, setImagesPreview]);
   const [isBroker, setIsBroker] = useState(
     payload?.brokerModel?.broker || false
   );

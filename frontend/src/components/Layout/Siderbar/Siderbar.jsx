@@ -90,18 +90,18 @@ const Siderbar = () => {
                 <span>ĐĂNG CHO THUÊ</span>
               </Link>
               <Link to={path.POST_AUCTION} className="group">
-                <i className="bi bi-card-list"></i>
+                <i className="bi bi-person-lines-fill"></i>
                 <span>ĐĂNG ĐẤU GIÁ</span>
               </Link>
               <Link to={path.LIST_NEWS} className="group">
                 <i className="bi bi-card-list"></i>
                 <span>DANH SÁCH TIN ĐĂNG</span>
               </Link>
-              <Link to={path.LIST_AUCTION} className="group">
+              <Link to={path.DANH_SACH_DANG_DAU_GIA} className="group">
                 <i className="bi bi-card-checklist"></i>
                 <span>DANH SÁCH ĐĂNG ĐẤU GIÁ</span>
               </Link>
-              <Link to={path.LIST_AUCTION} className="group">
+              <Link to={path.DANH_SACH_DANG_KI_DAU_GIA} className="group">
                 <i className="bi bi-card-checklist"></i>
                 <span>DANH SÁCH ĐĂNG KÝ THAM GIA ĐẤU GIÁ</span>
               </Link>

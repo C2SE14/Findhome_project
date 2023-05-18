@@ -15,7 +15,6 @@ const ListNews = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [dataEdit, setDateEdit] = useState([]);
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
 
   const updateDataEdit = (newData) => {
@@ -27,7 +26,7 @@ const ListNews = () => {
 
   const handleDelete = (realEstateId, userId) => {
     dispatch(deleteRealEstateByUserId(realEstateId, userId));
-    toast.success("Xóa thông tin thành công", {
+    toast.success("Xóa tin đăng thành công", {
       autoClose: 2000,
       onClose: () => {
         // Tắt toast và tải lại trang sau 1 giây
@@ -63,7 +62,7 @@ const ListNews = () => {
                 {listUserPostNew.map((item, index) => (
                   <React.Fragment key={item.id}>
                     <tr>
-                      <td style={{ width: "70px" }}>{index + 1}</td>
+                      <td style={{ width: "70px" }}>{item.id}</td>
                       <td
                         style={{
                           maxWidth: "500px",

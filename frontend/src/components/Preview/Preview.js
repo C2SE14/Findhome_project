@@ -49,7 +49,7 @@ const Preview = ({ payload }) => {
                       <i className="bi bi-arrows-expand"></i>
                       <span>Chiều sâu: </span>
                     </div>
-                    <p> {payload.depth ? `${payload.depth} m` : ""}</p>
+                    <p> {payload.depth ? `${payload.depth}m` : ""}</p>
                   </div>
 
                   <div className="direction">

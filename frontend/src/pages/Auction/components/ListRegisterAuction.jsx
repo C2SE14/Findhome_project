@@ -3,25 +3,22 @@ import "../Auction.scss";
 import { Badge, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import {
-  deleteRealEstateByUserId,
-  getRealEstateByUserId,
-} from "../../../store/actions/user";
+import { getAuctionRegisterOfUser } from "../../../store/actions/user";
 
 const ListRegisterAuction = () => {
   const dispatch = useDispatch();
   const { userId } = useSelector((state) => state.auth);
-  const { loading } = useSelector((state) => state.user);
+  const { loading, listUserRegisterAuction } = useSelector(
+    (state) => state.user
+  );
+  console.log(listUserRegisterAuction);
 
   const payFees = false;
 
   useEffect(() => {
-    dispatch(getRealEstateByUserId(userId));
+    dispatch(getAuctionRegisterOfUser(userId));
   }, [dispatch, userId]);
 
-  const handleDelete = (userId, postId) => {
-    console.log("hai");
-  };
   const startTime = new Date("2023-05-20T12:00:00").getTime();
   const currentTime = new Date().getTime();
   const handleClick = () => {
@@ -56,102 +53,57 @@ const ListRegisterAuction = () => {
               </tr>
             </thead>
             <tbody>
-              <tr
-                onClick={handleClick}
-                style={{ cursor: "pointer" }}
-                className={currentTime > startTime ? "disabled" : ""}
-              >
-                <td>223323</td>
-                <td
-                  style={{
-                    display: "flex",
-                    gap: "5px",
-                    fontWeight: "700",
-                  }}
+              {listUserRegisterAuction.map((item) => (
+                <tr
+                  key={item.id}
+                  onClick={handleClick}
+                  style={{ cursor: "pointer" }}
+                  className={currentTime > startTime ? "disabled" : ""}
                 >
-                  <img
-                    src={
-                      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/ba/29/5c/img-worlds-of-adventure.jpg?w=1200&h=-1&s=1"
-                    }
+                  <td>{item.id}</td>
+                  <td
                     style={{
-                      width: "70px",
-                      height: "50px",
-                      objectFit: "cover",
+                      display: "flex",
+                      gap: "5px",
+                      fontWeight: "700",
                     }}
-                    alt=""
-                  />
-                  Công Ty TNHH Bất Động Sản Thái Bình
-                </td>
-                <td>12/3/2023</td>
-                <td>17/5/2024</td>
-                <td>
-                  {payFees ? (
-                    <Badge
-                      bg="success"
-                      text="light"
-                      style={{ padding: "5px", fontSize: "13px" }}
-                    >
-                      Đã phê duyệt
-                    </Badge>
-                  ) : (
-                    <Badge
-                      bg="warning"
-                      text="dark"
-                      style={{ padding: "5px", fontSize: "13px" }}
-                    >
-                      Đang phê duyệt
-                    </Badge>
-                  )}
-                </td>
-              </tr>
-              <tr
-                onClick={handleClick}
-                style={{ cursor: "pointer" }}
-                className={currentTime > startTime ? "disabled" : ""}
-              >
-                <td>223323</td>
-                <td
-                  style={{
-                    display: "flex",
-                    gap: "5px",
-                    fontWeight: "700",
-                  }}
-                >
-                  <img
-                    src={
-                      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/ba/29/5c/img-worlds-of-adventure.jpg?w=1200&h=-1&s=1"
-                    }
-                    style={{
-                      width: "70px",
-                      height: "50px",
-                      objectFit: "cover",
-                    }}
-                    alt=""
-                  />
-                  Công Ty TNHH Bất Động Sản Thái Bình
-                </td>
-                <td>12/3/2023</td>
-                <td>17/5/2024</td>
-                <td>
-                  {payFees ? (
-                    <Badge
-                      bg="success"
-                      text="light"
-                      style={{ padding: "5px", fontSize: "13px" }}
-                    >
-                      Đã phê duyệt
-                    </Badge>
-                  ) : (
-                    <Badge
-                      bg="success"
-                      text="light"
-                      style={{ padding: "5px", fontSize: "13px" }}
-                    >
-                      Đã phê duyệt
-                    </Badge>
-                  )}
-                </td>
-              </tr>
+                  >
+                    <img
+                      src={
+                        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/ba/29/5c/img-worlds-of-adventure.jpg?w=1200&h=-1&s=1"
+                      }
+                      style={{
+                        width: "70px",
+                        height: "50px",
+                        objectFit: "cover",
+                      }}
+                      alt=""
+                    />
+                    Công Ty TNHH Bất Động Sản Thái Bình
+                  </td>
+                  <td>12/3/2023</td>
+                  <td>17/5/2024</td>
+                  <td>
+                    {payFees ? (
+                      <Badge
+                        bg="success"
+                        text="light"
+                        style={{ padding: "5px", fontSize: "13px" }}
+                      >
+                        Đã phê duyệt
+                      </Badge>
+                    ) : (
+                      <Badge
+                        bg="warning"
+                        text="dark"
+                        style={{ padding: "5px", fontSize: "13px" }}
+                      >
+                        Đang phê duyệt
+                      </Badge>
+                    )}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </Table>
         </div>

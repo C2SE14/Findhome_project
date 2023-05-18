@@ -2,7 +2,8 @@ export const path = {
   HOME: "/",
   AUCTION: "/dau-gia",
   AUCTION_DETAIL: "/dau-gia/:id",
-  LIST_AUCTION: "/danh-sach-dang-ki-dau-gia",
+  DANH_SACH_DANG_KI_DAU_GIA: "/danh-sach-dang-ki-dau-gia",
+  DANH_SACH_DANG_DAU_GIA: "/danh-sach-dang-dau-gia",
   KET_QUA_DAU_GIA: "/ket-qua-dau-gia",
   PHONG_DAU_GIA: "/phong-dau-gia/:id",
   //
