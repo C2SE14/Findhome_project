@@ -24,31 +24,23 @@ public class Auction {
     private Long id;
 
     @Column(name = "date_of_publication")
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date dateOfPublication;
+    private String dateOfPublication;
 
 
     @Column(name = "registration_date_start")
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date registrationDateStart;
+    private String registrationDateStart;
 
 
     @Column(name = "registration_date_end")
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date registrationDateEnd;
+    private String registrationDateEnd;
 
     @Column(name = "auction_start_date")
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date auctionStartDate;
+    private String auctionStartDate;
 
     @Column(name = "auction_end_date")
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private Date auctionEndDate;
+    private String auctionEndDate;
+
+    private String auctionParticipationProfile;
 
     private Double startingPrice;
 
@@ -115,4 +107,14 @@ public class Auction {
 
     @OneToMany(mappedBy = "auction", fetch = FetchType.LAZY)
     private List<Image> imageList;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+
+    @OneToMany(mappedBy = "auction", fetch = FetchType.LAZY)
+    private List<AuctionRegistration> auctionRegistrationList;
+
+
 }

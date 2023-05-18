@@ -18,12 +18,14 @@ import Profile from "./pages/Profile/Profile";
 import PostNew from "./pages/PostNew/PostNew";
 import ListNews from "./pages/ListNews/ListNews";
 import Auction from "./pages/Auction/Auction";
-import DetailAction from "./pages/Auction/components/DetailAction";
-import ListAction from "./pages/Auction/components/ListAuction";
 import AuctionResults from "./pages/Auction/components/AuctionResults";
 import { useSelector } from "react-redux";
 import LayoutAdmin from "./AdminPage/components/LayoutAdmin/LayoutAdmin";
 import AdminRouter from "./AdminPage/AdminRouter";
+import DetailAuction from "./pages/Auction/components/DetailAuction";
+import AuctionRoom from "./pages/Auction/components/AuctionRoom";
+import ListRegisterAuction from "./pages/Auction/components/ListRegisterAuction";
+import AuctionPost from "./pages/AuctionPost/AuctionPost";
 
 function App() {
   const { userData } = useSelector((state) => state.user);
@@ -45,7 +47,7 @@ function App() {
           {isAdmin ? (
             <Route path="/" element={<LayoutAdmin />}>
               <Route index element={<Navigate to="admin" />} />
-              {/* <Route path="*" element={<AdminRouter />} /> */}
+              <Route path="*" element={<AdminRouter />} />
             </Route>
           ) : (
             <>
@@ -57,11 +59,12 @@ function App() {
                   path={path.KET_QUA_DAU_GIA}
                   element={<AuctionResults />}
                 />
+                <Route path={path.PHONG_DAU_GIA} element={<AuctionRoom />} />
               </Route>
 
               <Route element={<LayoutDetails />}>
                 <Route path={path.AUCTION} element={<Auction />} />
-                <Route path={path.AUCTION_DETAIL} element={<DetailAction />} />
+                <Route path={path.AUCTION_DETAIL} element={<DetailAuction />} />
 
                 <Route
                   path={path.REAL_ESTATE_FOR_SALE}
@@ -167,8 +170,14 @@ function App() {
               <Route element={<LayoutSystem />}>
                 <Route path={path.PROFILE} element={<Profile />} />
                 <Route path={path.POST_NEWS} element={<PostNew />} />
+                <Route path={path.POST_RENT} element={<PostNew />} />
+                <Route path={path.POST_SELL} element={<PostNew />} />
                 <Route path={path.LIST_NEWS} element={<ListNews />} />
-                <Route path={path.LIST_AUCTION} element={<ListAction />} />
+                <Route path={path.POST_AUCTION} element={<AuctionPost />} />
+                <Route
+                  path={path.LIST_AUCTION}
+                  element={<ListRegisterAuction />}
+                />
               </Route>
             </>
           )}

@@ -37,6 +37,9 @@
       font-size: 15px;
     }
     tbody {
+      .disabled {
+        background: azure;
+      }
       tr {
         td {
           font-size: 14px;

@@ -216,14 +216,20 @@ const Header = () => {
                     </div>
                   ) : null}
                 </div>
-                <NavLink to={path.POST_NEWS} className="header__btn-post">
+                <NavLink
+                  to={isLoggedIn ? path.POST_AUCTION : path.LOGIN}
+                  className="header__btn-post"
+                >
                   <i className="bi bi-bar-chart-line"></i>
                   Đăng đấu giá
                 </NavLink>
-                <NavLink to={path.POST_NEWS} className="header__btn-post">
+                <a
+                  href={isLoggedIn ? path.POST_NEWS : path.LOGIN}
+                  className="header__btn-post"
+                >
                   <i className="bi bi-pencil-square"></i>
                   Đăng tin
-                </NavLink>
+                </a>
               </div>
             </div>
           </Container>

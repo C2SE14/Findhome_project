@@ -22,32 +22,32 @@ const Navbar = () => {
           <input type="text" placeholder="Search..." />
           <SearchOutlinedIcon />
         </div>
-        <div className="items">
-          <div className="item">
+        <div className="itemms">
+          <div className="itemm">
             <LanguageOutlinedIcon className="icon" />
-            English
+            Vietnamese
           </div>
-          <div className="item">
+          <div className="itemm">
             <DarkModeOutlinedIcon
               className="icon"
               onClick={() => dispatch({ type: "TOGGLE" })}
             />
           </div>
-          <div className="item">
+          <div className="itemm">
             <FullscreenExitOutlinedIcon className="icon" />
           </div>
-          <div className="item">
+          <div className="itemm">
             <NotificationsNoneOutlinedIcon className="icon" />
             <div className="counter">1</div>
           </div>
-          <div className="item">
+          <div className="itemm">
             <ChatBubbleOutlineOutlinedIcon className="icon" />
             <div className="counter">2</div>
           </div>
-          <div className="item">
+          <div className="itemm">
             <ListOutlinedIcon className="icon" />
           </div>
-          <div className="item">
+          <div className="itemm">
             {/* <img src={user.avatar} alt="" className="avatar" /> */}
           </div>
         </div>

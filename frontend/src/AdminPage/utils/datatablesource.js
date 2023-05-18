@@ -1,29 +1,31 @@
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-
-const formatPrice = (num) => {
-  const stringNum = num.toString();
-  const format = stringNum.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  return format;
-};
+import formatNumber from "../../components/Common/currencyFormat";
 export const userColumns = [
   {
     field: "id",
     headerName: "ID",
-    width: 210,
+    width: 60,
     renderCell: (params) => {
-      return <div className="cellWithId">{params.row._id}</div>;
+      return <div className="cellWithId">{params.row.id}</div>;
     },
   },
   {
     field: "user",
     headerName: "User",
-    width: 230,
+    width: 200,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
-          <img className="cellImg" src={params.row.avatar} alt="Avatar" />
-          {params.row.name}
+          <img
+            className="cellImg"
+            src={
+              params.row.avatar ||
+              "https://cdn.houseviet.vn/images/icons/user-avatar.png"
+            }
+            alt="Avatar"
+          />
+          {params.row.username}
         </div>
       );
     },
@@ -33,15 +35,30 @@ export const userColumns = [
     headerName: "Email",
     width: 230,
   },
+  {
+    field: "fullName",
+    headerName: "Họ và tên",
+    width: 200,
+  },
+  {
+    field: "address",
+    headerName: "Địa chỉ",
+    width: 200,
+  },
+  {
+    field: "phoneNumber",
+    headerName: "Số điện thoại",
+    width: 200,
+  },
 
   {
     field: "isAdmin",
-    headerName: "Có phải Admin",
+    headerName: "Admin",
     width: 120,
     renderCell: (params) => {
       return (
         <div className="cellWithRole">
-          {params.row.role === 1 ? (
+          {params.row.roles[0].id === 2 ? (
             <CheckCircleIcon className="iconCheck" />
           ) : (
             <HighlightOffIcon className="iconTimes" />
@@ -50,36 +67,34 @@ export const userColumns = [
       );
     },
   },
-  {
-    field: "createdAt",
-    headerName: "Ngày tạo",
-    width: 160,
-    renderCell: (params) => {
-      return <div className="cellWithCreateAt">{params.row.createdAt}</div>;
-    },
-  },
 ];
 
 //Places column
 
-export const placeColumns = [
+export const realEstate = [
   {
     field: "id",
     headerName: "ID",
-    width: 200,
+    width: 60,
     renderCell: (params) => {
-      return <div className="cellWithId">{params.row._id}</div>;
+      return <div className="cellWithId">{params.row.id}</div>;
     },
   },
   {
     field: "name",
-    headerName: "Tên địa điểm",
+    headerName: "Tên bất động sản",
     width: 250,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
-          <img className="cellImgPlace" src={params.row.image} alt="Avatar" />
-          {params.row.name}
+          <img
+            className="cellImgPlace"
+            src={
+              params.row.imageModelList[0] && params.row.imageModelList[0].image
+            }
+            alt="imaged"
+          />
+          {params.row.nameEstate}
         </div>
       );
     },
@@ -95,16 +110,44 @@ export const placeColumns = [
   {
     field: "category",
     headerName: "Thể loại",
-    width: 150,
+    width: 100,
     renderCell: (params) => {
-      return <div className="cellWithCategoryPlace">{params.row.category}</div>;
+      return (
+        <div className="cellWithCategoryPlace">
+          {params.row.businessTypeModel.typeName}
+        </div>
+      );
+    },
+  },
+  {
+    field: "price",
+    headerName: "Giá tiền",
+    width: 100,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithCategoryPlace">
+          {formatNumber(params.row.price)}
+        </div>
+      );
+    },
+  },
+  {
+    field: "userModel",
+    headerName: "Người đăng",
+    width: 100,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithCategoryPlace">
+          {params.row.userModel.username}
+        </div>
+      );
     },
   },
 
   {
     field: "createdAt",
-    headerName: "Create Date",
-    width: 84,
+    headerName: "Ngày tạo",
+    width: 100,
     renderCell: (params) => {
       return <div className="cellWithCreateAt">{params.row.createdAt}</div>;
     },
@@ -112,62 +155,89 @@ export const placeColumns = [
 ];
 
 //
-export const hotelColumns = [
-  {
-    field: "id",
-    headerName: "ID",
-    width: 200,
-    renderCell: (params) => {
-      return <div className="cellWithId">{params.row._id}</div>;
-    },
-  },
-  {
-    field: "name",
-    headerName: "Tên khách sạn",
-    width: 300,
-    renderCell: (params) => {
-      return (
-        <div className="cellWithImg">
-          <img
-            className="cellImgPlace"
-            src={params.row.images[0]}
-            alt="Khách sạn"
-          />
-          {params.row.name}
-        </div>
-      );
-    },
-  },
-  {
-    field: "address",
-    headerName: "Địa chỉ",
-    width: 350,
-    renderCell: (params) => {
-      return <div className="cellWithAddressPlace">{params.row.address}</div>;
-    },
-  },
-  {
-    field: "price",
-    headerName: "Giá trung bình",
-    width: 120,
-    renderCell: (params) => {
-      return (
-        <div className="cellWithCategoryPlace">
-          {formatPrice(params.row.price)} VNĐ
-        </div>
-      );
-    },
-  },
 
-  {
-    field: "createdAt",
-    headerName: "Create Date",
-    width: 84,
-    renderCell: (params) => {
-      return <div className="cellWithCreateAt">{params.row.createdAt}</div>;
-    },
-  },
-];
+// export const realEstateRent = [
+//   {
+//     field: "id",
+//     headerName: "ID",
+//     width: 60,
+//     renderCell: (params) => {
+//       return <div className="cellWithId">{params.row.id}</div>;
+//     },
+//   },
+//   {
+//     field: "name",
+//     headerName: "Tên bất động sản",
+//     width: 250,
+//     renderCell: (params) => {
+//       return (
+//         <div className="cellWithImg">
+//           <img
+//             className="cellImgPlace"
+//             src={
+//               params.row.imageModelList[0] && params.row.imageModelList[0].image
+//             }
+//             alt="imaged"
+//           />
+//           {params.row.nameEstate}
+//         </div>
+//       );
+//     },
+//   },
+//   {
+//     field: "address",
+//     headerName: "Địa chỉ",
+//     width: 350,
+//     renderCell: (params) => {
+//       return <div className="cellWithAddressPlace">{params.row.address}</div>;
+//     },
+//   },
+//   {
+//     field: "category",
+//     headerName: "Thể loại",
+//     width: 100,
+//     renderCell: (params) => {
+//       return (
+//         <div className="cellWithCategoryPlace">
+//           {params.row.businessTypeModel.typeName}
+//         </div>
+//       );
+//     },
+//   },
+//   {
+//     field: "price",
+//     headerName: "Giá tiền",
+//     width: 100,
+//     renderCell: (params) => {
+//       return (
+//         <div className="cellWithCategoryPlace">
+//           {formatNumber(params.row.price)}
+//         </div>
+//       );
+//     },
+//   },
+//   {
+//     field: "userModel",
+//     headerName: "Người đăng",
+//     width: 100,
+//     renderCell: (params) => {
+//       return (
+//         <div className="cellWithCategoryPlace">
+//           {params.row.userModel.username}
+//         </div>
+//       );
+//     },
+//   },
+
+//   {
+//     field: "createdAt",
+//     headerName: "Ngày tạo",
+//     width: 100,
+//     renderCell: (params) => {
+//       return <div className="cellWithCreateAt">{params.row.createdAt}</div>;
+//     },
+//   },
+// ];
 
 //
 export const tourColumns = [
@@ -219,7 +289,7 @@ export const tourColumns = [
     renderCell: (params) => {
       return (
         <div className="cellWithCategoryPlace">
-          {formatPrice(params.row.price)} VNĐ
+          {formatNumber(params.row.price)}
         </div>
       );
     },

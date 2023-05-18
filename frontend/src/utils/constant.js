@@ -4,6 +4,7 @@ export const path = {
   AUCTION_DETAIL: "/dau-gia/:id",
   LIST_AUCTION: "/danh-sach-dang-ki-dau-gia",
   KET_QUA_DAU_GIA: "/ket-qua-dau-gia",
+  PHONG_DAU_GIA: "/phong-dau-gia/:id",
   //
   REAL_ESTATE_FOR_SALE: "/nha-dat-ban",
   BAN_CAN_HO_CHUNG_CU: "/ban-can-ho-chung-cu",
@@ -33,10 +34,13 @@ export const path = {
   //
   REAL_ESTATE_DETAIL: "/:nameEstate",
   POST_NEWS: "/dang-tin",
+  POST_RENT: "/dang-tin-cho-thue",
+  POST_SELL: "/dang-tin-ban",
   LIST_NEWS: "/danh-sach-dang-tin",
   LOGIN: "/dang-nhap",
   SIGNUP: "/dang-ki",
   REGISTER_PARTICIPAE: "/dang-ki-dau-gia",
   CONTACT: "/lien-he",
   PROFILE: "/thong-tin-ca-nhan",
+  POST_AUCTION: "/dang-tin-dau-gia",
 };

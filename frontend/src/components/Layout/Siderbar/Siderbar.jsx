@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { path } from "../../../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById, updateUser } from "../../../store/actions/user";
-import { apiUploadImages } from "../../../services/post";
+import { apiUpLoadImages } from "../../../services/post";
 import LoadingComp from "../../Loading/Loading";
 import { toast } from "react-toastify";
 
@@ -22,7 +22,7 @@ const Siderbar = () => {
     const formData = new FormData();
     formData.append("file", image);
     formData.append("upload_preset", process.env.REACT_APP_UPLOAD_ASSET_NAME);
-    const response = await apiUploadImages(formData);
+    const response = await apiUpLoadImages(formData);
 
     if (response.status === 200) {
       const updatedData = {
@@ -81,17 +81,25 @@ const Siderbar = () => {
           <li>
             <div className="title">QUẢN LÝ TIN ĐĂNG</div>
             <div className="content">
-              <Link to={path.POST_NEWS} className="group">
+              <Link to={path.POST_SELL} className="group">
                 <i className="bi bi-pencil-square"></i>
                 <span>ĐĂNG TIN MUA BÁN </span>
               </Link>
-              <Link to={path.POST_NEWS} className="group">
+              <Link to={path.POST_RENT} className="group">
                 <i className="bi bi-credit-card"></i>
                 <span>ĐĂNG CHO THUÊ</span>
+              </Link>
+              <Link to={path.POST_AUCTION} className="group">
+                <i className="bi bi-card-list"></i>
+                <span>ĐĂNG ĐẤU GIÁ</span>
               </Link>
               <Link to={path.LIST_NEWS} className="group">
                 <i className="bi bi-card-list"></i>
                 <span>DANH SÁCH TIN ĐĂNG</span>
+              </Link>
+              <Link to={path.LIST_AUCTION} className="group">
+                <i className="bi bi-card-checklist"></i>
+                <span>DANH SÁCH ĐĂNG ĐẤU GIÁ</span>
               </Link>
               <Link to={path.LIST_AUCTION} className="group">
                 <i className="bi bi-card-checklist"></i>

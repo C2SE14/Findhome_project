@@ -1,16 +1,18 @@
 import "./sidebar.scss";
-import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-// import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import PlaceIcon from "@mui/icons-material/Place";
+import CabinIcon from "@mui/icons-material/Cabin";
 import { Link } from "react-router-dom";
-import TourIcon from "@mui/icons-material/Tour";
-import HotelIcon from "@mui/icons-material/Hotel";
+import HolidayVillageIcon from "@mui/icons-material/HolidayVillage";
 import { logo } from "../../../assets/images";
+import * as actions from "../../../store/actions";
+import { useDispatch } from "react-redux";
+import GiteIcon from "@mui/icons-material/Gite";
+import HomeWorkIcon from "@mui/icons-material/HomeWork";
 const Sidebar = () => {
+  const dispatch = useDispatch();
   return (
-    <div className="sidebar">
+    <div className="sidebarr">
       <div className="top">
         <Link
           to="/"
@@ -24,26 +26,16 @@ const Sidebar = () => {
             src={logo}
             alt=""
             style={{
-              width: "40px",
+              width: "100px",
               height: "40px",
               objectFit: "cover",
-              borderRadius: "50%",
-              border: "1px solid #6439ff",
             }}
           />
-          <span className="logo">TravelCaps</span>
         </Link>
       </div>
       <hr />
       <div className="center">
         <ul>
-          <p className="title">MAIN</p>
-          <Link to="/admin" style={{ textDecoration: "none" }}>
-            <li>
-              <DashboardIcon className="icon" />
-              <span>Home</span>
-            </li>
-          </Link>
           <p className="title">LISTS</p>
           <Link to="/admin/users" style={{ textDecoration: "none" }}>
             <li>
@@ -51,30 +43,39 @@ const Sidebar = () => {
               <span>Người dùng</span>
             </li>
           </Link>
-          <Link to="/admin/places" style={{ textDecoration: "none" }}>
+          <Link to="/admin/realestatesale" style={{ textDecoration: "none" }}>
             <li>
-              <PlaceIcon className="icon" />
-              <span>Địa điểm</span>
+              <GiteIcon className="icon" />
+              <span>Nhà đất bán</span>
             </li>
           </Link>
-          <Link to="/admin/hotels" style={{ textDecoration: "none" }}>
+          <Link to="/admin/realestaterent" style={{ textDecoration: "none" }}>
             <li>
-              <HotelIcon className="icon" />
-              <span>Khách sạn</span>
+              <CabinIcon className="icon" />
+              <span>Nhà đất cho thuê</span>
             </li>
           </Link>
-          <Link to="/admin/tours" style={{ textDecoration: "none" }}>
+          <Link to="/admin/auction-approval" style={{ textDecoration: "none" }}>
             <li>
-              <TourIcon className="icon" />
-              <span>Tours du lịch</span>
+              <HolidayVillageIcon className="icon" />
+              <span>Phê duyệt BĐS đấu giá</span>
+            </li>
+          </Link>
+          <Link
+            to="/admin/approving-auction-register"
+            style={{ textDecoration: "none" }}
+          >
+            <li>
+              <HomeWorkIcon className="icon" />
+              <span>Phê duyệt đăng kí đấu giá</span>
             </li>
           </Link>
 
           <p className="title">USER</p>
-          <li onClick>
+          <a href="/dang-nhap" onClick={() => dispatch(actions.logout())}>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
-          </li>
+          </a>
         </ul>
       </div>
     </div>

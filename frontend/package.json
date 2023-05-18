@@ -21,6 +21,7 @@
     "install": "^0.13.0",
     "npm": "^9.6.6",
     "react": "^18.2.0",
+    "face-api.js": "^0.22.2",
     "react-alice-carousel": "^2.7.1",
     "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
@@ -38,6 +39,7 @@
     "react-spinners": "^0.13.8",
     "react-tabs": "^6.0.1",
     "react-toastify": "^9.1.2",
+    "react-webcam": "^7.0.1",
     "reactjs-popup": "^2.0.5",
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
@@ -46,6 +48,7 @@
     "slick-carousel": "^1.8.1",
     "slugify": "^1.6.6",
     "sweetalert2": "^11.7.5",
+    "vn-num2words": "^1.0.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

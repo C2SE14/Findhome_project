@@ -9,12 +9,12 @@ const LayoutAdmin = () => {
   return (
     <div className="layoutAdmin">
       <Sidebar />
-      {/* <div className="layoutAdmin__container">
+      <div className="layoutAdmin__container">
         <Navbar />
         <div className="layoutAdmin__content">
           <Outlet />
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

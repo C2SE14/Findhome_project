@@ -50,4 +50,6 @@ public class UserModel {
     private String frontOfTheIdentityCard;
 
     private String backOfTheIdentityCard;
+
+    private List<AuctionModel> auctionModelList;
 }

@@ -56,3 +56,16 @@ export const apiUpdateUser = (body) =>
       reject(error);
     }
   });
+
+export const apiGetAllUser = () =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "get",
+        url: "/api/user/getAll",
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });

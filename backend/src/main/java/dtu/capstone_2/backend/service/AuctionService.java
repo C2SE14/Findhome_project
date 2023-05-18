@@ -5,6 +5,7 @@ import dtu.capstone_2.backend.entity.Auction;
 import dtu.capstone_2.backend.entity.Image;
 import dtu.capstone_2.backend.model.AuctionModel;
 import dtu.capstone_2.backend.model.ImageModel;
+import dtu.capstone_2.backend.model.UserModel;
 import dtu.capstone_2.backend.repository.AuctionRepository;
 import dtu.capstone_2.backend.repository.ImageRepository;
 import org.modelmapper.ModelMapper;
@@ -69,6 +70,7 @@ public class AuctionService {
             for(Image imageItem: auction.getImageList()){
                 imageModelList.add(modelMapper.map(imageItem, ImageModel.class));
             }
+            auctionModel.setUserModel(modelMapper.map(auction.getUser(), UserModel.class));
             auctionModel.setImageModelList(imageModelList);
 
         return auctionModel;

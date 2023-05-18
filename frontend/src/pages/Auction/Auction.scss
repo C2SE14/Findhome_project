@@ -9,6 +9,8 @@
     text-decoration: none;
     color: #3f3424;
     margin-bottom: 20px;
+    max-height: 340px;
+    height: 100%;
     &:hover .title {
       color: var(--primary-color);
     }
@@ -44,11 +46,13 @@
             span {
               font-size: 13px;
               font-weight: 400;
+              white-space: nowrap;
             }
             p {
               margin: 0;
               font-size: 13px;
               font-weight: 600;
+              white-space: nowrap;
             }
           }
         }
@@ -130,6 +134,7 @@
         overflow: hidden;
         img {
           width: 100%;
+          height: 400px;
 
           object-fit: cover;
         }
@@ -195,6 +200,26 @@
     display: flex;
     gap: 10px;
     margin-bottom: 10px;
+    input {
+      outline: none;
+      &:focus {
+        color: none;
+        background-color: none;
+        border-color: none;
+        outline: 0;
+        box-shadow: none;
+      }
+    }
+  }
+  .faceCheck {
+    margin-bottom: 10px;
+    p {
+      color: red;
+      font-size: 13px;
+      font-weight: 600;
+      font-style: italic;
+      margin-top: 5px;
+    }
   }
   .custom-form-label-modal {
     font-size: 14px;
@@ -202,6 +227,22 @@
     white-space: nowrap;
     max-width: 150px;
     width: 100%;
+  }
+  .custom-form-group-modal-2 {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 5px;
+    p {
+      font-weight: 600;
+      margin: 0;
+    }
+  }
+  .form-check {
+    label {
+      font-size: 15px;
+      font-weight: 600;
+      // font-style: italic;
+    }
   }
 }
 
@@ -219,5 +260,209 @@
       font-size: 17px;
       font-weight: 700;
     }
+  }
+}
+
+//Auction room
+.aur {
+  &__container {
+    padding: 50px 0;
+  }
+  .history {
+    .title {
+      display: flex;
+      align-items: center;
+      margin-top: 30px;
+      h2 {
+        width: 50%;
+        text-align: center;
+        background: blue;
+        color: #fff;
+        font-size: 17px;
+        padding: 10px;
+        border-right: 2px solid #000;
+        &:last-child {
+          border: none;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.7;
+          }
+        }
+      }
+    }
+    .content {
+      table {
+        thead {
+          color: #000;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+  &__title {
+    border-bottom: 1px solid #000;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    overflow: hidden;
+    h2 {
+      font-size: 24px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--primary-color);
+      animation: chaychu 14s linear infinite;
+    }
+  }
+  &__countdown {
+    flex: 0.6;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 10px;
+    .countdown-item {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 700;
+      .countdown-value {
+        font-weight: 600;
+      }
+
+      .countdown-label {
+        text-transform: uppercase;
+      }
+    }
+  }
+  .aur__bargain-section {
+    flex: 0.4;
+    .bargain-price {
+      color: red;
+    }
+    button {
+      display: inline-block;
+      padding: 17px 30px;
+      border: none;
+      outline: none;
+      margin-left: 20px;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      background: var(--primary-color);
+      border-radius: 5px;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 600;
+      text-transform: uppercase;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+    .bargain-input-container {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid #ccc;
+      padding: 10px 20px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      input {
+        border: none;
+        outline: none;
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+
+      .bargain-sign {
+        color: #ccc;
+        cursor: pointer;
+        font-size: 25px;
+      }
+    }
+  }
+  &__body {
+    padding: 10px 0;
+  }
+  &__content {
+    display: flex;
+    gap: 20px;
+    height: 500px;
+  }
+  &__left {
+    flex: 0.5;
+  }
+  &__image {
+    height: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &__right {
+    flex: 0.5;
+
+    display: flex;
+    flex-direction: column;
+    .name {
+      font-size: 20px;
+      display: inline-block;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #ccc;
+      span {
+        color: #3f3424;
+      }
+    }
+    ul {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+
+      li {
+        list-style: none;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h5 {
+          font-size: 17px;
+        }
+        span {
+          color: var(--primary-color);
+          font-size: 17px;
+          font-weight: 600;
+        }
+      }
+    }
+    .priceMax {
+      margin-top: auto;
+      background: blue;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      border-radius: 5px;
+      font-weight: 600;
+    }
+  }
+}
+
+.custom-modal-dialog {
+  max-width: 1140px !important;
+  width: 100%;
+}
+
+.auctionDetailPopup {
+  width: 100%;
+}
+
+@keyframes chaychu {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }

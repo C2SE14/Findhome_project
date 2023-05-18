@@ -12,13 +12,14 @@ import {
 } from "../../services/app";
 import LoadingComp from "../../components/Loading/Loading";
 import { toast } from "react-toastify";
-import { apiUploadImages } from "../../services/post";
+import { apiUpLoadImages } from "../../services/post";
 
 const Profile = () => {
   //state
   const dispatch = useDispatch();
   const { userId } = useSelector((state) => state.auth);
   const { userData, loading } = useSelector((state) => state.user);
+  console.log(userData);
   const [provinces, setProvinces] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState({
     id: "",
@@ -169,7 +170,7 @@ const Profile = () => {
     const errors = {};
 
     // Kiểm tra trường Họ tên
-    if (!fullName.trim()) {
+    if (!fullName && !fullName.trim()) {
       errors.fullName = "Vui lòng nhập họ tên";
     }
 
@@ -236,7 +237,7 @@ const Profile = () => {
     const formData = new FormData();
     formData.append("file", image);
     formData.append("upload_preset", process.env.REACT_APP_UPLOAD_ASSET_NAME);
-    const response = await apiUploadImages(formData);
+    const response = await apiUpLoadImages(formData);
     if (response.status === 200) {
       if (isFront) {
         setFrontOfTheIdentityCard(response.data.secure_url);

@@ -94,4 +94,15 @@ public class UserService {
         userRepository.save(user);
         return  "update success";
     }
+
+    public List<UserModel> getAllUser(){
+        List<User> userList =  userRepository.findAll();
+        List<UserModel> userModelList = new ArrayList<>();
+        ModelMapper modelMapper = new ModelMapper();
+
+        for(User user: userList){
+            userModelList.add(modelMapper.map(user, UserModel.class));
+        }
+        return  userModelList;
+    }
 }

@@ -3,12 +3,12 @@ import React, { memo, useEffect } from "react";
 const Select = ({
   label,
   options,
-  value,
-  setValue,
+  payload,
+  setPayload,
   type,
-  reset,
-  name,
   selectOption,
+  setSelectedValue,
+  selectedValue,
 }) => {
   return (
     <div className="flex flex-col flex-1 info-2">
@@ -17,9 +17,9 @@ const Select = ({
           <label className="title-name" htmlFor={`select-${type}`}>
             {label}
           </label>
-          <select value={value === null ? " " : value} onChange={setValue}>
-            {options?.map((option) => (
-              <option key={option.value} value={option.id}>
+          <select value={payload} onChange={setPayload}>
+            {options.map((option) => (
+              <option key={option.id} value={option.value}>
                 {option.value}
               </option>
             ))}
@@ -31,41 +31,63 @@ const Select = ({
             {label}
           </label>
           <select
-            value={reset ? " " : value ? value : " "}
-            onChange={(e) =>
-              !name
-                ? setValue(e.target.value)
-                : setValue((prev) => ({ ...prev, [name]: e.target.value }))
-            }
+            value={selectedValue && selectedValue.id}
+            onChange={(e) => {
+              setSelectedValue({
+                id: e.target.value,
+                value: e.target.selectedOptions[0].text,
+              });
+              if (type === "ward") {
+                setPayload((prev) => ({
+                  ...prev,
+                  wards: e.target.selectedOptions[0].text,
+                  address: ` ${e.target.selectedOptions[0].text}, ${
+                    payload.district ? payload.district : ""
+                  },${payload.cityProvince ? payload.cityProvince : ""} `,
+                }));
+              } else if (type === "district") {
+                setPayload((prev) => ({
+                  ...prev,
+                  district: e.target.selectedOptions[0].text,
+                  address: ` ${e.target.selectedOptions[0].text}, ${
+                    payload.cityProvince ? payload.cityProvince : ""
+                  }`,
+                }));
+              } else if (type === "province") {
+                setPayload((prev) => ({
+                  ...prev,
+                  cityProvince: e.target.selectedOptions[0].text,
+                  address: `${e.target.selectedOptions[0].text}`,
+                }));
+              }
+            }}
             id={`select-${type}`}
             className="outline-none border border-gray-300 p-2 rounded-md w-full"
           >
             <option value="">{`--Chọn ${label}--`}</option>
-            {options?.map((item) => {
+            {options?.map((option) => {
               return (
                 <option
                   key={
                     type === "province"
-                      ? item?.province_id
+                      ? option.province_id
                       : type === "district"
-                      ? item?.district_id
-                      : item?.code
+                      ? option.district_id
+                      : option.ward_id
                   }
                   value={
                     type === "province"
-                      ? item?.province_id
+                      ? option.province_id
                       : type === "district"
-                      ? item?.district_id
-                      : item?.code
-                      ? " "
-                      : " "
+                      ? option.district_id
+                      : option.ward_id
                   }
                 >
                   {type === "province"
-                    ? item?.province_name
+                    ? option.province_name
                     : type === "district"
-                    ? item?.district_name
-                    : item?.label}
+                    ? option.district_name
+                    : option.ward_name}
                 </option>
               );
             })}

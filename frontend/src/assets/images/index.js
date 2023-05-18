@@ -42,8 +42,10 @@ import sell from "./sell.jpg";
 import bannersystem from "./bannerS.jpg";
 import rental from "./rent.jpg";
 import iconKhongcosanpham from "./ionKhongcosanpham.png";
+import maQr from "./maQr.jpg";
 export {
   iconKhongcosanpham,
+  maQr,
   bannersystem,
   rental,
   sell,

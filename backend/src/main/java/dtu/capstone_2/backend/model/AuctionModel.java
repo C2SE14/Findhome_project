@@ -3,6 +3,7 @@ package dtu.capstone_2.backend.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Lob;
 import java.util.Date;
@@ -14,15 +15,17 @@ public class AuctionModel {
 
     private Long id;
 
-    private Date dateOfPublication;
+    private String dateOfPublication;
 
-    private Date registrationDateStart;
+    private String registrationDateStart;
 
-    private Date registrationDateEnd;
+    private String registrationDateEnd;
 
-    private Date auctionStartDate;
+    private String auctionStartDate;
 
-    private Date auctionEndDate;
+    private String auctionEndDate;
+
+    private String auctionParticipationProfile;
 
     private Double startingPrice;
 
@@ -77,4 +80,6 @@ public class AuctionModel {
     private String depth;
 
     private List<ImageModel> imageModelList;
+
+    private UserModel userModel;
 }

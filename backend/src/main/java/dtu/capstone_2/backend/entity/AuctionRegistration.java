@@ -22,8 +22,13 @@ public class AuctionRegistration {
 
     private boolean payFees;
 
+    private boolean checkFace;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "auction_id")
+    private Auction auction;
 }

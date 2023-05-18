@@ -4,7 +4,8 @@ const initState = {
   userData: {},
   listUserPostNew: [],
   msg: "",
-  loading: false, // Thêm trạng thái loading
+  loading: false,
+  users: [],
 };
 
 const userReducer = (state = initState, action) => {
@@ -13,6 +14,12 @@ const userReducer = (state = initState, action) => {
       return {
         ...state,
         userData: action.userData || {},
+        msg: action.msg || "",
+      };
+    case actionTypes.GET_ALL_USER:
+      return {
+        ...state,
+        users: action.users || [],
         msg: action.msg || "",
       };
     case actionTypes.GET_REAL_ESTATE_BY_USERID:

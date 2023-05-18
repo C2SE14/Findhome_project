@@ -302,7 +302,7 @@ const RealEstateForRent = ({ categoryId }) => {
                               >
                                 <img
                                   src={
-                                    data.imageModelList > 0
+                                    data.imageModelList[0]
                                       ? data.imageModelList[0].image
                                       : "https://cdn.houseviet.vn/images/no-image.jpg"
                                   }

@@ -34,5 +34,9 @@ public class UserController {
         return ok(userService.updateUser(userModel));
     }
 
+    @GetMapping("/getAll")
+    public ResponseEntity<?> getAllUser() throws NullObjectExeption {
+        return ok(userService.getAllUser());
+    }
 
 }

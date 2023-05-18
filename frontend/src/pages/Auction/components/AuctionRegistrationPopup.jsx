@@ -1,48 +1,73 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import "../Auction.scss";
 import { toast } from "react-toastify";
+import { maQr } from "../../../assets/images";
+import VNnum2words from "vn-num2words";
+import { useDispatch, useSelector } from "react-redux";
+import { registerAuction } from "../../../store/actions/auction";
+// import Webcam from "react-webcam";
 
 const AuctionRegistrationPopup = ({
   showPopup,
   handleClose,
   frontOfTheIdentityCard,
+  auction,
 }) => {
+  // Nhận diện khuôn mặt
+  // const webcamRef = useRef(null);
+  const dispatch = useDispatch();
+  const { userId } = useSelector((state) => state.auth);
+  const [acceptTerms, setAcceptTerms] = useState(false);
   const [formData, setFormData] = useState({
-    chiphithamgiadaugia: "",
-    sotiendattruoc: "",
-    tongtien: "",
-    bangchu: "",
-    sotaikhoan: "",
-    nganhang: "",
-    chutaikhoan: "",
-    chapnhandieukhoan: false,
-    nhandienkhuonmat: false,
+    payFees: false,
+    checkFace: true,
+    acceptTerms,
+    userModel: {
+      id: userId,
+    },
+    auctionModel: {
+      id: auction.id,
+    },
   });
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    const newValue = type === "checkbox" ? checked : value;
+  const handleAcceptTerms = (e) => {
+    const { checked } = e.target;
+    setAcceptTerms(checked);
 
     setFormData((prevState) => ({
       ...prevState,
-      [name]: newValue,
+      acceptTerms: checked,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleClose(); // Đóng popup sau khi xử lý thành công
-    toast.success("Đăng ký thành công", {
-      autoClose: 2000,
-      onClose: () => {
-        // Tắt toast và tải lại trang sau 1 giây
-        setTimeout(() => {
-          window.location.href = "/danh-sach-dang-ki-dau-gia";
-        }, 2000);
-      },
-    });
+
+    dispatch(registerAuction(formData))
+      .then(() => {
+        // Xử lý thành công
+        handleClose();
+        toast.success("Đăng ký thành công", {
+          autoClose: 2000,
+          onClose: () => {
+            setTimeout(() => {
+              window.location.href = "/danh-sach-dang-ki-dau-gia";
+            }, 2000);
+          },
+        });
+      })
+      .catch((error) => {
+        // Xử lý lỗi
+        console.error(error);
+      });
   };
+
+  // const videoConstraints = {
+  //   width: 1280,
+  //   height: 720,
+  //   facingMode: "user", // Sử dụng camera mặt trước
+  // };
 
   return (
     <Modal show={showPopup} onHide={handleClose} className="custom-modal">
@@ -64,38 +89,10 @@ const AuctionRegistrationPopup = ({
             <Form.Control
               type="text"
               name="chiphithamgiadaugia"
-              value={formData.chiphithamgiadaugia}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
-
-          <Form.Group
-            controlId="sotiendattruoc"
-            className="custom-form-group-modal"
-          >
-            <Form.Label className="custom-form-label-modal">
-              Số tiền đặt cọc trước
-            </Form.Label>
-            <Form.Control
-              type="text"
-              name="sotiendattruoc"
-              value={formData.sotiendattruoc}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
-
-          <Form.Group controlId="tongtien" className="custom-form-group-modal">
-            <Form.Label className="custom-form-label-modal">
-              Tổng tiền
-            </Form.Label>
-            <Form.Control
-              type="text"
-              name="tongtien"
-              value={formData.tongtien}
-              onChange={handleChange}
-              required
+              value={`${
+                auction.auctionParticipationFee &&
+                auction.auctionParticipationFee.toLocaleString()
+              } VNĐ`}
             />
           </Form.Group>
 
@@ -106,80 +103,65 @@ const AuctionRegistrationPopup = ({
             <Form.Control
               type="text"
               name="bangchu"
-              value={formData.bangchu}
-              onChange={handleChange}
-              required
+              value={
+                auction.auctionParticipationFee &&
+                VNnum2words(auction.auctionParticipationFee)
+              }
             />
           </Form.Group>
           <h5 className="custom-heading-modal">
-            Thông tin nhận lại khoản tiền nhận trước
+            Thông tin chuyển khoản lệ phí
           </h5>
-          <Form.Group
-            controlId="sotaikhoan"
-            className="custom-form-group-modal"
-          >
-            <Form.Label className="custom-form-label-modal">
-              Số tài khoản
-            </Form.Label>
-            <Form.Control
-              type="text"
-              name="sotaikhoan"
-              value={formData.sotaikhoan}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
-
-          <Form.Group controlId="nganhang" className="custom-form-group-modal">
-            <Form.Label className="custom-form-label-modal">
-              Ngân hàng
-            </Form.Label>
-            <Form.Control
-              type="text"
-              name="nganhang"
-              value={formData.nganhang}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
-          <Form.Group
-            controlId="chutaikhoan"
-            className="custom-form-group-modal"
-          >
-            <Form.Label className="custom-form-label-modal">
-              Chủ tài khoản
-            </Form.Label>
-            <Form.Control
-              type="text"
-              name="chutaikhoan"
-              value={formData.chutaikhoan}
-              onChange={handleChange}
-              required
-            />
-          </Form.Group>
+          <div className="custom-form-group-modal-2">
+            <label className="custom-form-label-modal">Số tài khoản</label>
+            <p>0271001103279</p>
+          </div>
+          <div className="custom-form-group-modal-2">
+            <label className="custom-form-label-modal">Ngân hàng</label>
+            <p>Vietcombank</p>
+          </div>
+          <div className="custom-form-group-modal-2">
+            <label className="custom-form-label-modal">Chủ tài khoản</label>
+            <p>NGUYEN VAN HAI</p>
+          </div>
+          <div className="custom-form-group-modal-2">
+            <label className="custom-form-label-modal">Mã QR</label>
+            <img src={maQr} alt="maQr" />
+          </div>
 
           <Form.Group controlId="chapnhandieukhoan" className="mb-3">
             <Form.Check
               type="checkbox"
               label="Tôi đã đọc và nghiên cứu đầy đủ các thông tin của hồ sơ tham gia đấu giá"
               name="chapnhandieukhoan"
-              checked={formData.chapnhandieukhoan}
-              onChange={handleChange}
+              checked={acceptTerms}
+              onChange={handleAcceptTerms}
               required
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
             />
           </Form.Group>
-          {/* <Button variant="primary" onClick={startFaceDetection}>
-            Bắt đầu quá trình nhận diện khuôn mặt
-          </Button> */}
-          {/* <p>
-            Chúng tôi sẽ sử dụng ảnh trong Căng cước công dân của bạn để bắt so
-            sánh
-          </p> */}
+          <div className="faceCheck">
+            {/* {showWebcam && (
+              <Webcam
+                audio={false}
+                mirrored={true}
+                ref={webcamRef}
+                screenshotFormat="image/jpeg"
+                videoConstraints={videoConstraints}
+                className="webcam"
+              />
+            )} */}
+            <Button variant="secondary">
+              Bắt đầu quá trình nhận diện khuôn mặt
+            </Button>
+            <p>
+              Lưu ý:
+              <br />- Chúng tôi sẽ sử dụng ảnh trong Căng cước công dân của bạn
+              để bắt so sánh
+              <br />- Vui lòng cập nhật đúng ảnh căn cước
+            </p>
+          </div>
 
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" fullWidth>
             Đăng ký tham gia đấu giá
           </Button>
         </Form>

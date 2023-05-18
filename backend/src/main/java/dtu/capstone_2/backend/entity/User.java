@@ -77,6 +77,13 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<RealEstate> realEstates;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<AuctionRegistration> auctionRegistrations;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Auction> auctionList;
+
+
 
 
     public Date getIdentityCardDate() {

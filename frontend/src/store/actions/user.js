@@ -1,10 +1,33 @@
 import actionTypes from "./actionTypes";
 import {
   apiDeleteRealEstate,
+  apiGetAllUser,
   apiGetRealEstateByUserId,
   apiGetUserById,
   apiUpdateUser,
 } from "../../services/user";
+
+export const getAllUser = () => async (dispatch) => {
+  try {
+    const response = await apiGetAllUser();
+    if (response?.status === 200) {
+      dispatch({
+        type: actionTypes.GET_ALL_USER,
+        users: response.data,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.GET_ALL_USER,
+        msg: response.data.msg,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.GET_ALL_USER,
+      users: null,
+    });
+  }
+};
 
 export const getUserById = (id) => async (dispatch) => {
   try {
@@ -78,6 +101,7 @@ export const deleteRealEstateByUserId =
       dispatch({ type: actionTypes.SET_LOADING, loading: false });
     }
   };
+
 export const updateUser = (body) => async (dispatch) => {
   try {
     dispatch({ type: actionTypes.SET_LOADING, loading: true });

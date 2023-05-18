@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const apiUploadImages = (images) =>
+export const apiUpLoadImages = (images) =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await axios({
@@ -13,5 +13,3 @@ export const apiUploadImages = (images) =>
       reject(error);
     }
   });
-
-console.log();
