@@ -4,10 +4,6 @@ import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 
 const LayoutDefault = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
   return (
     <div className="layout">
       <Header setColor />

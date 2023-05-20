@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import { getAuctionById } from "../../../store/actions/auction";
 import LoadingComp from "../../../components/Loading/Loading";
 import { formatDate } from "../../../components/Common/convertToSlug";
+import { toast } from "react-toastify";
 
 const DetailAuction = () => {
   const location = useLocation();
@@ -21,13 +22,29 @@ const DetailAuction = () => {
   const [showPopup, setShowPopup] = useState(false);
   const renderButtonContent = () => {
     if (isLoggedIn) {
-      // Kiểm tra thông tin người dùng đã đầy đủ hay chưa
       const isProfileComplete = checkProfileCompletion();
 
       if (isProfileComplete) {
-        return (
-          <button onClick={() => setShowPopup(true)}>Đăng ký đấu giá</button>
-        );
+        const registrationEndDate = new Date(
+          auction.registrationDateEnd
+        ).getTime();
+        const currentTime = new Date().getTime();
+
+        if (registrationEndDate > currentTime) {
+          return (
+            <button onClick={() => setShowPopup(true)}>Đăng ký đấu giá</button>
+          );
+        } else {
+          return (
+            <button
+              onClick={() => {
+                toast.error("Hết hạn đăng ký đấu giá");
+              }}
+            >
+              Đăng ký đấu giá
+            </button>
+          );
+        }
       } else {
         return (
           <button onClick={redirectToProfile}>

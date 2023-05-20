@@ -1201,7 +1201,7 @@ const RealEstateForSale = ({ categoryId }) => {
                     />
                   </div>
                   <div className="outstanding">
-                    <h2> Mua bán nhà đất Ở các tỉnh nổi bật</h2>
+                    <h2> Cho thuê Ở các tỉnh nổi bật</h2>
                     <ul>
                       <li>
                         <Link>

@@ -204,8 +204,6 @@ const RealEstateForRent = ({ categoryId }) => {
     dispatch(getFilterRealEstate(updatedSearchValues));
   };
 
-  console.log(dataByType);
-
   return (
     <>
       <SearchBox
@@ -1196,7 +1194,7 @@ const RealEstateForRent = ({ categoryId }) => {
                 <div className="refs__right">
                   <div className="suggest">
                     <Others
-                      title={"DỰ ÁN BÁN NHÀ ĐẤT NỔI BẬT"}
+                      title={"DỰ ÁN CHO THUÊ NHÀ ĐẤT NỔI BẬT"}
                       datas={dataByType}
                       setCss
                     />
@@ -1291,7 +1289,7 @@ const RealEstateForRent = ({ categoryId }) => {
                       <li>
                         <Link>
                           <p>Bình Định</p>
-                          <span></span>
+                          <span>5</span>
                         </Link>
                       </li>
                     </ul>

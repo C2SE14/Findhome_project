@@ -20,6 +20,8 @@ export const FormInfo = ({
   info,
   setImagesPreview,
   auction,
+  errorImage,
+  setImagesError,
 }) => {
   useEffect(() => {
     if (payload) {
@@ -35,8 +37,9 @@ export const FormInfo = ({
 
   const handelFiles = async (e) => {
     try {
-      setLoading(true);
       e.stopPropagation();
+      setLoading(true);
+      setImagesError("");
       const files = e.target.files;
       const images = new FormData();
       for (let i of files) {
@@ -268,7 +271,6 @@ export const FormInfo = ({
             type={"text"}
             name={"description"}
             className={"title-name"}
-            required={false}
             value={payload.description}
             setValue={setPayload}
             classParent={"info-1"}
@@ -295,7 +297,10 @@ export const FormInfo = ({
               Hình ảnh
             </label>
             <div className="action-img">
-              <label className="upload-image" htmlFor="file">
+              <label
+                className={`upload-image ${errorImage !== "" ? "red" : null}`}
+                htmlFor="file"
+              >
                 {loading ? (
                   <div className="lds-ring">
                     <div></div>
@@ -309,11 +314,14 @@ export const FormInfo = ({
                       <i className="bi bi-file-earmark text-icon"></i>
                       <i className="bi bi-arrow-down upload-icon"></i>
                     </div>
-                    {imagesPreview?.length !== 0 ? (
+                    {errorImage !== "" ? (
+                      <p style={{ color: "red" }}>{errorImage}</p>
+                    ) : imagesPreview?.length !== 0 ? (
                       <p>Bẩm để chọn thêm ảnh</p>
                     ) : (
                       <p>Bấm để chọn ảnh cần tải lên</p>
                     )}
+
                     <span>{""}</span>
                   </>
                 )}
@@ -364,6 +372,7 @@ export const FormInfo = ({
             value={payload.salientFeatures}
             setValue={setPayload}
             classParent={"info-1"}
+            required
           />
         </div>
         <div className="content between">
@@ -378,6 +387,7 @@ export const FormInfo = ({
             classParent={"info-2"}
             onlyNumber={true}
             inputvalue={"m2"}
+            required
           />
           <InputValue
             label={"Đường trước"}
@@ -390,6 +400,7 @@ export const FormInfo = ({
             setValue={setPayload}
             classParent={"info-2"}
             inputvalue={"m"}
+            required
           />
         </div>
         <div className="content between">
@@ -404,6 +415,7 @@ export const FormInfo = ({
             classParent={"info-2"}
             onlyNumber={true}
             inputvalue={"m2"}
+            required
           />
           <InputValue
             label={"Chiều sâu"}
@@ -416,6 +428,7 @@ export const FormInfo = ({
             setValue={setPayload}
             classParent={"info-2"}
             inputvalue={"m2"}
+            required
           />
         </div>
         <div className="content between">
@@ -451,6 +464,7 @@ export const FormInfo = ({
             setValue={setPayload}
             classParent={"info-2"}
             onlyNumber={true}
+            required
           />
           <InputValue
             label={"Phòng ngủ"}
@@ -462,6 +476,7 @@ export const FormInfo = ({
             value={payload.numberBedRooms}
             setValue={setPayload}
             classParent={"info-2"}
+            required
           />
         </div>
         <div className="content between">
@@ -475,6 +490,7 @@ export const FormInfo = ({
             value={payload.rentalFloorLocation}
             setValue={setPayload}
             classParent={"info-2"}
+            required
           />
           <InputValue
             label={"Vệ sinh"}
@@ -486,6 +502,7 @@ export const FormInfo = ({
             value={payload.numberToilets}
             setValue={setPayload}
             classParent={"info-2"}
+            required
           />
         </div>
         <div className="content">
@@ -498,6 +515,7 @@ export const FormInfo = ({
             value={payload.interior}
             setValue={setPayload}
             classParent={"info-1"}
+            required
           />
         </div>
       </div>

@@ -42,3 +42,30 @@ export const apiPostRegisterAuction = (body) =>
       reject(error);
     }
   });
+// Trả giá phần đấu giá
+export const apiPostBargainAuction = (body) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "post",
+        url: `/api/auctionRoom/saveTheBid`,
+        data: body,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+// Lấy danh sách trả giá của người tham gia đấu giá
+export const apiGetBargainAuctionById = (id) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "get",
+        url: `/api/auctionRoom/getAuctionRoomByAuctionId/${id}`,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });

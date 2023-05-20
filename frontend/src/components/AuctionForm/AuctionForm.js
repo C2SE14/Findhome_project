@@ -122,6 +122,7 @@ const AuctionForm = ({ payload, setPayload, userData }) => {
           setValue={setPayload}
           classParent={"info-1"}
           inputvalue={"vnđ"}
+          onlyNumber
         />
         <InputValue
           label={"Bước giá"}
@@ -134,6 +135,7 @@ const AuctionForm = ({ payload, setPayload, userData }) => {
           setValue={setPayload}
           classParent={"info-1"}
           inputvalue={"vnđ"}
+          onlyNumber
         />
       </div>
       <div className="content">
@@ -148,6 +150,7 @@ const AuctionForm = ({ payload, setPayload, userData }) => {
           setValue={setPayload}
           classParent={"info-1"}
           inputvalue={"vnđ"}
+          onlyNumber
         />
       </div>
       <div className="content">
@@ -162,6 +165,7 @@ const AuctionForm = ({ payload, setPayload, userData }) => {
           classParent={"info-1"}
           inputvalue={"vnđ"}
           required
+          onlyNumber
         />
       </div>
     </div>

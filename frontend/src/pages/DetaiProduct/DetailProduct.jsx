@@ -22,10 +22,6 @@ import Others from "../../components/Others/Others";
 import Carousel from "../../components/Carousel/Carousel";
 
 const DetailProduct = () => {
-  window.scrollTo({
-    top: 500,
-    behavior: "smooth",
-  });
   const location = useLocation();
 
   const id = location.state ? location.state.id : null;

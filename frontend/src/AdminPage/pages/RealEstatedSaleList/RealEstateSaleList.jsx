@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { realEstate } from "../../utils/datatablesource";
 import { DataGrid } from "@mui/x-data-grid";
 import "./PlaceList.scss";
@@ -6,8 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../components/Loading/Loading";
 import "sweetalert2/src/sweetalert2.scss";
 import { getRealEstateByBusinessTypeId } from "../../../store/actions/postRealEstate";
+import ReadInfo from "../ReadInfo";
 
 const RealEstatedSaleList = () => {
+  const [isEdit, setIsEdit] = useState(false);
+  const [dataEdit, setDateEdit] = useState([]);
   const { dataByType, loading } = useSelector((state) => state.postRealEstate);
   const dispatch = useDispatch();
 
@@ -23,7 +26,15 @@ const RealEstatedSaleList = () => {
         return (
           <div className="cellAction">
             <div className="deleteButton">Xoá</div>
-            <div className="detailButton">Chi tiết</div>
+            <div
+              className="detailButton"
+              onClick={() => {
+                setDateEdit(params.row);
+                setIsEdit(true);
+              }}
+            >
+              Chi tiết
+            </div>
           </div>
         );
       },
@@ -47,6 +58,13 @@ const RealEstatedSaleList = () => {
             getRowId={(row) => row.id}
           />
         </div>
+      )}
+      {isEdit && (
+        <ReadInfo
+          dataEdit={dataEdit}
+          setIsEdit={setIsEdit}
+          onHide={() => setIsEdit(false)}
+        />
       )}
     </div>
   );

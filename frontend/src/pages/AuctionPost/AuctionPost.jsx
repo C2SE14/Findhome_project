@@ -12,7 +12,8 @@ import { toast } from "react-toastify";
 const AuctionPost = () => {
   const dispatch = useDispatch();
   const { userId } = useSelector((state) => state.auth);
-  const { userData, loading } = useSelector((state) => state.user);
+  const { userData } = useSelector((state) => state.user);
+  const [errorImage, setErrorImage] = useState("");
 
   useEffect(() => {
     dispatch(getUserById(userId));
@@ -58,12 +59,23 @@ const AuctionPost = () => {
   const [imagesPreview, setImagesPreview] = useState([]);
   const hanlderSubmit = async (event) => {
     event.preventDefault();
+    if (payload.imageModelList.length === 0) {
+      setErrorImage("Bạn phải cần tải ít nhất 1 hình ");
+      window.scrollTo(0, 1000);
+      return;
+    }
     try {
       const response = await axios.post(
         "http://localhost:8080/api/auction/addAuction",
         payload
       );
-      toast.success("Đăng bài thành công", { autoClose: 3000 });
+      toast.success("Gửi xét duyệt thành công", { autoClose: 3000 });
+
+      // Chuyển đến trang "danh-sach-tin-dang" sau 3 giây
+      setTimeout(() => {
+        window.location.href = "/danh-sach-dang-dau-gia";
+      }, 3000);
+
       setPayload({
         dateOfPublication: "",
         registrationDateStart: "",
@@ -125,6 +137,8 @@ const AuctionPost = () => {
             imagesPreview={imagesPreview}
             setImagesPreview={setImagesPreview}
             auction
+            errorImage={errorImage}
+            setImagesError={setErrorImage}
           />
           <div className="submit-action">
             <Button

@@ -10,16 +10,19 @@ import { iconKhongcosanpham } from "../../assets/images";
 
 const Auction = () => {
   const { auctions } = useSelector((state) => state.auctionReducer);
+  const { userId } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllAuction());
   }, [dispatch]);
 
   const filteredAuctions = auctions.filter(
-    (auction) => auction.browseByAdmin === true
+    (auction) =>
+      auction.browseByAdmin === true &&
+      new Date(auction.registrationDateEnd) > new Date() &&
+      auction.userModel.id !== userId
   );
-  console.log(filteredAuctions);
-  console.log(auctions);
+
   return (
     <div className="auction">
       <Container>

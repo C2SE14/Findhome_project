@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ExploreProminentRealEstateAreas.scss";
 import { Container } from "react-bootstrap";
 import Heading from "../../../../components/Heading/Heading";
@@ -6,6 +6,14 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { path } from "../../../../utils/constant";
 
 const ExploreProminentRealEstateAreas = ({ posts }) => {
+  const [selectedCity, setSelectedCity] = useState("");
+  const handleCityClick = (city) => {
+    if (selectedCity === city) {
+      setSelectedCity("");
+    } else {
+      setSelectedCity(city);
+    }
+  };
   const locations = [];
   posts.forEach((realEstate) => {
     const { cityProvince, district } = realEstate;
@@ -51,7 +59,6 @@ const ExploreProminentRealEstateAreas = ({ posts }) => {
     }
     return total;
   };
-  console.log(top8Tinh);
   return (
     <div className="eprea">
       <Container>
@@ -71,7 +78,13 @@ const ExploreProminentRealEstateAreas = ({ posts }) => {
             </TabList>
 
             {top8Tinh.map((location, index) => (
-              <TabPanel key={index}>
+              <TabPanel
+                key={index}
+                onClick={() => handleCityClick(location.cityProvince)}
+                className={
+                  selectedCity === location.cityProvince ? "active" : ""
+                }
+              >
                 <div className="eprea__tabs">
                   {location.subLocations
                     .slice(0, 6)
@@ -95,8 +108,7 @@ const ExploreProminentRealEstateAreas = ({ posts }) => {
                 </div>
                 <div className="eprea__btn">
                   <a href={path.REAL_ESTATE_FOR_SALE}>
-                    Xem thêm {location.subLocations.length} tin Mua bán nhà đất
-                    tại {location.cityProvince}
+                    Xem thêm tin Mua bán nhà đất tại {location.cityProvince}
                     <i className="bi bi-arrow-right"></i>
                   </a>
                 </div>

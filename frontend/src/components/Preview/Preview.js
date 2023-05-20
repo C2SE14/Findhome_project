@@ -58,15 +58,7 @@ const Preview = ({ payload }) => {
                       <span>Hướng: </span>
                     </div>
                     <p>
-                      {
-                        payload.directionOfHouse ? payload.directionOfHouse : ""
-                        // ? `${
-                        //        directions[
-                        //             payload.directionOfHouse - 1
-                        //        ].value
-                        //   }`
-                        // : ""
-                      }
+                      {payload.directionOfHouse ? payload.directionOfHouse : ""}
                     </p>
                   </div>
                 </div>
@@ -79,7 +71,9 @@ const Preview = ({ payload }) => {
                   />
                 </div>
                 <div>
-                  <h3>{payload.userModel.fullName}</h3>
+                  <h3 className="preview__name">
+                    {payload.userModel.fullName}
+                  </h3>
                   <h4>
                     {payload.brokerModel.broker ? "Chính chủ" : "Môi giới"}
                   </h4>

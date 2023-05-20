@@ -224,6 +224,21 @@
           .info-1 {
             width: 100%;
             display: flex;
+            .red {
+              border: 1px solid red !important;
+              .error-message {
+                color: red;
+              }
+              .icon {
+                .text-icon {
+                  color: red !important;
+                }
+                .upload-icon {
+                  color: red !important;
+                  border: 1px solid red !important;
+                }
+              }
+            }
             .action-img {
               width: calc(100% - 150px);
               .upload-image {

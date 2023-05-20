@@ -264,6 +264,9 @@
 
 //Auction room
 .aur {
+  .loading__comp {
+    margin: 100px auto 100px;
+  }
   &__container {
     padding: 50px 0;
   }
@@ -275,7 +278,7 @@
       h2 {
         width: 50%;
         text-align: center;
-        background: blue;
+        background: var(--primary-color);
         color: #fff;
         font-size: 17px;
         padding: 10px;
@@ -331,12 +334,43 @@
       }
     }
   }
+
   .aur__bargain-section {
     flex: 0.4;
     .bargain-price {
       color: red;
     }
-    button {
+    .owner-alert {
+      color: red;
+      font-weight: 600;
+    }
+    .owner-alertt {
+      font-size: 16px;
+      color: red;
+      font-weight: 600;
+    }
+    .cong {
+      background: var(--primary-color);
+      padding: 11px 25px;
+      font-size: 25px;
+      color: #fff;
+    }
+    input {
+      padding: 17px 30px;
+      outline: none;
+      &:focus {
+        box-shadow: none;
+        border: 1px solid #cccc;
+      }
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+    .buttonTra {
+      width: 120px;
+      white-space: nowrap;
       display: inline-block;
       padding: 17px 30px;
       border: none;
@@ -351,29 +385,6 @@
       text-transform: uppercase;
       &:hover {
         opacity: 0.7;
-      }
-    }
-    .bargain-input-container {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      border: 1px solid #ccc;
-      padding: 10px 20px;
-      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-      input {
-        border: none;
-        outline: none;
-        &::-webkit-outer-spin-button,
-        &::-webkit-inner-spin-button {
-          -webkit-appearance: none;
-          margin: 0;
-        }
-      }
-
-      .bargain-sign {
-        color: #ccc;
-        cursor: pointer;
-        font-size: 25px;
       }
     }
   }
@@ -449,12 +460,18 @@
 }
 
 .custom-modal-dialog {
-  max-width: 1140px !important;
+  max-width: 900px !important;
   width: 100%;
 }
 
 .auctionDetailPopup {
   width: 100%;
+}
+
+.listAuctionRegister {
+  .loading__comp {
+    margin: 20px auto 0;
+  }
 }
 
 @keyframes chaychu {

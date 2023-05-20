@@ -16,14 +16,13 @@ const Home = () => {
   useEffect(() => {
     dispatch(getAllPostRealEstate());
   }, [dispatch]);
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
 
   return (
     <div className="home">
-      <Banner />
+      <Banner
+        title={"CÙNG NHAU KHÁM PHÁ "}
+        text={"KẾT NỐI BẠN VỚI NGÔI NHÀ LÝ TƯỞNG"}
+      />
       <main>
         <ProminentProjects posts={posts} />
         <ProminentListings posts={posts} />

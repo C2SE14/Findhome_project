@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import "../Auction.scss";
 import { toast } from "react-toastify";
@@ -19,6 +19,7 @@ const AuctionRegistrationPopup = ({
   const dispatch = useDispatch();
   const { userId } = useSelector((state) => state.auth);
   const [acceptTerms, setAcceptTerms] = useState(false);
+
   const [formData, setFormData] = useState({
     payFees: false,
     checkFace: true,
@@ -30,6 +31,15 @@ const AuctionRegistrationPopup = ({
       id: auction.id,
     },
   });
+  useEffect(() => {
+    setFormData((prevState) => ({
+      ...prevState,
+      auctionModel: {
+        ...prevState.auctionModel,
+        id: auction.id,
+      },
+    }));
+  }, [auction.id]);
 
   const handleAcceptTerms = (e) => {
     const { checked } = e.target;
@@ -58,7 +68,6 @@ const AuctionRegistrationPopup = ({
         });
       })
       .catch((error) => {
-        // Xử lý lỗi
         console.error(error);
       });
   };

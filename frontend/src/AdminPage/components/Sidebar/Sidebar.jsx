@@ -37,32 +37,32 @@ const Sidebar = () => {
       <div className="center">
         <ul>
           <p className="title">LISTS</p>
-          <Link to="/admin/users" style={{ textDecoration: "none" }}>
+          <Link to="/users" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
               <span>Người dùng</span>
             </li>
           </Link>
-          <Link to="/admin/realestatesale" style={{ textDecoration: "none" }}>
+          <Link to="/realestatesale" style={{ textDecoration: "none" }}>
             <li>
               <GiteIcon className="icon" />
               <span>Nhà đất bán</span>
             </li>
           </Link>
-          <Link to="/admin/realestaterent" style={{ textDecoration: "none" }}>
+          <Link to="/realestaterent" style={{ textDecoration: "none" }}>
             <li>
               <CabinIcon className="icon" />
               <span>Nhà đất cho thuê</span>
             </li>
           </Link>
-          <Link to="/admin/auction-approval" style={{ textDecoration: "none" }}>
+          <Link to="/auction-approval" style={{ textDecoration: "none" }}>
             <li>
               <HolidayVillageIcon className="icon" />
               <span>Phê duyệt BĐS đấu giá</span>
             </li>
           </Link>
           <Link
-            to="/admin/approving-auction-register"
+            to="/approving-auction-register"
             style={{ textDecoration: "none" }}
           >
             <li>

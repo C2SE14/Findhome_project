@@ -43,7 +43,11 @@ import bannersystem from "./bannerS.jpg";
 import rental from "./rent.jpg";
 import iconKhongcosanpham from "./ionKhongcosanpham.png";
 import maQr from "./maQr.jpg";
+import detailsBanner from "./detailsBanner.jpg";
+import detailBanner from "./detailBanner.jpg";
 export {
+  detailsBanner,
+  detailBanner,
   iconKhongcosanpham,
   maQr,
   bannersystem,

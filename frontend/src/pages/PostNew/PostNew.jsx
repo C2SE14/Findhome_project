@@ -17,6 +17,7 @@ const PostNew = () => {
   const { userData } = useSelector((state) => state.user);
   const [loadingcComp, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
+  const [errorImage, setErrorImage] = useState("");
   useEffect(() => {
     dispatch(getUserById(userId));
   }, [dispatch, userId]);
@@ -115,6 +116,11 @@ const PostNew = () => {
   const [imagesPreview, setImagesPreview] = useState([]);
   const handleSubmitPostNews = async (event) => {
     event.preventDefault();
+    if (payload.imageModelList.length === 0) {
+      setErrorImage("Bạn phải cần tải ít nhất 1 hình ");
+      window.scrollTo(0, 700);
+      return;
+    }
     try {
       const response = await axios.post(
         "http://localhost:8080/api/realEstate/addRealEstate",
@@ -188,6 +194,8 @@ const PostNew = () => {
                 loading={loadingcComp}
                 imagesPreview={imagesPreview}
                 setImagesPreview={setImagesPreview}
+                setImagesError={setErrorImage}
+                errorImage={errorImage}
               />
               <Preview payload={payload} info={userData} />
               <div className="submit-action">

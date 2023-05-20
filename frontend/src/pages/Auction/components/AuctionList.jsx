@@ -1,16 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../../ListNews/Listnews.scss";
 import { Badge, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getAuctionPostOfUser } from "../../../store/actions/user";
+import { formatDate } from "../../../components/Common/convertToSlug";
 const AuctionList = () => {
   const dispatch = useDispatch();
   const { userId } = useSelector((state) => state.auth);
   const { listUserPostAuction, loading } = useSelector((state) => state.user);
+  const [selectedRoomId, setSelectedRoomId] = useState(null);
   useEffect(() => {
     dispatch(getAuctionPostOfUser(userId));
   }, [dispatch, userId]);
-  console.log(listUserPostAuction);
+  const hanldeClickShowRoom = (e, roomId) => {
+    e.preventDefault();
+    setSelectedRoomId(roomId);
+  };
+  useEffect(() => {
+    if (selectedRoomId) {
+      window.location.href = `/phong-dau-gia/${selectedRoomId}`;
+    }
+  }, [selectedRoomId]);
 
   return (
     <>
@@ -37,7 +47,15 @@ const AuctionList = () => {
               <tbody>
                 {listUserPostAuction.map((item) => (
                   <>
-                    <tr key={item.id}>
+                    <tr
+                      key={item.id}
+                      onClick={
+                        item.browseByAdmin
+                          ? (e) => hanldeClickShowRoom(e, item.id)
+                          : null
+                      }
+                      style={item.browseByAdmin ? { cursor: "pointer" } : null}
+                    >
                       <td>{item.id}</td>
                       <td
                         style={{
@@ -60,8 +78,8 @@ const AuctionList = () => {
                         />
                         {item.nameRealEstate}
                       </td>
-                      <td>12/3/2023</td>
-                      <td>17/5/2024</td>
+                      <td>{formatDate(item.auctionEndDate)}</td>
+                      <td>{formatDate(item.auctionStartDate)}</td>
                       <td>
                         {item.browseByAdmin ? (
                           <Badge

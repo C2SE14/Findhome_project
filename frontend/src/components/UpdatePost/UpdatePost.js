@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./update.scss";
 import { FormInfo } from "../FormInfo/FormInfo";
 import Address from "../Address/Address";
 import Button from "../Button/Button";
 import { toast } from "react-toastify";
 const UpdatePost = ({ setIsEdit, dataEdit, updateDataEdit }) => {
+  const [errorImage, setErrorImage] = useState("");
   const [payload, setPayload] = useState(() => {
     let init = {
       id: dataEdit?.id || "",
@@ -34,6 +35,10 @@ const UpdatePost = ({ setIsEdit, dataEdit, updateDataEdit }) => {
       salientFeatures: dataEdit?.salientFeatures || "",
       userModel: {
         id: dataEdit?.userModel?.id,
+        fullName: dataEdit?.userModel?.fullName,
+        phoneNumber: dataEdit?.userModel?.phoneNumber,
+        email: dataEdit?.userModel?.email,
+        address: dataEdit?.userModel?.address,
       },
       businessTypeModel: dataEdit?.businessTypeModel?.id
         ? {
@@ -57,25 +62,27 @@ const UpdatePost = ({ setIsEdit, dataEdit, updateDataEdit }) => {
             }))
           : [],
       brokerModel: {
-        fullName: dataEdit?.brokerModel?.fullName,
-        phoneName: "",
-        email: dataEdit.brokerModel?.email,
-        address: "",
+        broker: false,
       },
     };
     return init;
   });
-  console.log(dataEdit.typeDetailModel);
-  console.log(payload.typeDetailModel);
+  const formInfoRef = useRef(null);
   const [imagesPreview, setImagesPreview] = useState([]);
   const [activeIndex, setActiveIndex] = useState(() => {
     if (dataEdit.businessTypeModel.id === 1) {
       return 0;
     } else return 1;
   });
+  console.log(setActiveIndex);
   const [loading, setLoading] = useState(false);
   const handleUpdatePost = async (e) => {
     e.preventDefault();
+    if (payload.imageModelList.length === 0) {
+      setErrorImage("Bạn phải cần tải ít nhất 1 hình ");
+
+      return;
+    }
     await fetch("http://localhost:8080/api/realEstate/updateRealEstate", {
       method: "PUT",
       headers: {
@@ -87,7 +94,6 @@ const UpdatePost = ({ setIsEdit, dataEdit, updateDataEdit }) => {
         if (response.ok) {
           toast.success("Cập nhật thành công");
           setIsEdit(false);
-          console.log(payload);
           updateDataEdit(payload);
         } else {
           toast.error("Cập nhật thất bại");
@@ -119,6 +125,7 @@ const UpdatePost = ({ setIsEdit, dataEdit, updateDataEdit }) => {
         <form onSubmit={handleUpdatePost}>
           <Address payload={payload} setPayload={setPayload} />
           <FormInfo
+            ref={formInfoRef}
             payload={payload}
             setPayload={setPayload}
             activeIndex={activeIndex}
@@ -126,6 +133,8 @@ const UpdatePost = ({ setIsEdit, dataEdit, updateDataEdit }) => {
             loading={loading}
             setImagesPreview={setImagesPreview}
             imagesPreview={imagesPreview}
+            setImagesError={setErrorImage}
+            errorImage={errorImage}
           />
           <div className="action-btn">
             <Button text={"Cập nhật"} className={"btn-update"} />

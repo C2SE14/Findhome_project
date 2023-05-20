@@ -1,26 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { Button, Col, Container, Modal, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
 import formatNumber from "../../../components/Common/currencyFormat";
-import { getRealEstateById } from "../../../store/actions/postRealEstate";
 import Carousel from "../../../components/ThumbsGalleryCarousel/ThumbsGalleryCarousel";
 import "../Auction.scss";
 
-const AuctionDetalPopup = (props) => {
-  const dispatch = useDispatch();
-  const { post } = useSelector((state) => state.postRealEstate);
-  useEffect(() => {
-    dispatch(getRealEstateById(1));
-  }, [dispatch]);
+const AuctionDetalPopup = ({ showModal, handleCloseModal, auction }) => {
   return (
     <Modal
-      show={props.showModal}
-      onHide={props.handleCloseModal}
+      show={showModal}
+      onHide={handleCloseModal}
       dialogClassName="custom-modal-dialog"
     >
       <Modal.Header closeButton>
-        <Modal.Title>THÔNG TIN CHI TIẾT</Modal.Title>
+        <Modal.Title style={{ fontSize: "23px", fontWeight: "700" }}>
+          THÔNG TIN CHI TIẾT
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="auctionDetaiPopup">
@@ -28,17 +23,17 @@ const AuctionDetalPopup = (props) => {
             <Container>
               <div className="deb__container">
                 <Row>
-                  <Col md={8}>
+                  <Col md={12}>
                     <div className="deb__left">
                       <div className="deb__img">
-                        {post.imageModelList && (
-                          <Carousel images={post.imageModelList} />
+                        {auction?.imageModelList && (
+                          <Carousel images={auction?.imageModelList} />
                         )}
                       </div>
 
                       <div className="deb__desc">
                         <h3>Thông tin mô tả:</h3>
-                        {post.description && <p>{post.description}</p>}
+                        {auction?.description && <p>{auction?.description}</p>}
                       </div>
 
                       <div className="deb__characteristic">
@@ -46,8 +41,8 @@ const AuctionDetalPopup = (props) => {
                         <div className="content">
                           <div className="address">
                             <span>Địa chỉ:</span>
-                            {post.address ? (
-                              <p>{post.address}</p>
+                            {auction?.address ? (
+                              <p>{auction?.address}</p>
                             ) : (
                               <p> --- </p>
                             )}
@@ -55,24 +50,24 @@ const AuctionDetalPopup = (props) => {
 
                           <div className="legaldocuments">
                             <span>Giấy tờ pháp lý:</span>
-                            {post.legalDocument ? (
-                              <p>{post.legalDocument}</p>
+                            {auction?.legalDocument ? (
+                              <p>{auction?.legalDocument}</p>
                             ) : (
                               <p> --- </p>
                             )}
                           </div>
                           <div className="area">
                             <span>Diện tích sử dụng:</span>
-                            {post.usableArea ? (
-                              <p>{post.usableArea} m²</p>
+                            {auction?.usableArea ? (
+                              <p>{auction?.usableArea} m²</p>
                             ) : (
                               <p> --- </p>
                             )}
                           </div>
                           <div className="price">
                             <span>Giá/m²:</span>
-                            {post.price ? (
-                              <p>{formatNumber(post.price)} /m²</p>
+                            {auction?.price ? (
+                              <p>{formatNumber(auction?.price)} /m²</p>
                             ) : (
                               <p> --- </p>
                             )}
@@ -81,32 +76,32 @@ const AuctionDetalPopup = (props) => {
                             <ul>
                               <li>
                                 <span>Mặt tiền:</span>
-                                {post.frontispiece ? (
-                                  <p>{post.frontispiece}m</p>
+                                {auction?.frontispiece ? (
+                                  <p>{auction?.frontispiece}m</p>
                                 ) : (
                                   <p> --- </p>
                                 )}
                               </li>
                               <li>
                                 <span>Đường trước nhà/đất:</span>
-                                {post.streetHouse ? (
-                                  <p>{post.streetHouse} m</p>
+                                {auction?.streetHouse ? (
+                                  <p>{auction?.streetHouse} m</p>
                                 ) : (
                                   <p> --- </p>
                                 )}
                               </li>
                               <li>
                                 <span>Chiều sâu:</span>
-                                {post.depth ? (
-                                  <p>{post.depth}m</p>
+                                {auction?.depth ? (
+                                  <p>{auction?.depth}m</p>
                                 ) : (
                                   <p> --- </p>
                                 )}
                               </li>
                               <li>
                                 <span>Hướng nhà/đất</span>
-                                {post.directionOfHouse ? (
-                                  <p>{post.directionOfHouse}</p>
+                                {auction?.directionOfHouse ? (
+                                  <p>{auction?.directionOfHouse}</p>
                                 ) : (
                                   <p> --- </p>
                                 )}
@@ -122,40 +117,40 @@ const AuctionDetalPopup = (props) => {
                             <ul>
                               <li>
                                 <span>Tổng số tầng:</span>
-                                {post.numberFloors ? (
-                                  <p>{post.numberFloors}</p>
+                                {auction?.numberFloors ? (
+                                  <p>{auction?.numberFloors}</p>
                                 ) : (
                                   <p> --- </p>
                                 )}
                               </li>
                               <li>
                                 <span>Vị trí tầng cho thuê:</span>
-                                {post.rentalFloorLocation ? (
-                                  <p>{post.rentalFloorLocation} m</p>
+                                {auction?.rentalFloorLocation ? (
+                                  <p>{auction?.rentalFloorLocation} m</p>
                                 ) : (
                                   <p> --- </p>
                                 )}
                               </li>
                               <li>
                                 <span>Hướng ban công:</span>
-                                {post.balconyDirection ? (
-                                  <p>{post.balconyDirection}</p>
+                                {auction?.balconyDirection ? (
+                                  <p>{auction?.balconyDirection}</p>
                                 ) : (
                                   <p> --- </p>
                                 )}
                               </li>
                               <li>
                                 <span>Số phòng ngủ</span>
-                                {post.numberBedRooms ? (
-                                  <p>{post.numberBedRooms} (phòng)</p>
+                                {auction?.numberBedRooms ? (
+                                  <p>{auction?.numberBedRooms} (phòng)</p>
                                 ) : (
                                   <p> --- </p>
                                 )}
                               </li>
                               <li>
                                 <span>Số phòng vệ sinh</span>
-                                {post.numberToilets ? (
-                                  <p>{post.numberToilets} (phòng)</p>
+                                {auction?.numberToilets ? (
+                                  <p>{auction?.numberToilets} (phòng)</p>
                                 ) : (
                                   <p> --- </p>
                                 )}
@@ -164,8 +159,8 @@ const AuctionDetalPopup = (props) => {
                           </div>
                           <div className="interior">
                             <span>Nội thất:</span>
-                            {post.interior ? (
-                              <p>{post.interior}</p>
+                            {auction?.interior ? (
+                              <p>{auction?.interior}</p>
                             ) : (
                               <p> --- </p>
                             )}
@@ -174,85 +169,75 @@ const AuctionDetalPopup = (props) => {
                             <ul>
                               <li>
                                 <span>Mã tin: </span>
-                                <p>{post.id}</p>
+                                <p>{auction?.id}</p>
                               </li>
                               <li>
                                 <span>Loại tin: </span>
-                                {post.typeDetailModel && (
-                                  <p>{post.typeDetailModel.typeDetailName}</p>
+                                {auction?.typeDetailModel && (
+                                  <p>
+                                    {auction?.typeDetailModel.typeDetailName}
+                                  </p>
                                 )}
                               </li>
                               <li>
                                 <span>Ngày đăng: </span>
-                                {post.postDate && <p>{post.postDate}</p>}
+                                {auction?.postDate && (
+                                  <p>{auction?.postDate}</p>
+                                )}
                               </li>
                             </ul>
                           </div>
                         </div>
                       </div>
-                      <div className="deb__attention">
-                        *Lưu ý:
-                        <br />
-                        Cảm ơn quý khách đã tin tưởng và lựa chọn hệ thống
-                        thương mại điện tử bất động sản Findhome. Quý khách đang
-                        xem nội dung tin rao{" "}
-                        {post.typeDetailModel && (
-                          <span>{post.typeDetailModel.typeDetailName}</span>
-                        )}{" "}
-                        - Mã tin <span>{post.id}</span>. Tất cả thông tin, nội
-                        dung liên quan tới tin rao này là do người đăng tin đăng
-                        tải và chịu trách nhiệm. Bằng tinh thần cầu thị, hướng
-                        đến sự minh bạch trong giao dịch bất động sản, Findhome
-                        luôn cố gắng để các thông tin niêm yết tại hệ thống được
-                        chính xác nhất đến quý khách. Tuy nhiên Findhome không
-                        đảm bảo và không chịu trách nhiệm pháp lý về bất kỳ
-                        thông tin, nội dung nào liên quan tới tin rao này.
-                        Trường hợp phát hiện nội dung tin đăng không chính xác,
-                        Quý khách hãy sử dụng chức năng Báo vi phạm hoặc liên hệ
-                        và cung cấp thông tin cho Ban quản trị Houseviet.vn theo
-                        Hotline 1800 6015 để được hỗ trợ ngay lập tức.
-                      </div>
                     </div>
-                  </Col>
-                  <Col md={4}>
-                    <div className="deb__right">
+
+                    <div className="deb__right" style={{ marginTop: "10px" }}>
                       <div className="top">
                         <div className="info">
-                          <h4>{post.nameEstate}</h4>
+                          <h4>{auction?.nameEstate}</h4>
                           <div className="address">
                             <i className="bi bi-geo-alt"></i>
-                            <span>{post.address}</span>
+                            <span>{auction?.address}</span>
                           </div>
                           <div className="group__flex">
                             <div className="price">
                               <span>Giá bán: </span>
-                              <span>{formatNumber(post.price)}</span>
+                              <span>{formatNumber(auction?.price)}</span>
                             </div>
                             <div className="separator"></div>
                             <div className="area">
                               <span>Diện tích: </span>
-                              <span>{post.area} m²</span>
+                              <span>{auction?.area} m²</span>
                             </div>
                           </div>
                         </div>
-                        <div className="contact">
-                          <div className="avatar">
-                            <img
-                              src="https://cdn.houseviet.vn/images/icons/user-avatar.png"
-                              alt=""
-                            />
-                          </div>
-                          <div className="info">
-                            <span>
-                              {post.brokerModel && post.brokerModel.name}
-                            </span>
-                            <p>{post.broker ? "Môi giới" : "Chính chủ"}</p>
-                          </div>
-                        </div>
-                        <div className="phone">
-                          <i className="bi bi-telephone"></i>
-                          0867405503
-                        </div>
+                      </div>
+                    </div>
+                    <div className="deb__right">
+                      <div className="top">
+                        <h4
+                          style={{
+                            fontSize: "17px",
+                            fontWeight: "600",
+                            textTransform: "uppercase",
+                            color: "var(--primary-color)",
+                            marginBottom: "8px",
+                            background: "#f4f2f0",
+                            padding: "4px 16px",
+                            borderRadius: "4px",
+                          }}
+                        >
+                          Hồ sơ tham gia đấu giá
+                        </h4>
+                        <>
+                          <span style={{ marginLeft: "10px" }}>
+                            {" "}
+                            Link file:{" "}
+                          </span>
+                        </>
+                        <a href={auction?.auctionParticipationProfile}>
+                          {auction?.auctionParticipationProfile}
+                        </a>
                       </div>
                     </div>
                   </Col>
@@ -263,7 +248,7 @@ const AuctionDetalPopup = (props) => {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={props.handleCloseModal}>
+        <Button variant="secondary" onClick={handleCloseModal}>
           Đóng
         </Button>
       </Modal.Footer>

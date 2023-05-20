@@ -10,7 +10,7 @@ const AdminRouter = () => {
   return (
     <div className="admin__router">
       <Routes>
-        <Route path="admin" element={<Outlet />}>
+        <Route element={<Outlet />}>
           <Route path="users" element={<UserList />} />
           <Route path="realestatesale" element={<RealEstatedSaleList />} />
           <Route path="realestaterent" element={<RealEstateRentList />} />

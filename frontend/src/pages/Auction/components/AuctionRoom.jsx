@@ -1,13 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { Container, Table } from "react-bootstrap";
+import { Button, Container, Form, Table } from "react-bootstrap";
 import VNnum2words from "vn-num2words";
 import AuctionDetalPopup from "./AuctionDetailPopup";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAuctionById,
+  getBargainAuctionById,
+  postBargainAuction,
+} from "../../../store/actions/auction";
+import { useParams } from "react-router-dom";
+import { formatDate } from "../../../components/Common/convertToSlug";
+import { toast } from "react-toastify";
+import getRandomName from "../../../components/Common/randomName";
+import { formatTimeStamp } from "../../../components/Common/formatTimeStamp";
 const AuctionRoom = () => {
+  // Lấy userId
+  const { userId } = useSelector((state) => state.auth);
+
+  // Show lỗi cảnh cáo khi chủ vô mà nhập
+  const [showOwnerAlert, setShowOwnerAlert] = useState(false);
+
+  // Lấy id của aucion
+  const params = useParams();
+
   // Đếm thời gian
+  const dispatch = useDispatch();
   const [countdown, setCountdown] = useState(null);
+  const { auction, listBargain } = useSelector((state) => state.auctionReducer);
 
   useEffect(() => {
-    const endTime = new Date("2023-05-20T12:00:00").getTime();
+    dispatch(getBargainAuctionById(auction.id));
+  }, [auction.id, dispatch]);
+
+  useEffect(() => {
+    dispatch(getAuctionById(params.id));
+  }, [dispatch, params.id]);
+
+  useEffect(() => {
+    const endTime = new Date(auction?.auctionEndDate).getTime();
 
     const interval = setInterval(() => {
       const now = new Date().getTime();
@@ -29,26 +59,12 @@ const AuctionRoom = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [auction?.auctionEndDate]);
 
   const formatTime = (value) => {
     return value < 10 ? `0${value}` : value;
   };
 
-  //Nhập tiền vào
-  const [bargainPrice, setBargainPrice] = useState(null);
-
-  const handleBargainChange = (event) => {
-    setBargainPrice(event.target.value);
-  };
-
-  const increaseBargainPrice = () => {
-    setBargainPrice((prev) => (prev !== null ? prev + 1 : null));
-  };
-
-  const decreaseBargainPrice = () => {
-    setBargainPrice((prev) => (prev !== null ? prev - 1 : null));
-  };
   /////
   const [showModal, setShowModal] = useState(false);
 
@@ -59,20 +75,95 @@ const AuctionRoom = () => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+  const isAuctionEnded = countdown === null;
+
+  const formatCurrencyy = (value) => {
+    if (value !== null && value !== undefined) {
+      return VNnum2words(value) + " đồng";
+    }
+
+    return ""; // Trả về chuỗi rỗng nếu value không hợp lệ
+  };
+  // ! PHẦN NÀY XỬ LÍ CON CHÓ CHẾT INPUT
+  const maxPricePaid = Math.max(...listBargain.map((item) => item?.pricePaid));
+  const sortedData =
+    listBargain && listBargain.sort((a, b) => b.pricePaid - a.pricePaid);
+  const initialPrice =
+    listBargain && listBargain.length > 0
+      ? maxPricePaid && maxPricePaid
+      : auction && auction.startingPrice;
+
+  const [bargainPrice, setBargainPrice] = useState(
+    initialPrice ? initialPrice : 0
+  );
+  useEffect(() => {
+    if (auction && auction.startingPrice !== undefined) {
+      setBargainPrice(initialPrice);
+    }
+  }, [auction, initialPrice]);
+
+  const handleDecreasePrice = () => {
+    const minPrice = auction?.startingPrice || 0;
+    const newPrice = bargainPrice - (auction?.priceStep || 0);
+    if (newPrice >= minPrice && newPrice !== maxPricePaid) {
+      setBargainPrice(newPrice);
+    }
+  };
+
+  const handleIncreasePrice = () => {
+    const newPrice = bargainPrice + (auction?.priceStep || 0);
+    setBargainPrice(newPrice);
+  };
+
+  // ? Đây là xử lí Submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (userId === auction.userModel?.id) {
+      setShowOwnerAlert(true);
+    }
+    const randomName = getRandomName();
+    const paymentTime = new Date();
+
+    const bargainData = {
+      pricePaid: bargainPrice,
+      paymentTime: formatTimeStamp(paymentTime),
+      randomName,
+      userModel: {
+        id: userId,
+      },
+      auctionModel: {
+        id: auction.id,
+      },
+    };
+
+    dispatch(postBargainAuction(bargainData))
+      .then(() => {
+        toast.success("Trả giá thành công!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      })
+      .catch((error) => {
+        toast.error("Đã xảy ra lỗi trong quá trình trả giá.");
+      });
+  };
 
   return (
     <div className="aur">
       <Container>
         <div className="aur__container">
           <div className="aur__title">
-            <h2>Công Ty Cổ Phần Đầu Tư & Kinh Doanh Bất Động Sản TGSGROUP</h2>
+            <h2>{auction.nameRealEstate}</h2>
           </div>
           <div className="aur__body">
             <div className="aur__content">
               <div className="aur__left">
                 <div className="aur__image">
                   <img
-                    src="https://thuanhunggroup.com/wp-content/uploads/2021/09/THG-hi%CC%80nh-ne%CC%82%CC%80n229-scaled.jpeg"
+                    src={
+                      auction?.imageModelList &&
+                      auction?.imageModelList[0]?.image
+                    }
                     alt=""
                   />
                 </div>
@@ -80,52 +171,53 @@ const AuctionRoom = () => {
               <div className="aur__right">
                 <div className="name">
                   <span>Tài sản đấu giá: </span>
-                  Đấu giá Chí Thông
+                  {auction.nameRealEstate}
                 </div>
                 <ul>
                   <li>
-                    <h5>Đấu giá viên</h5>
-                    <span>Nguyễn Văn Hải</span>
-                  </li>
-                  <li>
                     <h5>Người có tài sản</h5>
-                    <span>Nguyễn Văn Hải</span>
+                    <span>{auction.userModel?.username}</span>
                   </li>
                   <li>
                     <h5>Ngày công bố</h5>
-                    <span>16/5/2023</span>
+                    <span>{formatDate(auction?.dateOfPublication)}</span>
                   </li>
                   <li>
                     <h5>Thời gian bắt đầu cuộc đấu giá</h5>
-                    <span>16/5/2023</span>
+                    <span>{formatDate(auction?.auctionStartDate)}</span>
                   </li>
                   <li>
                     <h5>Thời gian điểm danh người tham gia đấu giá</h5>
-                    <span>16/5/2023</span>
+                    <span>{formatDate(auction?.registrationDateEnd)}</span>
                   </li>
                   <li>
                     <h5>Kết thúc dự kiến</h5>
-                    <span>16/5/2023</span>
+                    <span>{formatDate(auction?.auctionEndDate)}</span>
                   </li>
                   <li>
                     <h5>Giá khởi điểm</h5>
-                    <span>3222222222222</span>
+                    <span>{auction?.startingPrice?.toLocaleString()} VNĐ</span>
                   </li>
                   <li>
                     <h5>Bước giá</h5>
-                    <span>3222222222222</span>
+                    <span>{auction?.priceStep?.toLocaleString()} VNĐ </span>
                   </li>
                   <li>
                     <h5>Chi phí đấu giá</h5>
-                    <span>3222222222222</span>
+                    <span>
+                      {auction?.auctionParticipationFee?.toLocaleString()} VNĐ
+                    </span>
                   </li>
                   <li>
                     <h5>Tiền đặt trước</h5>
-                    <span>3222222222222</span>
+                    <span>
+                      {Number(auction?.downPayment).toLocaleString()} VNĐ
+                    </span>
                   </li>
                 </ul>
                 <div className="priceMax">
-                  Giá cao nhất thời điểm hiện tải : 350000000VNĐ
+                  Giá cao nhất thời điểm hiện tại :{" "}
+                  {maxPricePaid && maxPricePaid.toLocaleString()} VNĐ
                 </div>
               </div>
             </div>
@@ -133,7 +225,6 @@ const AuctionRoom = () => {
           <div
             style={{
               display: "flex",
-              alignItems: "center",
               marginTop: "30px",
               gap: "50px",
             }}
@@ -167,43 +258,66 @@ const AuctionRoom = () => {
                   </div>
                 </>
               ) : (
-                <div className="countdown-expired">
-                  Thời gian cuộc đấu giá kết thúc
+                <div
+                  className="countdown-expired"
+                  style={{
+                    padding: "5px 0",
+                    color: "red",
+                    fontWeight: "700",
+                  }}
+                >
+                  Thời gian cuộc đấu giá kết thúc !
                 </div>
               )}
             </div>
             <div className="aur__bargain-section">
               <div className="aur__bargain-input">
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <div className="bargain-input-container">
-                    <span
-                      className="bargain-sign"
-                      onClick={decreaseBargainPrice}
-                    >
-                      -
-                    </span>
+                <Form
+                  onSubmit={handleSubmit}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "5px",
+                  }}
+                >
+                  <Button
+                    variant="light"
+                    className="cong"
+                    onClick={handleDecreasePrice}
+                    disabled={bargainPrice === maxPricePaid}
+                  >
+                    -
+                  </Button>
+                  <Form.Control
+                    type="number"
+                    value={bargainPrice}
+                    onChange={(e) => setBargainPrice(Number(e.target.value))}
+                  />
 
-                    <input
-                      type="number"
-                      placeholder="Nhập giá"
-                      value={bargainPrice !== null ? bargainPrice : ""}
-                      onChange={handleBargainChange}
-                    />
-                    <span
-                      className="bargain-sign"
-                      onClick={increaseBargainPrice}
-                    >
-                      +
-                    </span>
-                  </div>
-                  <button>Trả giá</button>
-                </div>
-                <div className="bargain-price">
-                  {bargainPrice !== null
-                    ? `${VNnum2words(bargainPrice)} đồng `
-                    : ""}
-                </div>
+                  <Button
+                    variant="light"
+                    className="cong"
+                    onClick={handleIncreasePrice}
+                  >
+                    +
+                  </Button>
+                  <Button
+                    className="buttonTra"
+                    type="submit"
+                    disabled={isAuctionEnded || bargainPrice === maxPricePaid}
+                  >
+                    Trả giá
+                  </Button>
+                </Form>
               </div>
+              <small className="owner-alertt">
+                {formatCurrencyy(bargainPrice)}
+              </small>
+              {showOwnerAlert && (
+                <small className="owner-alert">
+                  Lưu ý: Chủ sở hữu không được trả giá
+                </small>
+              )}
             </div>
           </div>
 
@@ -214,6 +328,7 @@ const AuctionRoom = () => {
               <AuctionDetalPopup
                 showModal={showModal}
                 handleCloseModal={handleCloseModal}
+                auction={auction}
               />
             </div>
             <div className="content">
@@ -226,11 +341,13 @@ const AuctionRoom = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>TDWADAWDW</td>
-                    <td>200.000.000.000</td>
-                    <td>16/6/2023</td>
-                  </tr>
+                  {sortedData.map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.randomName}</td>
+                      <td>{item.pricePaid.toLocaleString()}VNĐ</td>
+                      <td>{formatDate(item.paymentTime)}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </Table>
             </div>

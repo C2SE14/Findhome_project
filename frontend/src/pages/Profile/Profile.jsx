@@ -19,7 +19,6 @@ const Profile = () => {
   const dispatch = useDispatch();
   const { userId } = useSelector((state) => state.auth);
   const { userData, loading } = useSelector((state) => state.user);
-  console.log(userData);
   const [provinces, setProvinces] = useState([]);
   const [selectedProvince, setSelectedProvince] = useState({
     id: "",
