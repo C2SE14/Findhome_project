@@ -83,8 +83,8 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Auction> auctionList;
 
-
-
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<AuctionRoom> auctionRooms;
 
     public Date getIdentityCardDate() {
         return identityCardDate;
@@ -228,4 +228,29 @@ public class User {
     public void setBackOfTheIdentityCard(String backOfTheIdentityCard) {
         this.backOfTheIdentityCard = backOfTheIdentityCard;
     }
+
+    public List<AuctionRegistration> getAuctionRegistrations() {
+        return auctionRegistrations;
+    }
+
+    public void setAuctionRegistrations(List<AuctionRegistration> auctionRegistrations) {
+        this.auctionRegistrations = auctionRegistrations;
+    }
+
+    public List<Auction> getAuctionList() {
+        return auctionList;
+    }
+
+    public void setAuctionList(List<Auction> auctionList) {
+        this.auctionList = auctionList;
+    }
+
+    public List<AuctionRoom> getAuctionRooms() {
+        return auctionRooms;
+    }
+
+    public void setAuctionRooms(List<AuctionRoom> auctionRooms) {
+        this.auctionRooms = auctionRooms;
+    }
+
 }

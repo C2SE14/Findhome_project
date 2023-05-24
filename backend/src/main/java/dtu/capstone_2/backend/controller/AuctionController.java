@@ -21,7 +21,6 @@ public class AuctionController {
     private AuctionService auctionService;
 
 
-
     @PostMapping("addAuction")
     public ResponseEntity<?> addRealEstate(@RequestBody AuctionModel auctionModel) throws NullObjectExeption, ParseException {
         return ResponseEntity.ok(auctionService.addAuction(auctionModel));
@@ -36,4 +35,43 @@ public class AuctionController {
     public ResponseEntity<?> getAuctionById(@PathVariable(value = "id") Long id) throws NullObjectExeption {
         return ok(auctionService.getAuctionById(id));
     }
+
+    @GetMapping("/getAuctionByRegisterId/{id}")
+    public ResponseEntity<?> getAuctionByRegisterId(@PathVariable(value = "id") Long id) throws NullObjectExeption {
+        return ok(auctionService.getAuctionByRegisterId(id));
+    }
+
+    @GetMapping("/getAuctionPostOfUser/{id}")
+    public ResponseEntity<?> getAuctionPostOfUser(@PathVariable(value = "id") Long id) throws NullObjectExeption {
+        return ok(auctionService.getAuctionPostOfUser(id));
+    }
+
+    @GetMapping("/unpaidUserAuctionRegistration/{id}")
+    public ResponseEntity<?> unpaidUserAuctionRegistration(@PathVariable(value = "id") Long id) throws NullObjectExeption {
+        return ok(auctionService.unpaidUserAuctionRegistration(id));
+    }
+
+    @PutMapping("/browseAuctionPost/{id}")
+    public ResponseEntity<?> browseAuctionPost(@PathVariable(value = "id") Long id) throws NullObjectExeption {
+        return ok(auctionService.browseAuctionPost(id));
+    }
+
+    @PutMapping("updateAuction")
+    public ResponseEntity<?> updateAuction(@RequestBody AuctionModel auctionModel) throws NullObjectExeption, ParseException {
+        return ResponseEntity.ok(auctionService.updateAuction(auctionModel));
+    }
+
+    @RequestMapping(value = "/deleteAuctionOfOwner", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteAuctionOfOwner(@RequestParam(name = "auction-id") Long auctionId, // file js trả về 2 tham số này ở đâu
+                                                  @RequestParam(name = "user-id" , required = false) Long userId) {
+        return ok(auctionService.deleteAuctionOfOwner(auctionId, userId));
+    }
+
+    @RequestMapping(value = "/deleteAuctionById/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteAuctionById(@PathVariable(value = "id") Long id) {
+        return ok(auctionService.deleteAuctionById(id));
+    }
+
 }
+
+

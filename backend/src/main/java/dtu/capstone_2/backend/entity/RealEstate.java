@@ -117,5 +117,4 @@ public class RealEstate {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "broker_id", referencedColumnName = "id")
     private Broker broker;
-
 }

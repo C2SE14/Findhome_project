@@ -7,28 +7,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "auction_registration")
-public class AuctionRegistration {
+@Table(name = "auction_room")
+public class AuctionRoom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private boolean payFees;
-
-    private boolean checkFace;
-
-    private boolean acceptTerms;
+    private Double pricePaid;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    private String paymentTime;
+
+    private String randomName;
 
     @ManyToOne
     @JoinColumn(name = "auction_id")

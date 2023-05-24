@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 public interface ImageRepository extends JpaRepository<Image, Long> {
@@ -29,5 +30,13 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
     @Query(value = "delete from image where real_estate_id = :id", nativeQuery = true)
     public void deleteImageByRealEstateId(@Param("id") long id);
 
+    @Query(value = "SELECT * FROM find_home.image\n" +
+            "where auction_id = :id", nativeQuery = true)
+    public List<Image> getImageByAuctionId(Long id);
+
+    @Modifying // allow delete
+    @Transactional // allow delete
+    @Query(value = "delete from image where auction_id = :id", nativeQuery = true)
+    public void deleteImageByAuctionId(@Param("id") long id);
 }
 

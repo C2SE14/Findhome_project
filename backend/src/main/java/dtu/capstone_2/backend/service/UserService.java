@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -104,5 +105,22 @@ public class UserService {
             userModelList.add(modelMapper.map(user, UserModel.class));
         }
         return  userModelList;
+    }
+
+    public List<UserModel> getUserInAuctionWithId(Long id){
+        List<User> userList =  userRepository.getUserInAuctionWithId(id);
+
+        List<UserModel> userModelList = new ArrayList<>();
+        ModelMapper modelMapper = new ModelMapper();
+
+        for(User user: userList){
+            userModelList.add(modelMapper.map(user, UserModel.class));
+        }
+        return  userModelList;
+    }
+
+    public String deleteUserById(Long id){
+        userRepository.deleteUserById(id);
+        return "delete success";
     }
 }

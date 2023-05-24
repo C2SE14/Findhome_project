@@ -1,6 +1,8 @@
 package dtu.capstone_2.backend.model;
 
 
+import dtu.capstone_2.backend.entity.AuctionRegistration;
+import dtu.capstone_2.backend.entity.AuctionRoom;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -79,7 +81,13 @@ public class AuctionModel {
 
     private String depth;
 
+    private boolean browseByAdmin;
+
     private List<ImageModel> imageModelList;
 
     private UserModel userModel;
+
+    private List<AuctionRegistrationModel> auctionRegistrationModels;
+
+    private List<AuctionRoomModel> auctionRoomModels;
 }

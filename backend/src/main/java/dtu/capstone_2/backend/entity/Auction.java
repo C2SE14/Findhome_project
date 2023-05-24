@@ -105,6 +105,8 @@ public class Auction {
 
     private String depth;
 
+    private boolean browseByAdmin;
+
     @OneToMany(mappedBy = "auction", fetch = FetchType.LAZY)
     private List<Image> imageList;
 
@@ -116,5 +118,7 @@ public class Auction {
     @OneToMany(mappedBy = "auction", fetch = FetchType.LAZY)
     private List<AuctionRegistration> auctionRegistrationList;
 
+    @OneToMany(mappedBy = "auction", fetch = FetchType.LAZY)
+    private List<AuctionRoom> auctionRooms;
 
 }

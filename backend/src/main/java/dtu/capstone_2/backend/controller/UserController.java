@@ -39,4 +39,14 @@ public class UserController {
         return ok(userService.getAllUser());
     }
 
+    @GetMapping("/getUserInAuctionWithId/{id}")
+    public ResponseEntity<?> getUserInAuctionWithId(@PathVariable(value = "id") Long id) throws NullObjectExeption {
+        return ok(userService.getUserInAuctionWithId(id));
+    }
+
+    @RequestMapping(value = "/deleteUserById/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteUserById(@PathVariable(value = "id") Long id) {
+        return ok(userService.deleteUserById(id));
+    }
+
 }

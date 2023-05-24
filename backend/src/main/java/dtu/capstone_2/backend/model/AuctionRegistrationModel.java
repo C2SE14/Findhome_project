@@ -1,14 +1,14 @@
 package dtu.capstone_2.backend.model;
 
-import dtu.capstone_2.backend.entity.Auction;
-import dtu.capstone_2.backend.entity.User;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class AuctionRegistrationModel {
 
 
@@ -18,7 +18,14 @@ public class AuctionRegistrationModel {
 
     private boolean checkFace;
 
+    private boolean acceptTerms;
+
+
     private UserModel userModel;
 
     private AuctionModel auctionModel;
+
+//   private RegisterAuction registerAuction;
+
+   private Long idUser;
 }

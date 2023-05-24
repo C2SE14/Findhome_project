@@ -1,6 +1,8 @@
 package dtu.capstone_2.backend.model;
 
 
+import dtu.capstone_2.backend.entity.AuctionRegistration;
+import dtu.capstone_2.backend.entity.AuctionResult;
 import dtu.capstone_2.backend.entity.Role;
 import lombok.Getter;
 import lombok.Setter;
@@ -52,4 +54,7 @@ public class UserModel {
     private String backOfTheIdentityCard;
 
     private List<AuctionModel> auctionModelList;
+
+    private List<AuctionRegistrationModel>  auctionRegistrationModels;
+
 }

@@ -12,4 +12,6 @@ public class ImageModel {
     private String image;
 
     private RealEstateModel realEstateModel;
+
+    private AuctionModel auctionModel;
 }
