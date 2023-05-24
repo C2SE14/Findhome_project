@@ -51,7 +51,7 @@ const Carousel = ({ items, noimage, info, show }) => {
                       <i className="bi bi-pie-chart"></i>
                       <div>
                         <span>
-                          <strong>Quy mô: </strong> ---
+                          <strong>Quy mô: </strong> TIN TỨC NỔI BẬT
                         </span>
                       </div>
                     </div>

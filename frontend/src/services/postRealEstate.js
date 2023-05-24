@@ -65,3 +65,16 @@ export const apiGetFilterRealEstate = (body) =>
       reject(error);
     }
   });
+// Xoá nhà đất bán nhà đất mua của admin
+export const apiDeleteRealEstateAdmin = (id) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "delete",
+        url: `/api/realEstate/deleteRealEstate/${id}`,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });

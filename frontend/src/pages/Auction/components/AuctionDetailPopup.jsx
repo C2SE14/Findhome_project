@@ -67,7 +67,10 @@ const AuctionDetalPopup = ({ showModal, handleCloseModal, auction }) => {
                           <div className="price">
                             <span>Giá/m²:</span>
                             {auction?.price ? (
-                              <p>{formatNumber(auction?.price)} /m²</p>
+                              <p>
+                                {formatNumber(auction?.price / auction?.area)}{" "}
+                                /m²
+                              </p>
                             ) : (
                               <p> --- </p>
                             )}

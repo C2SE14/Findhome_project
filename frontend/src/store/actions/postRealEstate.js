@@ -1,5 +1,6 @@
 import actionTypes from "./actionTypes";
 import {
+  apiDeleteRealEstateAdmin,
   apiGetAllPostRealEstate,
   apiGetFilterRealEstate,
   apiGetRealEstateByBusinessTypeId,
@@ -118,6 +119,34 @@ export const getFilterRealEstate = (body) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: actionTypes.GET_FILTER_REAL_ESTATE_FAILURE,
+      errorMsg: error.message,
+    });
+
+    dispatch({ type: actionTypes.SET_LOADING, loading: false });
+  }
+};
+//Xoá nhà đất bán, nhà đất mua của admin
+export const deleteRealEstateAdmin = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: actionTypes.SET_LOADING, loading: true });
+
+    const response = await apiDeleteRealEstateAdmin(id);
+    if (response.status === 200) {
+      dispatch({
+        type: actionTypes.DELETE_REALESTATE_TYPE_SUCCESS,
+        dataByType: response.data,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.DELETE_REALESTATE_TYPE_FAILER,
+        errorMsg: response.data.statusText,
+      });
+    }
+
+    dispatch({ type: actionTypes.SET_LOADING, loading: false });
+  } catch (error) {
+    dispatch({
+      type: actionTypes.DELETE_REALESTATE_TYPE_FAILER,
       errorMsg: error.message,
     });
 

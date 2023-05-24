@@ -1,10 +1,6 @@
 .placeList {
-  .loading {
-    text-align: center;
-    padding: 50px;
-    span {
-      margin: 0 auto;
-    }
+  .loading__comp {
+    margin: 0 auto;
   }
   .datatable {
     height: 650px;
@@ -97,5 +93,12 @@
         cursor: pointer;
       }
     }
+  }
+  .imgAvatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
   }
 }

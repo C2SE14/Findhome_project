@@ -24,6 +24,11 @@ import Carousel from "../../components/Carousel/Carousel";
 const DetailProduct = () => {
   const location = useLocation();
 
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+
   const id = location.state ? location.state.id : null;
   const dispatch = useDispatch();
   const { setProductTypeValue } = useContext(ProductContext);
@@ -159,8 +164,11 @@ const DetailProduct = () => {
                         </div>
                         <div className="price">
                           <span>Giá/m²:</span>
+
                           {post.price ? (
-                            <p>{formatNumber(post.price)} /m²</p>
+                            <p>
+                              {(post?.price / post?.area).toLocaleString()} /m²
+                            </p>
                           ) : (
                             <p> --- </p>
                           )}

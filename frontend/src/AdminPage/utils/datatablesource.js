@@ -1,6 +1,8 @@
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import formatNumber from "../../components/Common/currencyFormat";
+import { formatDate } from "../../components/Common/convertToSlug";
+import { Badge } from "react-bootstrap";
 export const userColumns = [
   {
     field: "id",
@@ -40,11 +42,11 @@ export const userColumns = [
     headerName: "Họ và tên",
     width: 200,
   },
-  {
-    field: "address",
-    headerName: "Địa chỉ",
-    width: 200,
-  },
+  // {
+  //   field: "address",
+  //   headerName: "Địa chỉ",
+  //   width: 200,
+  // },
   {
     field: "phoneNumber",
     headerName: "Số điện thoại",
@@ -154,153 +156,194 @@ export const realEstate = [
   },
 ];
 
-//
-
-// export const realEstateRent = [
-//   {
-//     field: "id",
-//     headerName: "ID",
-//     width: 60,
-//     renderCell: (params) => {
-//       return <div className="cellWithId">{params.row.id}</div>;
-//     },
-//   },
-//   {
-//     field: "name",
-//     headerName: "Tên bất động sản",
-//     width: 250,
-//     renderCell: (params) => {
-//       return (
-//         <div className="cellWithImg">
-//           <img
-//             className="cellImgPlace"
-//             src={
-//               params.row.imageModelList[0] && params.row.imageModelList[0].image
-//             }
-//             alt="imaged"
-//           />
-//           {params.row.nameEstate}
-//         </div>
-//       );
-//     },
-//   },
-//   {
-//     field: "address",
-//     headerName: "Địa chỉ",
-//     width: 350,
-//     renderCell: (params) => {
-//       return <div className="cellWithAddressPlace">{params.row.address}</div>;
-//     },
-//   },
-//   {
-//     field: "category",
-//     headerName: "Thể loại",
-//     width: 100,
-//     renderCell: (params) => {
-//       return (
-//         <div className="cellWithCategoryPlace">
-//           {params.row.businessTypeModel.typeName}
-//         </div>
-//       );
-//     },
-//   },
-//   {
-//     field: "price",
-//     headerName: "Giá tiền",
-//     width: 100,
-//     renderCell: (params) => {
-//       return (
-//         <div className="cellWithCategoryPlace">
-//           {formatNumber(params.row.price)}
-//         </div>
-//       );
-//     },
-//   },
-//   {
-//     field: "userModel",
-//     headerName: "Người đăng",
-//     width: 100,
-//     renderCell: (params) => {
-//       return (
-//         <div className="cellWithCategoryPlace">
-//           {params.row.userModel.username}
-//         </div>
-//       );
-//     },
-//   },
-
-//   {
-//     field: "createdAt",
-//     headerName: "Ngày tạo",
-//     width: 100,
-//     renderCell: (params) => {
-//       return <div className="cellWithCreateAt">{params.row.createdAt}</div>;
-//     },
-//   },
-// ];
-
-//
-export const tourColumns = [
+export const auctionApproval = [
   {
     field: "id",
     headerName: "ID",
-    width: 200,
+    width: 60,
     renderCell: (params) => {
-      return <div className="cellWithId">{params.row._id}</div>;
+      return <div className="cellWithId">{params.row.id}</div>;
     },
   },
   {
     field: "name",
-    headerName: "Tên tuyến đường",
-    width: 300,
+    headerName: "Tên bất động sản đấu giá",
+    width: 250,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
           <img
             className="cellImgPlace"
-            src={params.row.images[0]}
-            alt="Khách sạn"
+            src={
+              params.row.imageModelList[0] && params.row.imageModelList[0].image
+            }
+            alt="imaged"
           />
-          {params.row.name}
+          {params.row.nameRealEstate}
         </div>
       );
     },
   },
   {
-    field: "route",
-    headerName: "Tuyến đường",
-    width: 300,
-    renderCell: (params) => {
-      return <div className="cellWithAddressPlace">{params.row.route}</div>;
-    },
-  },
-  {
-    field: "time",
-    headerName: "Thời gian",
-    width: 100,
-    renderCell: (params) => {
-      return <div className="cellWithAddressPlace">{params.row.time}</div>;
-    },
-  },
-  {
-    field: "price",
-    headerName: "Giá trung bình",
-    width: 110,
+    field: "startingPrice",
+    headerName: "Giá khởi điểm",
+    width: 150,
     renderCell: (params) => {
       return (
-        <div className="cellWithCategoryPlace">
-          {formatNumber(params.row.price)}
+        <div className="cellWithCreateAt">
+          {params.row.startingPrice.toLocaleString()} VNĐ
         </div>
       );
     },
   },
 
   {
-    field: "createdAt",
-    headerName: "Create Date",
-    width: 84,
+    field: "userModel",
+    headerName: "Người đăng",
+    width: 200,
     renderCell: (params) => {
-      return <div className="cellWithCreateAt">{params.row.createdAt}</div>;
+      return (
+        <div className="cellWithImg">
+          <img
+            className="imgAvatar"
+            src={
+              params?.row?.userModel?.avatar ||
+              "https://cdn.houseviet.vn/images/icons/user-avatar.png"
+            }
+            alt="Avatar"
+          />
+          {params?.row?.userModel?.username}
+        </div>
+      );
+    },
+  },
+  {
+    field: "auctionStartDate",
+    headerName: "Ngày bắt đầu",
+    width: 200,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithCategoryPlace">
+          {formatDate(params.row.auctionStartDate)}
+        </div>
+      );
+    },
+  },
+  {
+    field: "auctionEndDate",
+    headerName: "Ngày kết thúc",
+    width: 200,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithCategoryPlace">
+          {formatDate(params.row.auctionEndDate)}
+        </div>
+      );
+    },
+  },
+];
+
+export const registerAuctionApproval = [
+  {
+    field: "id",
+    headerName: "ID",
+    width: 60,
+    renderCell: (params) => {
+      return <div className="cellWithId">{params.row.id}</div>;
+    },
+  },
+  {
+    field: "imageModelList",
+    headerName: "Bất động sản đấu giá",
+    width: 250,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          <img
+            className="cellImgPlace"
+            src={
+              params.row.auctionModel.imageModelList[0] &&
+              params.row.auctionModel.imageModelList[0].image
+            }
+            alt="imaged"
+          />
+          {params.row.auctionModel.nameRealEstate}
+        </div>
+      );
+    },
+  },
+  {
+    field: "auctionStartDate",
+    headerName: "Ngày bắt đầu đấu giá",
+    width: 200,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithCategoryPlace">
+          {formatDate(params?.row?.auctionModel?.auctionStartDate)}
+        </div>
+      );
+    },
+  },
+
+  {
+    field: "auctionEndDate",
+    headerName: "Ngày kết thúc đấu giá",
+    width: 200,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithCategoryPlace">
+          {formatDate(params.row.auctionModel.auctionEndDate)}
+        </div>
+      );
+    },
+  },
+
+  {
+    field: "userModel",
+    headerName: "Người đăng kí",
+    width: 200,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          <img
+            className="imgAvatar"
+            src={
+              params?.row?.userModel?.avatar ||
+              "https://cdn.houseviet.vn/images/icons/user-avatar.png"
+            }
+            alt="Avatar"
+          />
+          {params?.row?.userModel?.username}
+        </div>
+      );
+    },
+  },
+  {
+    field: "payFees",
+    headerName: "Trạng thái",
+    width: 200,
+    renderCell: (params) => {
+      return (
+        <div>
+          {params.row.payFees ? (
+            <Badge
+              bg="success"
+              text="light"
+              style={{ padding: "5px", fontSize: "13px" }}
+            >
+              Đã phê duyệt
+            </Badge>
+          ) : (
+            <Badge
+              bg="warning"
+              text="dark"
+              style={{ padding: "5px", fontSize: "13px" }}
+            >
+              Chưa phê duyệt
+            </Badge>
+          )}
+        </div>
+      );
     },
   },
 ];

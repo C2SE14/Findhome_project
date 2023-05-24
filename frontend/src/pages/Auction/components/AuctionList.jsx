@@ -78,8 +78,8 @@ const AuctionList = () => {
                         />
                         {item.nameRealEstate}
                       </td>
-                      <td>{formatDate(item.auctionEndDate)}</td>
                       <td>{formatDate(item.auctionStartDate)}</td>
+                      <td>{formatDate(item.auctionEndDate)}</td>
                       <td>
                         {item.browseByAdmin ? (
                           <Badge
@@ -100,7 +100,7 @@ const AuctionList = () => {
                         )}
                       </td>
                     </tr>
-                    <tr>
+                    {/* <tr>
                       <td colSpan="5" style={{ textAlign: "right" }}>
                         <div
                           className={`actions ${
@@ -123,7 +123,7 @@ const AuctionList = () => {
                           </div>
                         </div>
                       </td>
-                    </tr>
+                    </tr> */}
                   </>
                 ))}
               </tbody>

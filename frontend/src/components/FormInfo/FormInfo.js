@@ -377,7 +377,7 @@ export const FormInfo = ({
         </div>
         <div className="content between">
           <InputValue
-            label={"Sữ dụng"}
+            label={"Diện tích sử dụng"}
             placeholder={"Nhập dữ liệu"}
             type={"text"}
             name={"usableArea"}

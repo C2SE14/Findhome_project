@@ -18,6 +18,18 @@ const userReducer = (state = initState, action) => {
         userData: action.userData || {},
         msg: action.msg || "",
       };
+
+    case actionTypes.APPROVAL_AUCTION_REGISTER_SUCCESS:
+      return {
+        ...state,
+        listUserRegisterAuction: action.listUserRegisterAuction,
+        msg: "",
+      };
+    case actionTypes.APPROVAL_AUCTION_REGISTER_FAILER:
+      return {
+        ...state,
+        msg: action.errorMsg,
+      };
     case actionTypes.GET_ALL_USER:
       return {
         ...state,
@@ -58,6 +70,34 @@ const userReducer = (state = initState, action) => {
         ...state,
         loading: action.loading,
       };
+
+    case actionTypes.DELETE_APPROVAL_AUCTION_REGISTER_SUCCESS:
+      return {
+        ...state,
+        listUserRegisterAuction: state.listUserRegisterAuction.filter(
+          (i) => i.id !== action.id
+        ),
+        msg: "",
+      };
+    case actionTypes.DELETE_APPROVAL_AUCTION_REGISTER_FAILER:
+      return {
+        ...state,
+        msg: action.errorMsg,
+      };
+    case actionTypes.DELETE_USER_BY_ADMIN_SUCCESS:
+      return {
+        ...state,
+        listUserRegisterAuction: state.listUserRegisterAuction.filter(
+          (i) => i.id !== action.id
+        ),
+        msg: "",
+      };
+    case actionTypes.DELETE_USER_BY_ADMIN_FAILER:
+      return {
+        ...state,
+        msg: action.errorMsg,
+      };
+
     case actionTypes.DELETE_REAL_ESTATE_BY_USERID_SUCCESS:
       return {
         ...state,

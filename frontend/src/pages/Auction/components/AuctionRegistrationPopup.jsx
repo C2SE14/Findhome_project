@@ -157,8 +157,10 @@ const AuctionRegistrationPopup = ({
             </Button>
             <p>
               Lưu ý:
+              <br />- Nội dung chuyển khoản bao gồm "Họ và Tên , Số CMND/CCCD"
+              (Thông tin trên phải trùng khớp với thông tin cá nhân)
               <br />- Chúng tôi sẽ sử dụng ảnh trong Căng cước công dân của bạn
-              để bắt so sánh
+              để so sánh
               <br />- Vui lòng cập nhật đúng ảnh căn cước
             </p>
           </div>

@@ -194,7 +194,7 @@ const Header = () => {
                                     to={`/${convertToSlug(item.nameEstate)}`}
                                   >
                                     <img
-                                      src={item.imageModelList[0].image}
+                                      src={item?.imageModelList[0]?.image}
                                       alt=""
                                     />
                                     <div className="text">

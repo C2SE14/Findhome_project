@@ -73,6 +73,8 @@ export const apiDeleteRealEstate = (realEstateId, userId) =>
     }
   });
 
+//
+
 export const apiUpdateUser = (body) =>
   new Promise(async (resolve, reject) => {
     try {
@@ -93,6 +95,49 @@ export const apiGetAllUser = () =>
       const response = await axiosConfig({
         method: "get",
         url: "/api/user/getAll",
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+
+// Phê duyệt user đăng kí tham gia đấu giá
+
+export const apiPutRegisterAuction = (body) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "post",
+        url: `/api/auctionRegistration/updateAuctionRegistration`,
+        data: body,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+// Xoá phê duyệt user đăng kí tham gia đấu giá
+
+export const apiDeleteRegisterAuction = (id) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "delete",
+        url: `/api/auctionRegistration/deleteRegistrationsById/${id}`,
+      });
+      resolve(response);
+    } catch (error) {
+      reject(error);
+    }
+  });
+// xoá user by admin
+export const apiDeleteUserByAdmin = (id) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const response = await axiosConfig({
+        method: "delete",
+        url: `/api/user/deleteUserById/${id}`,
       });
       resolve(response);
     } catch (error) {

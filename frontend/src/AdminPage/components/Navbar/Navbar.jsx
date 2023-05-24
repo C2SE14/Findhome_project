@@ -8,12 +8,9 @@ import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutline
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
-import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
-  // const auth = useSelector((state) => state.auth);
-  // const { user } = auth;
 
   return (
     <div className="navbarAdmin">

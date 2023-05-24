@@ -259,6 +259,16 @@
       font-size: 17px;
       font-weight: 700;
     }
+    tbody {
+      tr {
+        td {
+          &:nth-child(1),
+          &:nth-child(3) {
+            white-space: nowrap;
+          }
+        }
+      }
+    }
   }
 }
 

@@ -1,29 +1,72 @@
-import React, { useEffect } from "react";
-import { realEstate } from "../../utils/datatablesource";
+import React, { useEffect, useState } from "react";
+import { auctionApproval } from "../../utils/datatablesource";
 import { DataGrid } from "@mui/x-data-grid";
 import "../RealEstatedSaleList/PlaceList.scss";
 import { useDispatch, useSelector } from "react-redux";
-import Loading from "../../components/Loading/Loading";
 import "sweetalert2/src/sweetalert2.scss";
-import { getRealEstateByBusinessTypeId } from "../../../store/actions/postRealEstate";
+import {
+  deleteAuctionApproval,
+  getAllAuction,
+} from "../../../store/actions/auction";
+import AuctionApprovalModal from "./AuctionApprovalModal";
+import Swal from "sweetalert2";
 
 const AuctionApproval = () => {
-  const { dataByType, loading } = useSelector((state) => state.postRealEstate);
+  const { auctions } = useSelector((state) => state.auctionReducer);
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(getRealEstateByBusinessTypeId(1));
+    dispatch(getAllAuction());
   }, [dispatch]);
+
+  const [selectedItemId, setSelectedItemId] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleApproveClick = (id) => {
+    setSelectedItemId(id);
+    setShowModal(true);
+  };
+
+  const unapprovedAuctions = auctions.filter(
+    (item) => item.browseByAdmin === false
+  );
+
   const actionColumn = [
     {
       field: "action",
       headerName: "Action",
       width: 150,
       renderCell: (params) => {
+        const handleDelete = () => {
+          Swal.fire({
+            title: "Xác nhận xoá",
+            text: "Bạn có chắc chắn muốn xoá đăng ký này?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Xoá",
+            cancelButtonText: "Hủy",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              dispatch(deleteAuctionApproval(params.row.id));
+              Swal.fire("Xoá thành công!", "", "success");
+              setTimeout(() => {
+                window.location.reload();
+              }, 0);
+            }
+          });
+        };
+
+        const itemId = params.row.id;
         return (
           <div className="cellAction">
-            <div className="deleteButton">Xoá</div>
-            <div className="detailButton">Chi tiết</div>
+            <div className="deleteButton" onClick={handleDelete}>
+              Xoá
+            </div>
+            <div
+              className="detailButton"
+              onClick={() => handleApproveClick(itemId)}
+            >
+              Phê duyệt
+            </div>
           </div>
         );
       },
@@ -31,24 +74,32 @@ const AuctionApproval = () => {
   ];
 
   return (
-    <div className="placeList">
-      {loading ? (
-        <Loading />
-      ) : (
+    <>
+      <div className="placeList">
         <div className="datatable">
-          <div className="datatableTitle">Danh sách nhà đất bán</div>
+          <div className="datatableTitle">
+            Danh sách phê duyệt đăng tin đấu giá
+          </div>
           <DataGrid
             className="datagrid"
-            rows={dataByType}
-            columns={realEstate.concat(actionColumn)}
+            rows={unapprovedAuctions}
+            columns={auctionApproval.concat(actionColumn)}
             pageSize={9}
             rowsPerPageOptions={[9]}
             checkboxSelection
             getRowId={(row) => row.id}
           />
         </div>
+      </div>
+      {showModal && (
+        <AuctionApprovalModal
+          showModal={showModal}
+          handleClose={() => setShowModal(false)}
+          selectedItemId={selectedItemId}
+          title="Phê duyệt tin đăng đấu giá"
+        />
       )}
-    </div>
+    </>
   );
 };
 

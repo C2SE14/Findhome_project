@@ -1,11 +1,14 @@
 import actionTypes from "./actionTypes";
 import {
   apiDeleteRealEstate,
+  apiDeleteRegisterAuction,
+  apiDeleteUserByAdmin,
   apiGetAllUser,
   apiGetAuctionPostOfUser,
   apiGetAuctionRegisterOfUser,
   apiGetRealEstateByUserId,
   apiGetUserById,
+  apiPutRegisterAuction,
   apiUpdateUser,
 } from "../../services/user";
 
@@ -171,6 +174,87 @@ export const updateUser = (body) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: actionTypes.UPDATE_USER_FAILURE,
+      errorMsg: error.message,
+    });
+
+    dispatch({ type: actionTypes.SET_LOADING, loading: false });
+  }
+};
+
+// Phê duyệt người dùng đăng kí tham gia đấu giá
+export const approvalRegisterAuction = (body) => async (dispatch) => {
+  try {
+    const response = await apiPutRegisterAuction(body);
+    if (response.status === 200) {
+      dispatch({
+        type: actionTypes.APPROVAL_AUCTION_REGISTER_SUCCESS,
+        listUserRegisterAuction: response.data,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.APPROVAL_AUCTION_REGISTER_FAILER,
+        errorMsg: response.data.statusText,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: actionTypes.APPROVAL_AUCTION_REGISTER_FAILER,
+      errorMsg: error.message,
+    });
+  }
+};
+
+//Xoá
+
+export const deleteRegisterAuction = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: actionTypes.SET_LOADING, loading: true });
+
+    const response = await apiDeleteRegisterAuction(id);
+    if (response.status === 200) {
+      dispatch({
+        type: actionTypes.DELETE_APPROVAL_AUCTION_REGISTER_SUCCESS,
+        listUserRegisterAuction: response.data,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.DELETE_APPROVAL_AUCTION_REGISTER_FAILER,
+        errorMsg: response.data.statusText,
+      });
+    }
+
+    dispatch({ type: actionTypes.SET_LOADING, loading: false });
+  } catch (error) {
+    dispatch({
+      type: actionTypes.DELETE_APPROVAL_AUCTION_REGISTER_FAILER,
+      errorMsg: error.message,
+    });
+
+    dispatch({ type: actionTypes.SET_LOADING, loading: false });
+  }
+};
+// xoá user by id
+export const deleteUserByAdmin = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: actionTypes.SET_LOADING, loading: true });
+
+    const response = await apiDeleteUserByAdmin(id);
+    if (response.status === 200) {
+      dispatch({
+        type: actionTypes.DELETE_APPROVAL_AUCTION_REGISTER_SUCCESS,
+        listUserRegisterAuction: response.data,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.DELETE_APPROVAL_AUCTION_REGISTER_FAILER,
+        errorMsg: response.data.statusText,
+      });
+    }
+
+    dispatch({ type: actionTypes.SET_LOADING, loading: false });
+  } catch (error) {
+    dispatch({
+      type: actionTypes.DELETE_APPROVAL_AUCTION_REGISTER_FAILER,
       errorMsg: error.message,
     });
 

@@ -62,6 +62,21 @@ const RightRegister = () => {
             invalids++;
           }
           break;
+        case "fullName":
+          const fullNameRegex =
+            /^[a-zA-Z\sÀÁÂÃẠĂẮẰẤẦẢẨẪẬĐÈỄÉÊẺẼẸÌÍĨỊÒÓÔÕỌƠỜỚỞỠỢÙÚŨỤỪỨỮỰÝỲỴỶỸàáâảăãèéêìíòóôõùúũụưựắằấầẩẫậểếễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ|_]+$/u;
+
+          if (!fullNameRegex.test(item[1])) {
+            setInvalidFields((prev) => [
+              ...prev,
+              {
+                name: item[0],
+                message: "Họ và tên không hợp lệ.",
+              },
+            ]);
+            invalids++;
+          }
+          break;
 
         case "password":
           const passwordRegex =

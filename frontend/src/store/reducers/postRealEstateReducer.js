@@ -47,6 +47,17 @@ const postRealEstateReducer = (state = initState, action) => {
         dataDetailId: action.dataDetailId || [],
         msg: action.msg || "",
       };
+    case actionTypes.DELETE_REALESTATE_TYPE_SUCCESS:
+      return {
+        ...state,
+        dataByType: state.dataByType.filter((i) => i.id !== action.id),
+        msg: "",
+      };
+    case actionTypes.DELETE_REALESTATE_TYPE_FAILER:
+      return {
+        ...state,
+        msg: action.errorMsg,
+      };
     case actionTypes.SET_LOADING:
       return {
         ...state,

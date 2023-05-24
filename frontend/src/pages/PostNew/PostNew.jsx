@@ -166,6 +166,10 @@ const PostNew = () => {
       });
       setImagesPreview([]);
       console.log(response.data);
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000); // 3000ms = 3 giây
     } catch (error) {
       console.log(error);
     }
